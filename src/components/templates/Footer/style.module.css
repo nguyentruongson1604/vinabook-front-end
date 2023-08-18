@@ -1,0 +1,11 @@
+.socialFooter{
+    background-color: #0a6f3c;
+}
+
+.copyRight{
+    float: left;
+    width: 100%;
+    border-top: 1px solid #d6d6d6;
+    padding: 20px 0;
+    background-color: #ececec;
+}

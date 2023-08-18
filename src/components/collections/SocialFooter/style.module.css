@@ -1,0 +1,13 @@
+.formWrapper{
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.newsLetter{
+    margin:  0;
+    display: flex;
+    justify-content: flex-start;
+}
