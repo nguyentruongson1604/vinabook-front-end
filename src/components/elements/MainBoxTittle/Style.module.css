@@ -1,0 +1,14 @@
+.boxTittle p{
+    float: left;
+    margin: 0;
+    font-size: 20px;
+}
+.boxTittle a{
+    text-decoration: none;
+    color: #0a6f3c;
+    float: right;
+}
+.boxTittle{
+    padding: 40px 0;
+    overflow: auto;
+}
