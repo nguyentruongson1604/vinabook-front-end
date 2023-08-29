@@ -1,0 +1,15 @@
+.a{
+    width: 884px;
+}
+.boxInforWrapper{
+    width: 100%;
+}
+.span4{
+    width: 31.914893617021278%;
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-left: 18px;
+}
+.boxInforWrapper [class*="span4"]:nth-child(3n+1){
+    margin-left: 0;
+}
