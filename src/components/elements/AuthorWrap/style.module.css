@@ -1,0 +1,11 @@
+.authorWrap {
+    width: 100%;
+}
+
+.author {
+    font-size: 11px;
+    color: #747474;
+    line-height: 1.2;
+    text-align: left;
+    margin-left: 10px;
+}

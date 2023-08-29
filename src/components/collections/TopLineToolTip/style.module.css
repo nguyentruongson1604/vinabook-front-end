@@ -1,0 +1,34 @@
+.topLineTooltip {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+}
+
+.topLineTooltip li {
+    float: left;
+}
+
+.topLineTooltip :first-child {
+    padding-left: 0;
+}
+
+.toolTip {
+    position: relative;
+    padding-right: 25px;
+    padding-left: 18px;
+}
+
+.toolTip::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: "|";
+    font-size: 20px;
+    color: #cccccc;
+    line-height: 30px;
+}
+
+.toolTip:last-child::after {
+    content: "";
+}

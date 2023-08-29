@@ -1,0 +1,22 @@
+/*Breadcrumbs*/
+.iconAngleRight {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.breadCrumbs {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 47px;
+    float: left;
+}
+
+.breadCrumbs li {
+    display: inline-block;
+    list-style: none;
+
+}
+
+.breadCrumbs li a {
+    text-decoration: none;
+    color: #333;
+}

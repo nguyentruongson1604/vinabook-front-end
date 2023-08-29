@@ -1,0 +1,25 @@
+/**/
+.headerContact {
+    float: right;
+
+}
+
+.headerContact p {
+    display: inline-block;
+    color: white;
+    font-size: 13px;
+    padding: 0 3px;
+    margin-right: 8px;
+}
+
+.headerContact a {
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    padding: 0 3px;
+}
+
+
+.headerContact a:hover {
+    text-decoration: underline;
+}
