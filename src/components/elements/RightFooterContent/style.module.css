@@ -1,0 +1,48 @@
+.rightContentFooter{
+    width: 55%;
+    float: left;
+}
+
+.colRight{
+    width: 32%;
+    padding: 20px 0;
+    float: left;
+}
+
+.colRight .content .title{
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+    padding: 0 0 5px 0;
+    /* font-family: "Montserrat-Regular"; */
+    font-weight: bold;
+}
+
+.content ul li {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -3px;
+    margin-right: -3px;
+    padding-top: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.rightContentFooter ul {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.payment img{
+    margin: 0 3px 6px 3px;
+    border: 1px solid #cecece;
+    width: 55px;
+    height: 38px;
+}
+.shipper img{
+    margin: 0 3px 12px 3px;
+    border: none;
+    max-width: 85%;
+}
