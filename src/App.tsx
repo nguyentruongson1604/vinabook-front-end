@@ -1,4 +1,5 @@
 import './App.css';
+
 import BoxHighlight from './components/collections/BoxHighlight/Index';
 import BoxInfoBook from './components/collections/BoxInfoBook/Index';
 import CategoryInfoBook from './components/collections/CategoryInfoBook';
@@ -22,7 +23,6 @@ function App() {
       </div>
       
     </>
-    
   )
 }
 
