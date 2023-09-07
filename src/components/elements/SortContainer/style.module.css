@@ -1,0 +1,55 @@
+.sortContainer {
+    float: right;
+}
+
+.sortContainer li {
+    position: relative;
+    list-style: none;
+    border: 1px solid #cecece;
+    padding: 10px;
+}
+
+.sortContainer li a {
+    text-decoration: none;
+    color: #7a7a7a;
+
+}
+
+.dropdownContainer {
+    display: none;
+    /*display: block;*/
+    margin: 0;
+    padding: 0;
+    width: 222px;
+    position: absolute;
+    box-shadow: 0 2px 10px #ccc;
+    z-index: 99;
+    top: 38px;
+    left: 0;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.dropdownContainer li {
+    border: none;
+    font-size: 14px;
+    z-index: 999;
+}
+
+.dropdownContainer li:hover {
+    background-color: #f2f5f7;
+}
+
+.dropdownContainer li a {
+    padding: 0 30px;
+}
+
+
+
+.sortContainer li:hover .dropdownContainer {
+    display: block;
+}
+.iconAngleDown {
+    margin-left: 5px;
+    margin-right: 10px;
+}

@@ -1,0 +1,30 @@
+.icon {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.content {
+    display: none;
+    position: absolute;
+    top: 35px;
+    width: 300px;
+    z-index: 999999;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 15px;
+    background: #fefefe;
+    box-shadow: 0 3px 0 #e4e4e4;
+    background-clip: padding-box;
+    z-index: 999;
+}
+
+.topSupport:hover .content {
+    display: block;
+    opacity: 1;
+}
+
+.topSupport {
+    height: 32px;
+    /* line-height: 32px; */
+    padding: 7px 0;
+}

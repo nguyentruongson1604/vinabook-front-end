@@ -1,0 +1,15 @@
+.productText {
+    float: left;
+    font-size: 14px;
+    padding: 5px 10px;
+    width: 67%;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+}
+
+.productText:hover {
+    color: #057A45;
+    text-decoration: underline;
+}

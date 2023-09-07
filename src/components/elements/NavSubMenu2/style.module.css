@@ -1,0 +1,46 @@
+/*Sub menu 2*/
+
+.navSubMenu2 {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 63vw;
+    height: 570px;
+    box-shadow: 0 2px 2px #ccc;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    left: 222px;
+    border-radius: 2px;
+    padding: 30px 0 50px 0;
+
+}
+
+.navSubMenu2More {
+    float: left;
+    width: 25%;
+    padding-left: 0;
+    
+}
+
+.navSubMenu2More li {
+    border: none;
+}
+
+.navSubMenu2More li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    
+}
+
+.navSubMenu2MoreTitle{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/*
+.navSubMenu li:hover .navSubMenu2 {
+    display: block;
+
+}
+*/
