@@ -1,0 +1,78 @@
+.authorBox{
+    float: right;
+    width: 260px;
+    margin-left: 30px;
+    /* margin-top: -35px; */
+    border: 1px solid #d1d3d4;
+    padding: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: transparent;
+    -webkit-box-shadow: 0 5px 0 0 #d9d9d9;
+    -moz-box-shadow: 0 5px 0 0 #d9d9d9;
+    box-shadow: 0 5px 0 0 #d9d9d9;
+}
+
+.title{
+    float: left;
+    width: 100%;
+    font-size: 16px;
+    font-family: "Roboto",sans-serif;
+    color: #087b39;
+    line-height: 1.2;
+    text-align: left;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.authorDescriptionWrap{
+    border-top: 1px dashed #c7c7c7;
+    padding-top: 10px;
+    float: left;
+    width: 100%;
+}
+
+.authorDescription{
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    color: #464646;
+    line-height: 20px;
+}
+
+.authorName a{
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-family: "Roboto",sans-serif;
+    color: #087b39;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.authorFullLink{
+    float: left;
+    clear: both;
+    margin: 0;
+    margin-left: -15px;
+    width: 260px;
+    /* padding: 10px 20px; */
+}
+
+.authorFullLink li a{
+    /* text-decoration: none; */
+    font-size: 12px;
+    font-family: "Roboto",sans-serif;
+    color: #008340;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.authorFullLink li:hover a{
+    text-decoration: none;
+}

@@ -1,0 +1,86 @@
+.productPropRight{
+    position: relative;
+    padding: 15px;
+    float: right;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dcdbdb;
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 250px;
+    min-height: 210px;
+    padding-bottom: 20px;
+    margin-right: 5px;
+    -webkit-box-shadow: 0 0 0 5px #e8e8e8;
+    -moz-box-shadow: 0 0 0 5px #e8e8e8;
+    box-shadow: 0 0 0 5px #e8e8e8;
+    box-sizing: content-box;
+}
+
+.title{
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.2;
+    text-align: left;
+    border-bottom: 1px dashed #c7c7c7;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.price{
+    float: left;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.rightPrice{
+    padding-left: 10px;
+    float: left;
+    position: absolute;
+    right: 10px;
+}
+
+.button{
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e1af04;
+    border-radius: 3px;
+    width: 230px;
+    padding-left: 65px;
+    height: 39px;
+    font-size: 14px;
+    font-family: "Roboto",sans-serif;
+    color: #3e3535;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+    background: #ffc705 url(../../images/icon_cart_1_2x.png) no-repeat 40px center;
+    background-size: 22px;
+    margin-left: 12px;
+    -o-transition: .2s;
+    -ms-transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.buttonAddToCart{
+    float: left;
+    border-top: 1px dashed #c7c7c7;
+    padding-top: 15px;
+    width: 100%;
+}
+
+.originalPrice{
+    text-decoration: line-through;
+}
+
+.sellPrice{
+    color: red;
+}
+
+.discount{
+    color: green
+}
