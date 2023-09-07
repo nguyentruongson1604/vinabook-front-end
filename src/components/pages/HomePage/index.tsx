@@ -1,12 +1,19 @@
-import BoxInfoBook from '../../collections/BoxInfoBook/Index';
-import MainBoxTittle from '../../elements/MainBoxTittle/Index';
+import Nav from '../../templates/Nav';
+import TopHeader from '../../templates/TopHeader';
+import BottomHeader from '../../templates/BottomHeader';
+import Banner from '../../templates/Banner';
 import Footer from '../../templates/Footer';
 import HomeLeft from '../../templates/HomeLeft';
 import HomeRight from '../../templates/HomeRight';
+import AuthorContent from '../../templates/AuthorContent';
 import styles from './style.module.css'
 const HomePage: React.FC<{className?: string }> = ({className }) => {
     return (
         <>
+            <TopHeader/>
+            <BottomHeader/>
+            <Nav appear={true}/>
+            <Banner/>
             <div className="container">
                 <HomeLeft className={styles.homeLeft}/>
                 <HomeRight className={styles.homeRight}/>
@@ -14,6 +21,7 @@ const HomePage: React.FC<{className?: string }> = ({className }) => {
             <div className="clearfix"></div>
 
             <Footer/>
+            {/* <AuthorContent/> */}
         </>
     )
 };

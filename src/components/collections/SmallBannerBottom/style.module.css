@@ -1,0 +1,26 @@
+/*smallBannerBottom*/
+
+.smallBannerBottom {
+    width: 100%;
+}
+
+.bannerBottom1 {
+    width: 33.3333%;
+    float: left;
+    height: 190px;
+}
+
+.bannerImgB {
+    width: 350px;
+    height: 100%;
+    /*max-width: 100%;*/
+}
+.styleLeft {
+    float: left;
+    width: 20%;
+}
+
+.styleRight {
+    float: right;
+    width: 80%;
+}

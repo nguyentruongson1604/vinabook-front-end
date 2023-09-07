@@ -1,9 +1,13 @@
 import styles from './style.module.css';
-import AuthorImg from '../../elements/AuthorImg';
-import AuthorInfo from '../../elements/AuthorInfo';
-function AuthorMore() {
+import AuthorImg from '../AuthorImg';
+import AuthorInfo from '../AuthorInfo';
+
+interface AuthorMoreProps {
+  className?: string;
+}
+const AuthorMore: React.FC<AuthorMoreProps> = ({ className }) => {
   return (
-    <div className={styles.authorMore}>
+    <div className={`${styles.authorMore} ${className}`}>
         <AuthorImg />
         <AuthorInfo />
     </div>
