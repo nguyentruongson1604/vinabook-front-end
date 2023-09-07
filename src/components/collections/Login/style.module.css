@@ -1,0 +1,20 @@
+/**/
+.login {
+    width: 15%;
+    float: left;
+    margin-top: 30px;
+    padding-left: 6px;
+}
+
+.login a {
+    color: #0f0f0f;
+    text-decoration: none;
+    padding: 0 6px;
+    line-height: 12px;
+    height: 13px;
+    margin-top: 10px;
+}
+
+.login p {
+    display: inline-block;
+}

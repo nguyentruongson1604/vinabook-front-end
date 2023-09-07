@@ -1,0 +1,9 @@
+.homeLeft{
+    float: left;
+    width: 75%;
+}
+.homeRight{
+    float: left;
+    width: 25%;
+    padding-left: 40px;
+}

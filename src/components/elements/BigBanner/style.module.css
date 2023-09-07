@@ -1,0 +1,13 @@
+.bigBanner {
+    /*background: #f26c63;*/
+    border-right: 1px solid #fff;
+    height: 375px;
+    float: left;
+    width: 66.6667%;
+}
+
+.bannerImg1 {
+    width: 660px;
+    height: 380px;
+    /*max-width: 100%;*/
+}

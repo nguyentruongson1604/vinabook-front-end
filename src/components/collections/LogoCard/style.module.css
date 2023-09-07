@@ -1,0 +1,37 @@
+/**/
+
+.logoCard {
+    width: 15%;
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding-left: 100px;
+
+}
+
+.logoCard a {
+    position: relative;
+}
+
+.logoCard .icon {
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #0b703d;
+    font-size: 26px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.numItemsMiniCart {
+    background-color: #0a6f3c;
+    font-size: 10px;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    bottom: 32px;
+    right: 0px;
+}

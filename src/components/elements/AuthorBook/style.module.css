@@ -1,0 +1,37 @@
+/*author book*/
+.authorBook {
+    margin-top: 20px;
+    width: 100%;
+    float: left;
+}
+
+.authorProduct {
+    float: left;
+    width: 30%;
+    padding-left: 30px;
+}
+
+.productImg {
+    width: 25%;
+    height: 80px;
+    float: left;
+    margin: 0;
+}
+
+.productImg a {}
+
+.productTitle {
+    float: left;
+    font-size: 14px;
+    padding: 5px 10px;
+    width: 67%;
+}
+
+.productTitle a {
+    text-decoration: none;
+    color: #057A45;
+}
+
+.productTitle a:hover {
+    text-decoration: underline;
+}

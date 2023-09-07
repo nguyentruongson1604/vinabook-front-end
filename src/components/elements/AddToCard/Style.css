@@ -1,0 +1,12 @@
+
+.btn{
+    height: 40px;
+    background: #e74c3c;
+    text-align: center;
+    padding: 10px;
+    color: aliceblue;
+    border-radius: 6px;
+    border: none;
+    font-size: 18px;
+    padding: 8px 15px;
+}

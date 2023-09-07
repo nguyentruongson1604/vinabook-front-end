@@ -1,0 +1,14 @@
+/*all banner*/
+.allBanner {
+    width: 100%;
+}
+.styleLeft {
+    float: left;
+    width: 20%;
+}
+
+.styleRight {
+    float: right;
+    width: 80%;
+}
+

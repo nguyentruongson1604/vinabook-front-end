@@ -1,0 +1,17 @@
+.homeRight{
+    width: 847px;
+}
+.newBook{
+    margin: 40px 0;
+}
+.homeRight .itemBook{
+    width: 20%;
+    padding-right: 10px;
+    display: inline-block;
+}
+[class*="itemBook"]:nth-child(5n){
+    padding-right: 0;
+}
+.listBook{
+    margin: 40px 0;
+}

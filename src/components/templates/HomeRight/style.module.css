@@ -1,0 +1,12 @@
+.HomeRight{
+    width: 256px;
+}
+.tittle{
+    padding: 40px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+}
+.item{
+    margin-bottom: 15px;
+}

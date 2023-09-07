@@ -1,0 +1,18 @@
+.productThumbTitle {
+    margin-left: 60px;
+    margin-bottom: 60px;
+}
+
+
+.productThumbTitle h4 {
+    display: inline-block;
+}
+
+.productThumbTitle1 {
+    color: #005983;
+    padding-right: 3px;
+}
+
+.productThumbTitle2 {
+    color: #ff7a0e;
+}
