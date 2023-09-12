@@ -5,8 +5,8 @@
     float: left;
     margin-top: 15px;
     margin-bottom: 10px;
-    padding-left: 100px;
-
+    text-align: center;
+    position: relative;
 }
 
 .logoCard a {
@@ -29,9 +29,23 @@
     border-radius: 50%;
     width: 16px;
     height: 16px;
+    line-height: 16px;
     text-align: center;
     display: inline-block;
     position: absolute;
-    bottom: 32px;
+    bottom: 35px;
     right: 0px;
+}
+
+.popUpBox{
+    position: absolute;
+    z-index: 500;
+    margin-top: 10px;
+    margin-right: -1px;
+    padding: 10px 0 0 0;
+    min-width: 218px;
+    /* border: 1px solid #b3b3b3; */
+    background: #ffffff;
+    text-align: left;
+    box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
 }

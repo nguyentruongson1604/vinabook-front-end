@@ -1,0 +1,87 @@
+.logoCart{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.titleCart{
+    padding: 20px 0 20px 0;
+    text-align: center;
+    color: #117c47;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: "Montserrat-Bold" !important;
+}
+
+.mainBox{
+    width: 100%;
+    float: left;
+}
+
+.leftSide{
+    width: 66%;
+    float: left;
+}
+
+.boxListCart thead tr th{
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+    color: #117c47;
+}
+
+.boxListCart{
+    background: #ffffff;
+    padding: 30px;
+    border: 1px solid #ececec;
+    border-radius: 4px;
+}
+
+.rightSide{
+    float: left;
+    width: 33%;
+}
+
+.payment{
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.btnBack{
+    box-sizing: content-box;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    border-radius: 4px;
+    font-size: 17px;
+    width: 230px;
+    height: 23px;
+    color: #fff;
+    background: #cecdcd;
+    padding: 13px;
+    font-weight: bold;
+}
+
+.btnPay{
+    box-sizing: content-box;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 25px !important;
+    display: block;
+    border-radius: 4px;
+    font-weight: bold !important;
+    font-size: 17px !important;
+    width: 230px !important;
+    height: 23px !important;
+    color: #000 !important;
+    background: #fdc92d !important;
+    border-color: #fdc92d !important;
+    padding: 13px !important;
+    font-weight: bold;
+}

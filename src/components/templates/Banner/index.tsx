@@ -1,7 +1,6 @@
-
 import './style.css';
 import AllBanner from '../../collections/AllBanner';
-import SmallBannerBottom from '../../collections/SmallBannerBottom';
+import SmallBannerBottom from '../../elements/SmallBannerBottom';
 
 function Banner() {
   return (

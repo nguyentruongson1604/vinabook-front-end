@@ -1,0 +1,72 @@
+.CartInfo{
+    background: #ffffff;
+    margin-left: 30px;
+    font-family: "Montserrat-Regular";
+    border-radius: 4px;
+    color: #66645c;
+}
+
+.title{
+    background: #117c47;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.info{
+    padding: 15px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+}
+
+.info table{
+    width: 100%;
+}
+
+.info table tr td{
+    display: inline-block;
+}
+
+.info table tr td{
+    padding: 3px 0;
+}
+
+.width60{
+    width: 60%;
+}
+
+.width40{
+    width: 40%;
+    text-align: right;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.right{
+    float: right;
+}
+
+.green{
+    color: #117c47;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.total{
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #8c8c8c;
+    display: flex;
+}
+
+.label{
+    width: 60%;
+    text-transform: uppercase;
+}

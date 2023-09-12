@@ -1,0 +1,16 @@
+.productMainInfo{
+    border-top: 1px solid #cdcdcd;
+    padding-top: 35px;
+    min-height: 350px;
+}
+
+.productInfo{
+    position: relative;
+    width: 550px;
+    float: left;
+}
+
+.productImage{
+    float: left;
+    margin-right: 25px;
+}

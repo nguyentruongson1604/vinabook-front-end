@@ -1,0 +1,44 @@
+.mainBoxTitle{
+    height: auto;
+    font-size: 24px;
+    font-family: "Roboto",sans-serif;
+    color: #404040;
+    line-height: 1.2;
+    text-align: left;
+    white-space: normal;
+    font-weight: 500;
+    border-bottom: none;
+}
+
+.productAuthor{
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.productAuthorShare{
+    margin-top: 2px;
+    color: #22242d;
+    font-size: 13px;
+    line-height: 20px;
+    width: 445px;
+    float: left;
+}
+
+.productIntro{
+    float: left;
+    font-size: 15px;
+    line-height: 26px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.productIntro p{
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    height: max-content;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

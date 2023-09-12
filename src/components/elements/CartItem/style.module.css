@@ -1,0 +1,59 @@
+.cartItem td{
+    padding: 10px 0;
+    vertical-align: top;
+}
+
+.cartItem td:first-child{
+    display: none;
+}
+
+.thumbImage{
+    padding-right: 10px;
+}
+
+.thumbImage img{
+    width: 100%;
+    height: auto;
+    border: 1px solid #efefef;
+}
+
+.title{
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 0;
+    color: #66645c;
+    padding-left: 5px;
+}
+
+.inputGroup{
+    width: 90px;
+    position: relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    white-space: nowrap;
+    padding-left: 5px;
+}
+
+.inputGroup input[type=number]{
+    width: 30px;
+    margin: 0 5px;
+}
+
+.inputGroup input[type=number]::-webkit-inner-spin-button, .inputGroup input[type=number]::-webkit-outer-spin-button{
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.labelPrice{
+    width: 20%;
+    text-align: right;
+}
+
+.icon{
+    font-size: 20px;
+    color: #d3d3d3;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+}
