@@ -6,7 +6,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faPhone, faComment } from '@fortawesome/free-solid-svg-icons'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import NavSubMenu from '../../collections/NavSubMenu';
-import HeaderContact from '../../collections/HeaderContact';
+import HeaderContact from '../../elements/HeaderContact';
 import { useState } from 'react';
 
 const Nav: React.FC<{ appear?: boolean}> = ({ appear}) =>{

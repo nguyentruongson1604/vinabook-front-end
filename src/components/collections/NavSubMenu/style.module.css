@@ -1,6 +1,8 @@
 /*Sub menu*/
 .iconAngleRight {
-    margin-left: 20px;
+    margin-top: 13px;
+    float: right;
+
 }
 
 .navSubMenu {
@@ -24,11 +26,13 @@
 }
 .navSubMenu li {
     width: 100%;
+    padding: 0 20px 0 30px;
     /*border-top: 1px solid #f1f1f1;*/
 }
 
 .navSubMenu li a {
     color: #333;
+    /* float: left; */
 }
 /*
 .navMenu li:hover .navSubMenu {

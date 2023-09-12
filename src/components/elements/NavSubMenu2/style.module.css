@@ -4,13 +4,14 @@
     display: block;
     margin: 0;
     padding: 0;
-    width: 63vw;
+    width: 944px;
     height: 570px;
     box-shadow: 0 2px 2px #ccc;
     position: absolute;
     z-index: 99;
     top: 0;
-    left: 222px;
+    /* left: 222px; */
+    right: -944px;
     border-radius: 2px;
     padding: 30px 0 50px 0;
 
