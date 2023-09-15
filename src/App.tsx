@@ -24,7 +24,7 @@ import BottomHeader from './components/templates/BottomHeader';
 function App() {
   return (
     <div className=''>
-      <DetailsCart />
+      <ProductFullDescription />
       
       {/* <CartItem id='123' title='Sapiens Lược Sử Loài Người' amount={1} price={254000}/> */}
       {/* // <CartInfomation /> */}
