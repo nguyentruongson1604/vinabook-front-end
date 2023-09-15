@@ -1,0 +1,45 @@
+.productNavTab{
+    position: relative;
+    float: left;
+    width: 100%;
+    background: #fff;
+    margin-top: 20px;
+}
+
+.productNavTab ul{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
+    border-bottom: 1px dashed #c7c7c7;
+}
+
+.productNavTab ul li{
+    list-style: none;
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+.productNavTab a{
+    color: #888888;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: -2px;
+    float: left;
+    padding: 0 30px;
+    white-space: nowrap;
+    padding-bottom: 12px;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+}
+
+.productNavTab ul li:first-child a{
+    padding-left: 0;
+}
+
+.productNavTab li:hover a, .productNavTab li:active a{
+    color: #087b44;
+    border-bottom: 3px solid #087b44;
+}

@@ -14,91 +14,91 @@ const NavSubMenu = () => {
         <li className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Bán Chạy
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
+            {open && <NavSubMenu2 />}
+        </li>
+        <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
+            <a href="#">
+                Sách Nước Ngoai
+            </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
         <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
             <a href="#">
                 Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             </a>
-            {open && <NavSubMenu2 />}
-        </li>
-        <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
-            <a href="#">
-                Sách Trong Nước
-                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-            </a>
+            <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
             {open && <NavSubMenu2 />}
         </li>
 

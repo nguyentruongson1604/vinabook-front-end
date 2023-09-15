@@ -1,0 +1,27 @@
+.routeTitle{
+    float: left;
+    margin-right: 10px;
+}
+
+.route{
+    display: inline;
+    font-size: 13px;
+    color: #232323;
+    line-height: 1.2;
+    text-align: left;
+    text-decoration: none;
+}
+
+.route span{
+    display: inline;
+    font-size: 13px;
+    color: #232323;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.icon{
+    margin-right: 10px;
+    position: relative;
+    bottom: -2px;
+}

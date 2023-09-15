@@ -3,16 +3,14 @@ import logo from '../../images/vnb_logo_2x.png'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-const LogoCart = () => {
+const Logo = () => {
     return(
-        <div className={styles.logoCard}>
+        <div className={styles.logo}>
             <a href="#">
-                <FontAwesomeIcon icon={faCartShopping} style={{color: "#11b02c",}} className={styles.icon}/>  
-                <span className={styles.numItemsMiniCart}>2</span>
+                <img src={logo} alt="logo" />
             </a>
-        </div>
-        
+        </div> 
     )
 }
 
-export default LogoCart
+export default Logo

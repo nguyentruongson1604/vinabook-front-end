@@ -1,15 +1,16 @@
 import styles from './style.module.css';
 import AuthorMore from '../../elements/AuthorMore';
-import BreadCrumbs from '../../elements/BreadCrumbs';
 import LeftContent from '../../collections/LeftContent';
 import DetailTittle from '../../elements/DetailTittle';
 import SortContainer from '../../elements/SortContainer';
 import ProductContainer from '../../collections/ProductContainer';
+import RouteLine from '../../collections/RouteLine';
 const AuthorContent =() => {
   return (
         <div className={styles.authorContent}>
             <div className="container">
-                <BreadCrumbs/>
+                <RouteLine/>
+                <div className="clearfix"></div>
                 <div className={styles.styleLeft}>
                     <LeftContent/>
                 </div>
@@ -22,10 +23,7 @@ const AuthorContent =() => {
                             <ProductContainer/>  
                             <ProductContainer/>  
                             <ProductContainer/>  
-
                             <ProductContainer/>  
-                                       
-
                         </div>
                     </div>
                 </div>

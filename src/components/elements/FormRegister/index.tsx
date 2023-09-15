@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import {
   Button,
   TextField,
+  styled,
 } from "@mui/material";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -13,6 +14,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 
 const validationSchema = Yup.object().shape({
@@ -162,8 +164,8 @@ const FormRegister= () => {
             onChange={formik.handleChange}
             className={styles.rdoGroup}
           >
-            <FormControlLabel value="female" control={<Radio size="small" />}  label="Nữ" />
-            <FormControlLabel value="male" control={<Radio size="small"/>} label="Nam" />
+            <FormControlLabel value="1" control={<Radio size="small" />}  label="Nữ" />
+            <FormControlLabel value="0" control={<Radio size="small"/>} label="Nam" />
           </RadioGroup>
         </div>
 

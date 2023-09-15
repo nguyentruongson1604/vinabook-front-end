@@ -1,14 +1,19 @@
-.clearfix{
-    content: "";
-    display: block;
-    clear:both;
+html{
+    scroll-behavior: smooth;
 }
+
+.clearfix{
+    content: '';
+    display: block;
+    clear: both;
+}
+
 body {
     margin: auto;
     font-family: 'Roboto', Arial, sans-serif;
     font-size: 14px;
     color: #333;
-    background-color: #f2f5f7;
+    /* background-color: #f2f5f7; */
 }
 
 * {
@@ -21,9 +26,12 @@ img {
     max-width: 100%;
     border: 0;
 }
+img {
+    max-width: 100%;
+    border: 0;
+}
 
 .container {
-    /* width: 100%; */
     margin: auto;
     max-width: 1180px;
 }
