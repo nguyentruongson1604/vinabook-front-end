@@ -1,0 +1,30 @@
+.inputBase {
+    padding: 0 !important; /* Đặt padding của phần tử con thành 0 để xóa padding */
+    width: 260px !important;
+    height: 24px !important;
+    padding: 4px !important;
+    box-sizing: border-box !important;
+}
+.inputName{
+    width: 160px;
+    display: inline-block;
+    margin-bottom: 14px;
+}
+.rdoGroup{
+    display: inline-block !important;
+}
+.buttonStyles{
+    width: 135px !important;
+    height: 40px !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    background-color: #2ba40d !important;
+}
+.bannerReg{
+    color: #087b44;
+    font-size: 22px;
+    font-weight: normal;
+    border-bottom: 1px dashed #c7c7c7;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+}

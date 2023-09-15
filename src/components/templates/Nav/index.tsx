@@ -12,6 +12,7 @@ import { useState } from 'react';
 const Nav: React.FC<{ appear?: boolean}> = ({ appear}) =>{
   const [open , setOpen] = useState(true)
   return (
+    <>
     <div className={styles.nav}>
         
         <div className="container">
@@ -31,7 +32,8 @@ const Nav: React.FC<{ appear?: boolean}> = ({ appear}) =>{
             <HeaderContact/>
         </div>
     </div>
-    
+    <div className="clearfix"></div>
+    </>
   )
 }
 
