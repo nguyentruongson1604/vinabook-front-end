@@ -10,11 +10,10 @@ import HeaderContact from '../../elements/HeaderContact';
 import { useState } from 'react';
 
 const Nav: React.FC<{ appear?: boolean}> = ({ appear}) =>{
-  const [open , setOpen] = useState(true)
+  const [open , setOpen] = useState(false)
   return (
     <>
     <div className={styles.nav}>
-        
         <div className="container">
             <ul className={styles.navMenu}>
                 <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)}>
