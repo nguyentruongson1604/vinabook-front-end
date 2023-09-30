@@ -22,7 +22,7 @@ import TopHeader from './components/templates/TopHeader';
 function App() {
   return (
     <>
-    <HomePage/>
+    <CategoryPage/>
     </>
   )
 }
