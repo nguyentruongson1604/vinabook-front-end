@@ -1,3 +1,4 @@
+import { Pagination } from '@mui/material';
 import './App.css';
 import LeftContent from './components/collections/LeftContent';
 import RouteLine from './components/collections/RouteLine';
@@ -16,10 +17,11 @@ import LoginBox from './components/templates/LoginBox';
 import Nav from './components/templates/Nav';
 import RegisterBox from './components/templates/RegisterBox';
 import TopHeader from './components/templates/TopHeader';
+import PaginationCategory from './components/elements/PaginationCategory';
 function App() {
   return (
     <>
-    <CategoryPage/>
+    <PaginationCategory/>
     </>
   )
 }

@@ -19,7 +19,6 @@ const LoginPage: React.FC<{className?: string }> = ({className }) => {
             </div>
             <div className="clearfix"></div>
             <Footer/>
-            {/* <AuthorContent/> */}
         </>
     )
 };
