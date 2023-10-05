@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom'
 import MiniCartItem from '../../elements/MiniCartItem'
 import style from './style.module.css'
 
-const HomeCart = () => {
+const HomeCart = ({closeCart}: {closeCart: (isOpenCart: boolean) => void}) => {
     return(
         <div className={style.homeCart}>
             <div className={style.listCart}>
@@ -25,7 +26,7 @@ const HomeCart = () => {
                 </div>
                 <div className={style.cartButton}>
                     <span className={style.button}>
-                        <a href="" rel="nofollow" className="viewCart">Xem giỏ hàng</a>
+                        <Link to='checkout' onClick={()=>{closeCart(false)}}>Xem giỏ hàng</Link>
                     </span>
                 </div>
             </div>
