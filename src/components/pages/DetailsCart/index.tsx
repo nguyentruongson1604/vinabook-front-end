@@ -1,7 +1,6 @@
 import CartInfomation from '../../elements/CartInfomation'
 import CartItem from '../../elements/CartItem'
 import Logo from '../../elements/Logo'
-import Footer from '../../templates/Footer'
 import style from './style.module.css'
 
 const DetailsCart = () => {
@@ -54,7 +53,6 @@ const DetailsCart = () => {
                 </div>
             </div>
         </div>
-        <Footer />
         </>
     )
 }
