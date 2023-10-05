@@ -5,7 +5,9 @@ import HomeCart from '../../collections/HomeCart'
 import { useState } from 'react'
 const LogoCart = () => {
     const [isOpenCart, setOpenCart] = useState<boolean>(false);
-
+    const closeCart = (isOpenCart: boolean) => {
+        setOpenCart(false)
+    }
     return(
         <div className={styles.logoCard}>
             <a >
@@ -13,7 +15,7 @@ const LogoCart = () => {
                 <span className={styles.numItemsMiniCart}>2</span>
             </a>
             {isOpenCart && <div className={styles.popUpBox}>
-                <HomeCart />
+                <HomeCart closeCart = {closeCart} />
             </div> }
         </div>
         

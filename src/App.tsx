@@ -9,7 +9,6 @@ import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';
 import DetailsCart from './components/pages/DetailsCart';
 import DetailsPage from './components/pages/DetailsPage';
-import Header from './components/pages/Header';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
@@ -26,13 +25,13 @@ import PaginationCategory from './components/elements/PaginationCategory';
 function App() {
   return (
     <BrowserRouter>
-      <Header/>
+      <TopHeader/>
+      <BottomHeader/>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/checkout' element={<DetailsCart/>}/>
-        {/* <Route path='/author/:authorId' element={<AuthorPage/>}/> */}
       </Routes>
       <Footer/>
     </BrowserRouter>
