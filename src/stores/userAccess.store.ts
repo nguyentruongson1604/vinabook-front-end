@@ -57,4 +57,24 @@ class UserAccess {
             return { success: false, res: error.response.data };
         }
     };
+
+    changePassword = async (data: object) => {
+        try {
+            const option = {
+                method: 'put',
+                url: "/api/user/changePassword",
+                data: data,
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            }
+            const response = await axios(option)
+
+            return { success: true, res: response.data };
+        } catch (error: any) {
+            return { success: false, res: error.response.data };
+        }
+    };
+
+
 }

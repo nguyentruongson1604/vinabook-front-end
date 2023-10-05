@@ -5,7 +5,8 @@ import style from './style.module.css'
 
 const DetailsCart = () => {
     return(
-        <div className='container'>
+        <>
+            <div className='container'>
             <div className={style.logoCart}>
                 <Logo/>
             </div>
@@ -52,6 +53,7 @@ const DetailsCart = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
