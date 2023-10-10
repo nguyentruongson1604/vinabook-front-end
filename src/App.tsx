@@ -1,3 +1,4 @@
+import { Pagination } from '@mui/material';
 import './App.css';
 import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';
@@ -11,6 +12,7 @@ import Footer from './components/templates/Footer';
 import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppContextProvider, useStore } from './stores/RootStore.store';
+
 function App() {
   const store = useStore()
   

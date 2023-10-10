@@ -4,6 +4,8 @@ import AuthorStore from "./childrens/Authors.store"
 import CategoryStore from "./childrens/Categorys.store"
 import PublisherStore from "./childrens/Publishers.store"
 import CartStore from "./childrens/Carts.store"
+import UserAccess from "./childrens/UserAccess.store"
+import UserManagement from "./childrens/UserManagement.store"
 
 class RootStore {
     BooksStore?: BooksStore
@@ -11,7 +13,11 @@ class RootStore {
     CategoryStore?: CategoryStore
     PublisherStore?: PublisherStore
     CartStore?: CartStore
+    userAccess?: UserAccess;
+    userManagement?: UserManagement;
     constructor(){
+        this.userAccess = new UserAccess()
+        this.userManagement = new UserManagement(this)
         this.BooksStore = new BooksStore(this)
         this.AuthorStore = new AuthorStore(this)
         this.CategoryStore = new CategoryStore(this)
