@@ -12,6 +12,8 @@ export interface IUserAccount {
     password: string
 }
 
+//createAxiosInstance đã có sẵn token
+
 export async function register(newUser: IUser) {
     try {
         const options: axiosInstanceOptions = {
@@ -33,7 +35,6 @@ export async function login(userAccount: IUserAccount) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', userAccount)
-        console.log("login: ", res)
         return res
     } catch (error) {
         console.log(error)
@@ -47,7 +48,6 @@ export async function getCurrentUser() {
         }
         const instance = createAxiosInstance(options)
         const res = instance.get('/')
-        console.log('currentUser: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -62,7 +62,6 @@ export async function changePassword(data: object) {
         }
         const instance = createAxiosInstance(options)
         const res = instance.put('/', data)
-        console.log('changePassword: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -79,21 +78,45 @@ export async function getAllUser(page: number, limit: number, search?: string) {
         }
         const instance = createAxiosInstance(options)
         const res = instance.get('/')
-        console.log('getAllUser: ', res)
         return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function updateOtherInfo(_id: string) {
+export async function updateOtherUser(_id: string, data: IUser) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/user/otherUser/`
+            baseURL: `/api/user/otherUser/${_id}`
+        }
+        const instance = createAxiosInstance(options)
+        const res = instance.put('/', data)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function deleteOtherUser(_id: string) {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/user/otherUser/${_id}`
+        }
+        const instance = createAxiosInstance(options)
+        const res = instance.delete('/')
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getOtherUser(_id: string) {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/user/otherUser/${_id}`
         }
         const instance = createAxiosInstance(options)
         const res = instance.get('/')
-        console.log('currentUser: ', res)
         return res
     } catch (error) {
         console.log(error)

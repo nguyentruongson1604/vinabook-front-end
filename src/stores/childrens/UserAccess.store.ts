@@ -1,7 +1,8 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import { changePassword, login, register } from "../../APIs/user.api";
 
-interface IUserAccess{
+export interface IUserAccess{
     _id?: string
     name?: string
     email?: string
@@ -18,22 +19,16 @@ class UserAccess {
         this.userAccess = user;
     };
 
-    getToken = () :string|null => {
-        return localStorage.getItem("token") 
-    };
-
     userLogin = async (userInput: { email: string; password: string }) => {
         try {
-            const option = {
-                method: 'post',
-                url: "/api/user/login",
-                data: userInput,
-            }
-            const response = await axios(option)
+            const response = await login(userInput);            
             // const {refreshToken,accessToken} = response.data
             // localStorage.setItem("accessToken", accessToken)
             // localStorage.setItem("refreshToken", refreshToken)
-            return { success: true, res: response.data };
+            if(response)
+                return { success: true, res: response.data };
+            else
+            return { success: false, res: 'khong thay tai khoan' };
         } catch (error: any) {
             return { success: false, res: error.response.data };
         }
@@ -45,14 +40,8 @@ class UserAccess {
         password: string;
     }) => {
         try {
-            const option = {
-                method: 'post',
-                url: "/api/user/register",
-                data: account,
-            }
-            const response = await axios(option)
-
-            return { success: true, res: response.data };
+            const response = await register(account);
+            return { success: true, res: response?.data };
         } catch (error: any) {
             return { success: false, res: error.response.data };
         }
@@ -60,21 +49,12 @@ class UserAccess {
 
     changePassword = async (data: object) => {
         try {
-            const option = {
-                method: 'put',
-                url: "/api/user/changePassword",
-                data: data,
-                headers: {
-                    Authorization: `Bearer ${this.getToken()}`
-                }
-            }
-            const response = await axios(option)
-
-            return { success: true, res: response.data };
+            const response = await changePassword(data);
+            return { success: true, res: response?.data };
         } catch (error: any) {
             return { success: false, res: error.response.data };
         }
     };
 
-
 }
+export default UserAccess
