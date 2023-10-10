@@ -1,6 +1,7 @@
 import { axiosInstanceOptions, createAxiosInstance } from "../instances/instance"
+import { IFilter } from "../stores/childrens/Books.store"
 
-export interface IBook{
+interface IBook{
     name?: string,
     description?: string,
     page?: number,
@@ -132,7 +133,7 @@ export async function getBookByPublisher(publisherId: string) {
     }
 }
 
-export async function getBookByCategory(categoryId: string) {
+export async function getBooksByCategory(categoryId: string) {
     try {
         const options: axiosInstanceOptions = {
             baseURL: `/api/v1/book/category/${categoryId}`
@@ -146,10 +147,10 @@ export async function getBookByCategory(categoryId: string) {
     }
 }
 
-export async function searchBooks(keyWord: string = "", limit: number = 0, page: number = 0) {
+export async function searchBooks(filter: IFilter) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/book/all-book/search?page=${page}&keyword=${keyWord}&limit=${limit}`
+            baseURL: `/api/v1/book/all-book/search?page=${filter.page}&keyword=${filter.keyWord}&limit=${filter.limit}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')

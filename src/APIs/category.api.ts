@@ -60,3 +60,17 @@ export async function deleteCategory(categoryId: string) {
         console.log(error)
     }
 }
+
+export async function getCategoryById(categoryId: string){
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/v1/category/${categoryId}`
+        }
+        const instance = createAxiosInstance(options)
+        const res =  await instance.get('/')
+        console.log('category', res)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

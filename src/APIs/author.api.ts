@@ -48,6 +48,20 @@ export async function getAuthorById(authorId: string) {
     }
 }
 
+export async function getAuthorsByCategory(categoryId: string) {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `api/v1/author/category/${categoryId}`
+        }
+        const instance =  createAxiosInstance(options);
+        const res = await instance.get('/')
+        console.log(`author ${categoryId}: `, res)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function updateAuthor(newAuthor: IAuthor, authorId: string) {
     try {
         const options: axiosInstanceOptions = {
