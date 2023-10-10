@@ -7,7 +7,7 @@ export interface ICart{
 }
 
 export interface IBookInCart{
-    bookId?: string,
+    book?: string,
     quantity: number
 }
 

@@ -4,7 +4,9 @@ import AddToCard from '../../elements/AddToCard/Index';
 import BoxPrice from '../../elements/BoxPrice/Index';
 import BoxSaleOff from '../../elements/BoxSaleOff/Index';
 import styles from './Style.module.css'
-const BoxHighlight: React.FC<{ book?: object, background_color?: string, className?: string}> = ({ book,background_color, className}) => {
+import { IBook } from '../../../stores/childrens/Books.store';
+import { observer } from 'mobx-react';
+const BoxHighlight: React.FC<{ book?: IBook, background_color?: string, className?: string}> = observer(({book, background_color, className}) => {
     const backgr = { "--box-highlight-background-color": background_color } as React.CSSProperties;
     const price ={
         className: styles.price,
@@ -14,7 +16,11 @@ const BoxHighlight: React.FC<{ book?: object, background_color?: string, classNa
     const sale = {
         className: styles.sale,
         boxSaleOffEdit: styles.boxSaleOffEdit
-    } 
+    }
+    let newPrice = 0
+    if(book?.price && book.discount){
+        newPrice = book?.price * (100 - book?.discount) / 100
+    }
     return (
         <div className={className}>
             <div className={styles.background} style={backgr}>
@@ -26,16 +32,16 @@ const BoxHighlight: React.FC<{ book?: object, background_color?: string, classNa
                 <div className={clsx(styles.textInfo, 'clearfix')}> 
                     <div className={styles.tittle}>
                         <div className={styles.smallTittle}>
-                            <a href="">Bách Khoa Toàn Thư Content: Đại Biểu Mẫu</a>
+                            <a href="">{book?.name}</a>
                         </div>
-                        <div className={styles.auth}>Nhiều tác giả</div>
+                        <div className={styles.auth}>{book?.author.name}</div>
                     </div>
                     <div className={styles.textContent}>
-                        <p>Bạn thân mến, Bạn đang sống trong một thời đại mà khi khép mắt vào, điều còn đọng lại trong đầu bạn có khi không phải là những lời thì thầm chúc ngủ ngon, mà là lời lẽ mời gọi từ một chiếc email bạn nhận được lúc nửa đêm. Và khi mở mắt ra, điều đầu tiên bạn nhìn thấy có thể không phải là một gương mặt của người thân quen, hay của chính mình trong gương. Đó có thể là những dòng tin trên chiếc điện thoại của bạn, một hình ảnh trên mạng xã hội, một vài video quảng cáo, một clip Tiktok vui nhộn… Vâng, đúng thế. Chào ngày mới, điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  điều còn đọng  chúng ta đang sống</p>
+                        <p>{book?.description}</p>
                     </div>
                     <div className={styles.boxPriceBuy}>
-                        <BoxSaleOff discount={10} className={sale}/>
-                        <BoxPrice newprice={100000} oldprice={200000} className={price}/>
+                        <BoxSaleOff discount={book?.discount} className={sale}/>
+                        <BoxPrice newprice={newPrice} oldprice={book?.price} className={price}/>
                         <AddToCard className={styles.addToCard}/>         
                     </div>
                 </div>
@@ -43,6 +49,6 @@ const BoxHighlight: React.FC<{ book?: object, background_color?: string, classNa
             </div>
         </div>
     );
-  };
+  });
   
 export default BoxHighlight
