@@ -1,13 +1,13 @@
 import { makeAutoObservable } from "mobx";
-import { RootStore } from './../RootStore.store';
 import { IBill, createUserBill, deleteBill, getAllBillAdmin, getAllBillUser, getCurrentBill, updateStatusBill } from "../../APIs/bill.api";
+import { TRootStore } from "../RootStore.store";
 
 class Bill{
     bills: IBill[] = []
     // historyBill: IBill[] = []
     currenBill: IBill | undefined = undefined
-    rootStore: RootStore
-    constructor(rootStore: RootStore) {
+    rootStore: TRootStore
+    constructor(rootStore: TRootStore) {
         makeAutoObservable(this);
         this.rootStore = rootStore
     }

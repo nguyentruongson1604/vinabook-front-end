@@ -1,12 +1,12 @@
-import { RootStore } from './../RootStore.store';
 import { makeAutoObservable } from "mobx";
 import { IUserAccess } from "./UserAccess.store";
 import { IUser, deleteOtherUser, getAllUser, updateOtherUser } from '../../APIs/user.api';
+import { TRootStore } from "../RootStore.store";
 
 class UserManagement {
     usersManagemant: IUserAccess[] = []
-    rootStore: RootStore
-    constructor(rootStore: RootStore) {
+    rootStore: TRootStore
+    constructor(rootStore: TRootStore) {
         makeAutoObservable(this);
         this.rootStore = rootStore
     }
