@@ -32,3 +32,6 @@
 .reg{
     margin: 10px 0;
 }
+.errorMesage{
+    color: #aa0b0b;
+}

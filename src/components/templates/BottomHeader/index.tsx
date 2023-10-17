@@ -3,7 +3,8 @@ import Logo from '../../elements/Logo'
 import FormWrapper from '../../elements/FormWrapper'
 import LogoCard from '../../elements/LogoCard'
 import Login from '../../elements/Login'
-const BottomHeader = () => {
+import { observer } from 'mobx-react'
+const BottomHeader = observer(() => {
     return(
         <div className={styles.bottomHeader}>
             <div className="container">
@@ -16,6 +17,6 @@ const BottomHeader = () => {
         </div>
         
     )
-}
+})
 
 export default BottomHeader

@@ -26,12 +26,12 @@ class RootStore {
     }
 }
 
-const rootStore = new RootStore()
+export const rootStore = new RootStore()
 export type TRootStore = typeof rootStore
 
-const AppContext = createContext<RootStore>(rootStore)
+const AppContext = createContext<TRootStore>(rootStore)
 export const  AppContextProvider = AppContext.Provider
-export function useStore(): RootStore{
+export function useStore(): TRootStore{
     const store = useContext(AppContext)
     return store
 }

@@ -1,0 +1,35 @@
+
+.mainBox{
+    width: 1100px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: auto;
+    margin-top: 40px;
+    height: 350px;
+}
+.leftBox{
+    float: left;
+    width: 66%;
+    padding: 10px 20px;
+}
+/* .rightBox{
+    float: right;
+    width: 33%;
+    text-align: center;
+    padding: 40px 0 0 0;
+    background-image: -webkit-gradient(linear,left top,right top,color-stop(0,#F1F1F1),color-stop(1,#FFFFFF));
+    height: 100%;
+}
+.imgG{
+    width: 185px;
+    height: 40px;
+    margin: 15px 0;
+}
+.imgF{
+    width: 247px;
+    height: 40px;
+}
+.policy{
+    color: #66645c;
+    margin-top: 20px;
+} */

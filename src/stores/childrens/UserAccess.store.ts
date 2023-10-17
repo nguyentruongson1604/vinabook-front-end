@@ -1,12 +1,12 @@
-import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { changePassword, login, register } from "../../APIs/user.api";
+import { changePassword, getCurrentUser, login, register } from "../../APIs/user.api";
 
 export interface IUserAccess{
     _id?: string
     name?: string
     email?: string
     role?: string
+    password?: string
 }
 
 class UserAccess {
@@ -22,13 +22,7 @@ class UserAccess {
     userLogin = async (userInput: { email: string; password: string }) => {
         try {
             const response = await login(userInput);            
-            // const {refreshToken,accessToken} = response.data
-            // localStorage.setItem("accessToken", accessToken)
-            // localStorage.setItem("refreshToken", refreshToken)
-            if(response)
-                return { success: true, res: response.data };
-            else
-            return { success: false, res: 'khong thay tai khoan' };
+            return { success: true, res: response?.data };
         } catch (error: any) {
             return { success: false, res: error.response.data };
         }
@@ -47,9 +41,19 @@ class UserAccess {
         }
     };
 
-    changePassword = async (data: object) => {
+    getCurrentUser= async () =>{
         try {
-            const response = await changePassword(data);
+            const response = await getCurrentUser();
+            this.setUserAccess(response.data.data)            
+        } catch (error: any) {
+            return { success: false, res: error.response.data };
+        }
+    }
+
+    changePassword = async (data: {currentPassword: string, newPassword: string}) => {
+        try {
+            const response = await changePassword(data);            
+            this.setUserAccess({ ...this.userAccess, ...response.data.data })
             return { success: true, res: response?.data };
         } catch (error: any) {
             return { success: false, res: error.response.data };

@@ -1,3 +1,4 @@
+import { log } from "console"
 import { axiosInstanceOptions, createAxiosInstance } from "../instances/instance"
 
 export interface IUser{
@@ -15,110 +16,78 @@ export interface IUserAccount {
 //createAxiosInstance đã có sẵn token
 
 export async function register(newUser: IUser) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: '/api/user/register'
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', newUser)
         return res
-
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export async function login(userAccount: IUserAccount) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: '/api/user/login'
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', userAccount)
         return res
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export async function getCurrentUser() {
-    try {
-        const options: axiosInstanceOptions = {
-            baseURL: '/api/user/getCurrentUser'
-        }
-        const instance = createAxiosInstance(options)
-        const res = instance.get('/')
-        return res
-    } catch (error) {
-        console.log(error)
+    const options: axiosInstanceOptions = {
+        baseURL: '/api/user/getCurrentUser'
     }
+    const instance = createAxiosInstance(options)
+    const res = await instance.get('/') 
+    return res
 }
 
 
-export async function changePassword(data: object) {
-    try {
+export async function changePassword(data: {currentPassword: string, newPassword: string}) {    
         const options: axiosInstanceOptions = {
             baseURL: '/api/user/changePassword'
         }
         const instance = createAxiosInstance(options)
-        const res = instance.put('/', data)
+        const res = await instance.put('/', data)        
         return res
-    } catch (error) {
-        console.log(error)
-    }
+
 }
 
 
 //user manager
 export async function getAllUser(page: number, limit: number, search?: string) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: `/api/getAllUser?page=${page}&limit=${limit}&search=${search}`
             
         }
         const instance = createAxiosInstance(options)
-        const res = instance.get('/')
+        const res = await instance.get('/')
         return res
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export async function updateOtherUser(_id: string, data: IUser) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: `/api/user/otherUser/${_id}`
         }
         const instance = createAxiosInstance(options)
-        const res = instance.put('/', data)
+        const res = await instance.put('/', data)
         return res
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export async function deleteOtherUser(_id: string) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: `/api/user/otherUser/${_id}`
         }
         const instance = createAxiosInstance(options)
-        const res = instance.delete('/')
+        const res = await instance.delete('/')
         return res
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export async function getOtherUser(_id: string) {
-    try {
         const options: axiosInstanceOptions = {
             baseURL: `/api/user/otherUser/${_id}`
         }
         const instance = createAxiosInstance(options)
-        const res = instance.get('/')
+        const res = await instance.get('/')
         return res
-    } catch (error) {
-        console.log(error)
-    }
 }

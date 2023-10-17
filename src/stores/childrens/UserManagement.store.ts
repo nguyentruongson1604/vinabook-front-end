@@ -22,7 +22,6 @@ class UserManagement {
             );
             return { status: true, message: "Success!!" };
         } catch (error: any) {
-            console.log(error.response.data);
             return { status: false, message: error.response.data.message };
         }
     }
