@@ -6,6 +6,7 @@ import PublisherStore from "./childrens/Publishers.store"
 import CartStore from "./childrens/Carts.store"
 import UserAccess from "./childrens/UserAccess.store"
 import UserManagement from "./childrens/UserManagement.store"
+import { makeObservable, observable } from "mobx"
 
 class RootStore {
     BooksStore?: BooksStore
@@ -24,9 +25,10 @@ class RootStore {
         this.CartStore = new CartStore(this)
         this.PublisherStore = new PublisherStore(this)
     }
+    
 }
 
-const rootStore = new RootStore()
+export const rootStore = new RootStore()
 export type TRootStore = typeof rootStore
 
 const AppContext = createContext<RootStore>(rootStore)

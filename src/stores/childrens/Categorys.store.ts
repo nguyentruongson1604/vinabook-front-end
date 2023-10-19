@@ -20,6 +20,10 @@ class CategoryStore {
         this.currentCategory = category
     }
 
+    setAllCategories(categories: ICategory[]){
+        this.listCategories = categories
+    }
+
     get getCurrentCategory(){
         return this.currentCategory
     }
@@ -31,7 +35,7 @@ class CategoryStore {
     async getAllCategorysAPI(){
         try {
             const categories = await getAllCategory()
-            this.listCategories = categories?.data.data
+            this.setAllCategories(categories?.data.allCategory)
         } catch (error) {
             console.log(error)
         }

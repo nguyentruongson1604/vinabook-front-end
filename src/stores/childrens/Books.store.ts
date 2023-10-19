@@ -17,6 +17,12 @@ export interface IBook {
     category: ICategoryInBook
 }
 
+export interface IBookCategory {
+    categoryId: string,
+    categoryName: string,
+    listBook: IBook[]
+}
+
 interface IAuthorInBook {
     _id: string,
     name: string
@@ -43,10 +49,20 @@ class BooksStore {
     size?: number
     RootStore?: TRootStore
     currentBook?: IBook
+    listBookCategory: IBookCategory[] = []
 
     constructor(RootStore: TRootStore){
         makeAutoObservable(this)
         this.RootStore = RootStore
+    }
+
+    get getListBookCategory(){
+        return this.listBookCategory
+    }
+
+    setListBookCategory(books: IBookCategory){
+        if(!this.listBookCategory.find(book => book.categoryId === books.categoryId) && books.listBook.length > 0)
+            this.listBookCategory = [...this.listBookCategory, books]
     }
 
     get getBooks(){
@@ -119,6 +135,7 @@ class BooksStore {
             console.log(error)
         }
     }    
+    
 }
 
 

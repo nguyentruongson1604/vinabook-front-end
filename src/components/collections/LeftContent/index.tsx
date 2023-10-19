@@ -1,115 +1,36 @@
 import styles from './style.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { observer } from 'mobx-react';
+import { useStore } from '../../../stores/RootStore.store';
+import { ICategory } from '../../../APIs/category.api';
+import { useEffect } from 'react';
 
-const LeftContent =() => {
-  return (
-        <ul className={styles.leftContent}>
-            <li className={styles.fontBold}>
-                <a href="#">
-                    Kho sách giảm giá
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li className={styles.fontBold}>
-                <a href="#">
-                    Kho sách bán chạy
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li className={styles.fontBold}>
-                <a href="#">
-                    Sách mới phát hành
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li className={styles.fontBold}>
-                <a href="#">
-                    Sách sắp phát hành
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li className={styles.fontBold}>
-                <a href="#">
-                    Combo ưu đãi
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li className={styles.leftContentTitle}>
-                DANH MỤC
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Sách ngoại văn
-                    <span className={styles.count}> (3)</span>
-                    <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                </a>
-            </li> 
-        </ul>
-  )
-}
+const LeftContent = observer(() => {
+    const store = useStore()
+    useEffect(()=>{
+        store.CategoryStore?.getAllCategorysAPI()
+    }, [])
+    return (
+          <ul className={styles.leftContent}>
+              <li className={styles.leftContentTitle}>
+                  DANH MỤC
+              </li>
+              {
+                store.CategoryStore?.getAllCategories && store.CategoryStore?.getAllCategories.map((item: ICategory)=>{
+                    return(
+                        <li key={item._id}>
+                            <a href="#">
+                                Sách {item.name}
+                                <span className={styles.count}> (3)</span>
+                                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
+                            </a>
+                        </li>
+                    )
+                })
+              }
+          </ul>
+    )
+  })
 
 export default LeftContent;

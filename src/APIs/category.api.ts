@@ -1,6 +1,7 @@
 import { axiosInstanceOptions, createAxiosInstance } from "../instances/instance"
 
 export interface ICategory {
+    _id?: string,
     name?: string,
 }
 
@@ -11,7 +12,7 @@ export async function getAllCategory() {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('all category: ', res)
+        // console.log('all category: ', res)
 
         return res
     } catch (error) {
@@ -26,7 +27,7 @@ export async function newCategory(newCategory: ICategory) {
         }
         const instance = createAxiosInstance(options)
         const res =  await instance.post('/', newCategory)
-        console.log('new category: ',res)
+        // console.log('new category: ',res)
         return res
     } catch (error) {
         console.log(error)
@@ -40,7 +41,7 @@ export async function updateCategory(newCategory: ICategory, categoryId: string)
         }
         const instance = createAxiosInstance(options)
         const res =  await instance.put('/', newCategory)
-        console.log('update category: ',res)
+        // console.log('update category: ',res)
         return res
     } catch (error) {
         console.log(error)
@@ -54,7 +55,7 @@ export async function deleteCategory(categoryId: string) {
         }
         const instance = createAxiosInstance(options)
         const res =  await instance.delete('/')
-        console.log('delete category', res)
+        // console.log('delete category', res)
         return res
     } catch (error) {
         console.log(error)
@@ -68,7 +69,7 @@ export async function getCategoryById(categoryId: string){
         }
         const instance = createAxiosInstance(options)
         const res =  await instance.get('/')
-        console.log('category', res)
+        // console.log('category', res)
         return res
     } catch (error) {
         console.log(error)

@@ -11,14 +11,14 @@ import BottomHeader from './components/templates/BottomHeader';
 import Footer from './components/templates/Footer';
 import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppContextProvider, useStore } from './stores/RootStore.store';
+import { AppContextProvider, rootStore } from './stores/RootStore.store';
+import PayForm from './components/elements/PayForm';
+import RegisterBox from './components/templates/RegisterBox';
 
 function App() {
-  const store = useStore()
-  
   return (
     <BrowserRouter>
-      <AppContextProvider value={store}>
+      <AppContextProvider value={rootStore}>
         <TopHeader/>
         <BottomHeader/>
         <Routes>
@@ -26,9 +26,10 @@ function App() {
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/checkout' element={<DetailsCart/>}/>
-          <Route path='/author' element={<AuthorPage/>}/>
+          <Route path='/author/:authorId' element={<AuthorPage/>}/>
           <Route path='/category' element={<CategoryPage/>}/>
-          <Route path='/details' element={<DetailsPage/>}/>
+          <Route path='/details/:bookId' element={<DetailsPage/>}/>
+          <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
         </Routes>
         <Footer/>
