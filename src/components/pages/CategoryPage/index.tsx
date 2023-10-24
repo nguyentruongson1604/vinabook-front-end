@@ -4,15 +4,24 @@ import RouteLine from '../../collections/RouteLine';
 import CategoryRight from '../../templates/CategoryRight';
 import Nav from '../../templates/Nav';
 import { observer } from 'mobx-react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { useStore } from '../../../stores/RootStore.store';
 import { useEffect, useState } from 'react';
 
 const CategoryPage = observer(() => {
     const [loading, setLoading] = useState(true);
+
+    //get id of author and publisher
     const {publisherId} = useParams()
     const {categoryId} = useParams()
-    // console.log('cate:', categoryId, 'publish:', publisherId)
+
+    //get search params
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search)
+    const keyword = searchParams.get('keyword')
+    const page = searchParams.get('page')
+    // console.log('params:', keyword, page)
+
     const store = useStore()
     const fetchCategories = async () => {
         setLoading(true)
@@ -26,9 +35,23 @@ const CategoryPage = observer(() => {
             store.BooksStore?.getBooksOfCategoryAPI(categoryId!)
             store.CategoryStore?.getCategoryByIdAPI(categoryId!)
         }
-        else{
+        else if(publisherId){
             store.BooksStore?.getBooksOfPublisherAPI(publisherId!)
             store.PublisherStore?.getPublisherByIdAPI(publisherId!)
+        }
+        else if(keyword !== null){
+            if(page){
+                store.BooksStore?.getBooksSearchAPI({
+                    keyWord: keyword,
+                    page: parseInt(page)
+                })
+            }
+            else{
+                store.BooksStore?.getBooksSearchAPI({
+                    keyWord: keyword,
+                    page: 1
+                })
+            }
         }
     }, [])
     if(loading) return <div>Loading....</div>
@@ -36,14 +59,14 @@ const CategoryPage = observer(() => {
         <div >
             <Nav appear={false}/>
             <div className="container">
-                <RouteLine className={styles.rouLine} category={store.CategoryStore?.currentCategory} publisher={store.PublisherStore?.currentPublisher}/>
+                <RouteLine className={styles.rouLine} category={store.CategoryStore?.currentCategory} publisher={store.PublisherStore?.currentPublisher} search={keyword!}/>
                 <div className="clearfix"></div>
                 <div className={styles.authorContent}>
                     <div className={styles.styleLeft}>
                         <LeftContent/>
                     </div>
                     <div className={styles.styleRight}>
-                        <CategoryRight/>
+                        <CategoryRight search={keyword!}/>
                     </div>
                     <div className="clearfix"></div>
                 </div>

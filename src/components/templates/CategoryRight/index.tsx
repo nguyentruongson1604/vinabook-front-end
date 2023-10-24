@@ -4,42 +4,71 @@ import DetailTittle from '../../elements/DetailTittle';
 import styles from './style.module.css'
 import { useStore } from '../../../stores/RootStore.store';
 import { IBook } from '../../../stores/childrens/Books.store';
-const CategoryRight: React.FC<{className?: string }> = observer(({className }) => {
+const CategoryRight: React.FC<{className?: string, search?: string }> = observer(({className, search}) => {
     const store = useStore()
-    const categoryBooks = store.BooksStore?.getBooks
+    const books = store.BooksStore?.getBooks
+
     const category = store.CategoryStore?.currentCategory
-    const publisherBooks = store.BooksStore?.getBooks
     const publisher = store.PublisherStore?.currentPublisher
     // console.log('book cate: ', categoryBooks)
+    // if(books?.length === 0){
+    //     return <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
+    // }
     return (
         <div className={className}>
             {
-                (categoryBooks && category &&
+                (books && category &&
                 <div className={styles.homeRight}>
                     <DetailTittle tittle={`Sách ${category?.name}`}/>
-                    <div className={styles.newBook}>
-                        {
-                            categoryBooks.map((item: IBook)=>{
-                                return(
-                                    <CategoryInfoBook key={item._id} className={styles.itemBook} book={item}/>
-                                )
-                            })
-                        }
-                    </div>
+                    {
+                        books.length > 0 ? 
+                        <div className={styles.newBook}>
+                            {
+                                books.map((item: IBook)=>{
+                                    return(
+                                        <CategoryInfoBook key={item._id} className={styles.itemBook} book={item}/>
+                                    )
+                                })
+                            }
+                        </div> : 
+                        <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
+                    }
                 </div>)
                 ||
-                (publisherBooks && publisher &&
+                (books && publisher &&
                 <div className={styles.homeRight}>
                     <DetailTittle tittle={`Nhà xuất bản ${publisher?.name}`}/>
-                    <div className={styles.newBook}>
+                    {
+                        books.length > 0 ? 
+                        <div className={styles.newBook}>
                         {
-                            publisherBooks.map((item: IBook)=>{
+                            books.map((item: IBook)=>{
                                 return(
                                     <CategoryInfoBook key={item._id} className={styles.itemBook} book={item}/>
                                 )
                             })
                         }
-                    </div>
+                    </div> : 
+                        <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
+                    }
+                </div>)
+                ||
+                (books && search !== null &&
+                    <div className={styles.homeRight}>
+                    <DetailTittle tittle={`Kết quả tìm kiếm: ${search}`}/>
+                    {
+                        books.length > 0 ? 
+                        <div className={styles.newBook}>
+                        {
+                            books.map((item: IBook)=>{
+                                return(
+                                    <CategoryInfoBook key={item._id} className={styles.itemBook} book={item}/>
+                                )
+                            })
+                        }
+                        </div> : 
+                        <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
+                    }
                 </div>)
             }
         </div>

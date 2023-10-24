@@ -149,9 +149,11 @@ export async function getBooksByCategory(categoryId: string) {
 
 export async function searchBooks(filter: IFilter) {
     try {
+        console.log('filter', filter)
         const options: axiosInstanceOptions = {
             baseURL: `/api/v1/book/all-book/search?page=${filter.page}&keyword=${filter.keyWord}&limit=${filter.limit}`
         }
+        console.log('baseUrl', options.baseURL)
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
         // console.log('book by filter: ', res)

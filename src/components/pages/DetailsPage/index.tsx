@@ -5,7 +5,6 @@ import style from './style.module.css'
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useStore } from '../../../stores/RootStore.store'
-import { ICategory } from '../../../APIs/category.api'
 
 const DetailsPage = observer(() => {
     const [loading, setLoading] = useState(true);

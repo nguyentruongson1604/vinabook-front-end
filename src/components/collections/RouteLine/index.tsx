@@ -5,12 +5,12 @@ import { IBook } from '../../../stores/childrens/Books.store'
 import RouteTitle from '../../elements/RouteTitle'
 import styles from './style.module.css'
 
-const RouteLine: React.FC<{className?: string, book?: IBook, author?: IAuthor, category?: ICategory, publisher?: IPublisher}> = ({ className, book, author, category, publisher}) => {
+const RouteLine: React.FC<{className?: string, book?: IBook, author?: IAuthor, category?: ICategory, publisher?: IPublisher, search?: string}> = ({ className, book, author, category, publisher, search}) => {
     // console.log('publisher', publisher?.name)s
     return(
         <div className={className}>
             {
-                (book || author || category || publisher) ? 
+                (book || author || category || publisher || search) ? 
                 <ul className={styles.line}>
                     {
                         (book && 
@@ -37,6 +37,12 @@ const RouteLine: React.FC<{className?: string, book?: IBook, author?: IAuthor, c
                             <RouteTitle title='Trang chủ' />
                             <RouteTitle title='Nhà xuất bản' />
                             <RouteTitle title={publisher!.name!} />
+                        </>
+                        ) ||
+                        (search &&
+                        <>
+                            <RouteTitle title='Trang chủ' />
+                            <RouteTitle title='Tìm kiếm' />
                         </>
                         )
                     }

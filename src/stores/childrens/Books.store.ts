@@ -129,6 +129,8 @@ class BooksStore {
 
     async getBooksSearchAPI(filter: IFilter){
         try {
+            //get 10 books in a page
+            filter.limit = 10
             const res = await searchBooks(filter)
             this.setBooks(res?.data.data)
         } catch (error) {

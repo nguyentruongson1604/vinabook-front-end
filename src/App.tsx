@@ -27,6 +27,7 @@ function App() {
           <Route path='/author/:authorId' element={<AuthorPage/>}/>
           <Route path='/category/:categoryId' element={<CategoryPage/>}/>
           <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
+          <Route path='/search?' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}

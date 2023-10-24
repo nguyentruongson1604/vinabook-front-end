@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { observer } from 'mobx-react';
 import styles from './style.module.css';
-import { useState } from 'react';
 
 import { IPublisher } from '../../../APIs/publisher.api';
 import { useNavigate } from 'react-router';
