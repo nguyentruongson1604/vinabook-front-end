@@ -83,7 +83,7 @@ export async function getPublisherById(publisherId: string) {
         }
         const instance =  createAxiosInstance(options);
         const res = await instance.get('/')
-        // console.log(`publisher ${publisherId}: `, res)
+        console.log(`publisher ${publisherId}: `, res)
         return res
     } catch (error) {
         console.log(error)

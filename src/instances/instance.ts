@@ -25,7 +25,7 @@ async function refreshAccessToken(refreshToken: string){
 export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstance => {
     // console.log('url', options.baseURL)
     const instance = axios.create({
-        baseURL: `http://localhost:5000${options.baseURL}`,
+        baseURL: options.baseURL,
         timeout: options.timeout || 10000,
         headers: {
             'Content-Type': 'application/json',

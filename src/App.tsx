@@ -1,4 +1,3 @@
-import { Pagination } from '@mui/material';
 import './App.css';
 import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';
@@ -12,7 +11,6 @@ import Footer from './components/templates/Footer';
 import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppContextProvider, rootStore } from './stores/RootStore.store';
-import PayForm from './components/elements/PayForm';
 import RegisterBox from './components/templates/RegisterBox';
 
 function App() {
@@ -27,7 +25,8 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/checkout' element={<DetailsCart/>}/>
           <Route path='/author/:authorId' element={<AuthorPage/>}/>
-          <Route path='/category' element={<CategoryPage/>}/>
+          <Route path='/category/:categoryId' element={<CategoryPage/>}/>
+          <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}

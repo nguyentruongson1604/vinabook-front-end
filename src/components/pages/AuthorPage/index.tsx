@@ -3,28 +3,25 @@ import styles from './style.module.css'
 import AuthorContent from '../../templates/AuthorContent';
 import { useParams } from 'react-router';
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '../../../stores/RootStore.store';
-import { ICategory } from '../../../APIs/category.api';
+
 const AuthorPage: React.FC<{className?: string }> = observer(({className }) => {
+    const [loading, setLoading] = useState(true);
     const {authorId} = useParams()
     const store = useStore()
 
     const fetchCategories = async () => {
-        await store.CategoryStore?.getAllCategorysAPI()
-        if (store.CategoryStore?.getAllCategories) {
-            store.CategoryStore?.getAllCategories.map(async (item: ICategory) => {
-                console.log('run here')
-                await store.AuthorStore?.getAuthorsByCategoryAPI(item._id!)
-                await store.PublisherStore?.getPublishersByCategoryAPI(item._id!)
-            })
-        }
+        setLoading(true)
+        await store.CategoryStore?.getCategoriesAndRelationAPI()
+        setLoading(false)
     }
 
     useEffect(()=>{
         store.BooksStore?.getBooksOfAuthorAPI(authorId!)
         fetchCategories()
     }, [])
+    if(loading) return <div>Loading....</div>
     return (
         <>
             <Nav appear={false}/>

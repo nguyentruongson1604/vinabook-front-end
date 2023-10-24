@@ -1,30 +1,31 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import styles from './style.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { observer } from 'mobx-react';
 import { useStore } from '../../../stores/RootStore.store';
-import { ICategory } from '../../../APIs/category.api';
-import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { ICategoryAndRelation } from '../../../stores/childrens/Categorys.store';
 
 const LeftContent = observer(() => {
     const store = useStore()
-    useEffect(()=>{
-        store.CategoryStore?.getAllCategorysAPI()
-    }, [])
+    const navigate = useNavigate()
+    const listBookCategory = store.CategoryStore?.getCategoriesAndRelation
+
     return (
           <ul className={styles.leftContent}>
               <li className={styles.leftContentTitle}>
                   DANH MỤC
               </li>
               {
-                store.CategoryStore?.getAllCategories && store.CategoryStore?.getAllCategories.map((item: ICategory)=>{
+                listBookCategory && listBookCategory.map((item: ICategoryAndRelation) => {
                     return(
                         <li key={item._id}>
-                            <a href="#">
-                                Sách {item.name}
-                                <span className={styles.count}> (3)</span>
-                                <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
-                            </a>
+                             <a href="" onClick={()=>{navigate(`/category/${item._id}`)}}>
+                                 Sách {item.name}
+                                 <span className={styles.count}> ({item.books})</span>
+                                 <FontAwesomeIcon icon={faAngleRight} className={styles.iconAngleRight}/>
+                             </a>
                         </li>
                     )
                 })

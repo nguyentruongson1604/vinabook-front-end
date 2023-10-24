@@ -11,23 +11,26 @@ const HomeRight: React.FC<{className?: string }> = observer(({className }) => {
             <div className={styles.HomeRight}>
                 {
                     listBookCategory && listBookCategory.map((books: IBookCategory, index: number)=>{
-                        return(
-                            <div key={index} className={styles.topWeek}>   
-                                <div className={styles.tittle}>
-                                    {books.categoryName}
+                        if(books.listBook.length > 0){
+                            return(
+                                <div key={index} className={styles.topWeek}>   
+                                    <div className={styles.tittle}>
+                                        {books.categoryName}
+                                    </div>
+                                    <div className={styles.listItem}>
+                                        {
+                                            books.listBook.map((book: IBook)=>{
+                                                return(
+                                                    <SmallBoxInfo key={book._id} className={styles.item} book={book}/>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
-                                <div className={styles.listItem}>
-                                    {
-                                        books.listBook.map((book: IBook)=>{
-                                            return(
-                                                <SmallBoxInfo key={book._id} className={styles.item} book={book}/>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        )
-                    })
+                            )
+                        }
+                        return <div></div>})
+                        
                 }
                 {/* <div className={styles.topWeek}>   
                     <div className={styles.tittle}>

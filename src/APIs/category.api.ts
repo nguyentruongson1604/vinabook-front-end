@@ -75,3 +75,16 @@ export async function getCategoryById(categoryId: string){
         console.log(error)
     }
 }
+
+export async function getCategoriesAndRelation() {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/v1/category/relation`
+        }
+        const instance = createAxiosInstance(options)
+        const res = await instance.get('/')
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

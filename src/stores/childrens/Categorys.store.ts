@@ -1,15 +1,26 @@
 import { makeAutoObservable } from "mobx"
 import { TRootStore } from "../RootStore.store"
-import {getAllCategory, getCategoryById} from '../../APIs/category.api'
+import {getAllCategory, getCategoriesAndRelation, getCategoryById} from '../../APIs/category.api'
+import { IAuthor } from "../../APIs/author.api"
+import { IPublisher } from "../../APIs/publisher.api"
+
 
 export interface ICategory{
     name: string
 }
 
+export interface ICategoryAndRelation{
+    _id: string,
+    name: string,
+    books: number,
+    authors: IAuthor[],
+    publishers: IPublisher[]
+}
 class CategoryStore {
     currentCategory?: ICategory
-    listCategories?: ICategory[] 
+    listCategories?: ICategory[]
     RootStore?: TRootStore
+    categoriesAndRelation: ICategoryAndRelation[] = []
 
     constructor(RootStore: TRootStore){
         this.RootStore = RootStore
@@ -24,6 +35,13 @@ class CategoryStore {
         this.listCategories = categories
     }
 
+    setCategoriesAndRelation(catergories: ICategoryAndRelation[]){
+        this.categoriesAndRelation = [...catergories]
+    }
+
+    get getCategoriesAndRelation(){
+        return this.categoriesAndRelation
+    }
     get getCurrentCategory(){
         return this.currentCategory
     }
@@ -45,6 +63,15 @@ class CategoryStore {
         try {
             const category = await getCategoryById(categoryId)
             this.setCurrentCategory(category?.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getCategoriesAndRelationAPI() {
+        try {
+            const categoriesRelation = await getCategoriesAndRelation()
+            this.setCategoriesAndRelation(categoriesRelation?.data.allCategory as ICategoryAndRelation[])
         } catch (error) {
             console.log(error)
         }

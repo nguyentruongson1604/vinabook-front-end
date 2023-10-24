@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx"
 import {TRootStore} from "../RootStore.store"
-import { getAllBook, getBookByAuthor, getBookById, getBooksByCategory, searchBooks } from "../../APIs/book.api"
+import { getAllBook, getBookByAuthor, getBookById, getBookByPublisher, getBooksByCategory, searchBooks } from "../../APIs/book.api"
 
 export interface IBook {
     _id: string,
@@ -61,7 +61,7 @@ class BooksStore {
     }
 
     setListBookCategory(books: IBookCategory){
-        if(!this.listBookCategory.find(book => book.categoryId === books.categoryId) && books.listBook.length > 0)
+        if(!this.listBookCategory.find(book => book.categoryId === books.categoryId))
             this.listBookCategory = [...this.listBookCategory, books]
     }
 
@@ -120,7 +120,7 @@ class BooksStore {
 
     async getBooksOfPublisherAPI(publisherId: string){
         try {
-            const res = await getBooksByCategory(publisherId)
+            const res = await getBookByPublisher(publisherId)
             this.setBooks(res?.data.data)
         } catch (error) {
             console.log(error)
