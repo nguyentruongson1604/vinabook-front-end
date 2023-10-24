@@ -1,32 +1,36 @@
-import clsx from 'clsx';
-
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import styles from './style.module.css'
 import BoxPrice from '../../elements/BoxPrice/Index';
+import { IBook } from '../../../stores/childrens/Books.store';
+import { useNavigate } from 'react-router';
+import { observer } from 'mobx-react';
 const price = {
   className: styles.price
 }
-const SmallBoxInfo: React.FC<{ book?: object, className?: string}> = ({ book, className}) => {
-    return (
-        <div className={className}>
-          <div className={styles.smallBoxInfo}> 
-            <div className={styles.picThump}>
-                <a href="#">
-                    <img src="https://www.vinabook.com/images/thumbnails/product/50x/281094_cay-chuoi-non-di-giay-xanh-bia-mem.jpg" data-src="https://www.vinabook.com/images/thumbnails/product/50x/281094_cay-chuoi-non-di-giay-xanh-bia-mem.jpg" alt="Cây Chuối Non Đi Giày Xanh (Bìa Mềm)" width="55" height="" title="Cây Chuối Non Đi Giày Xanh (Bìa Mềm)"/>
-                </a>
+const SmallBoxInfo: React.FC<{ book?: IBook, className?: string}> = observer(({ book, className}) => {
+  const navigate = useNavigate()
+
+  return (
+    <div className={className}>
+      <div className={styles.smallBoxInfo} onClick={()=>{navigate(`/details/${book?._id}`)}}> 
+        <div className={styles.picThump}>
+            <a href="">
+                <img src={book?.imageUrl} data-src={book?.imageUrl} alt={book?.imageUrl} width="55" height="" title={book?.name}/>
+            </a>
+        </div>
+        <div className={styles.infoBook}>
+            <div className={styles.tittle}>
+                <a href="">{book?.name}</a>
             </div>
-            <div className={styles.infoBook}>
-                <div className={styles.tittle}>
-                    <a href="#">Cách Nuôi Dạy Một Đứa Trẻ Có Trái Tim Ấm Áp Cách Nuôi Dạy Một Đứa Trẻ Có Trái Tim Ấm Áp</a>
-                </div>
-                <div className={styles.auth}>
-                    <p>Nobuyoshi Hirai</p>
-                </div>
-                <div className={styles.price}>
-                    <BoxPrice oldprice={95000} newprice={81000} className={price}/>
-                </div>
+            <div className={styles.auth}>
+                <p>{book?.author.name}</p>
+            </div>
+            <div className={styles.price}>
+                <BoxPrice oldprice={book?.price} newprice={book?.price! * (100 - book?.discount!) / 100} className={price}/>
             </div>
         </div>
-      </div>  
-    );
-  };
+    </div>
+  </div>  
+);
+})
 export default SmallBoxInfo

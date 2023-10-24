@@ -1,10 +1,13 @@
+import { observer } from 'mobx-react';
 import styles from './style.module.css';
-const ProductText =() => {
+import { useNavigate } from 'react-router';
+const ProductText = observer(({title, id}: {title: string, id: string}) => {
+  const navigate = useNavigate()
   return (
-        <a href="" className={styles.productText}>
-            Muôn kiếp nhân sinh - Many Times,Many Lives - Tập 3
+        <a href="" onClick={()=>{navigate(`/details/${id}`)}} className={styles.productText}>
+            {title}
         </a>
   )
-}
+})
 
 export default ProductText;

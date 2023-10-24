@@ -1,4 +1,3 @@
-import { Pagination } from '@mui/material';
 import './App.css';
 import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';
@@ -11,14 +10,13 @@ import BottomHeader from './components/templates/BottomHeader';
 import Footer from './components/templates/Footer';
 import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppContextProvider, useStore } from './stores/RootStore.store';
+import { AppContextProvider, rootStore } from './stores/RootStore.store';
+import RegisterBox from './components/templates/RegisterBox';
 
 function App() {
-  const store = useStore()
-  
   return (
     <BrowserRouter>
-      <AppContextProvider value={store}>
+      <AppContextProvider value={rootStore}>
         <TopHeader/>
         <BottomHeader/>
         <Routes>
@@ -26,9 +24,12 @@ function App() {
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/checkout' element={<DetailsCart/>}/>
-          <Route path='/author' element={<AuthorPage/>}/>
-          <Route path='/category' element={<CategoryPage/>}/>
-          <Route path='/details' element={<DetailsPage/>}/>
+          <Route path='/author/:authorId' element={<AuthorPage/>}/>
+          <Route path='/category/:categoryId' element={<CategoryPage/>}/>
+          <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
+          <Route path='/search?' element={<CategoryPage/>}/>
+          <Route path='/details/:bookId' element={<DetailsPage/>}/>
+          <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
         </Routes>
         <Footer/>

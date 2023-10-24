@@ -23,7 +23,7 @@ export async function createNewBook(newBook: IBook) {
     
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', newBook)
-        console.log('new book', res)    
+        // console.log('new book', res)    
         return res
     } catch (error) {
         console.log(error)
@@ -37,7 +37,7 @@ export async function updateABook(updateBook: IBook, bookId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.put('/', updateBook)
-        console.log('updated book: ', res)
+        // console.log('updated book: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -51,7 +51,7 @@ export async function deleteBook(bookId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.delete('/')
-        console.log('delete response: ', res)
+        // console.log('delete response: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -70,7 +70,7 @@ export async function uploadImageBook(bookId: string, image: File) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', formData)
-        console.log('upload result: ', res)
+        // console.log('upload result: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -84,7 +84,7 @@ export async function getAllBook() {
         }
         const instance = createAxiosInstance(options)
         const res = instance.get('/')
-        console.log('all book: ', res)
+        // console.log('all book: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -98,7 +98,7 @@ export async function getBookById(bookId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('book by Id: ', res)
+        // console.log('book by Id: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -112,7 +112,7 @@ export async function getBookByAuthor(authorId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('book by author: ', res)
+        // console.log('book by author: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -126,7 +126,7 @@ export async function getBookByPublisher(publisherId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('book by publisher: ', res)
+        // console.log('book by publisher: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -140,7 +140,7 @@ export async function getBooksByCategory(categoryId: string) {
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('book by category: ', res)
+        // console.log('book by category: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -149,12 +149,14 @@ export async function getBooksByCategory(categoryId: string) {
 
 export async function searchBooks(filter: IFilter) {
     try {
+        console.log('filter', filter)
         const options: axiosInstanceOptions = {
             baseURL: `/api/v1/book/all-book/search?page=${filter.page}&keyword=${filter.keyWord}&limit=${filter.limit}`
         }
+        console.log('baseUrl', options.baseURL)
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('book by filter: ', res)
+        // console.log('book by filter: ', res)
 
         return res
     } catch (error) {

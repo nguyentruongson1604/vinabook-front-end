@@ -3,13 +3,20 @@ import { TRootStore } from "../RootStore.store"
 import { getAllAuthors, getAuthorById, getAuthorsByCategory } from "../../APIs/author.api"
 
 export interface IAuthor{
+    _id: string
     name: string,
     info: string
 }
 
+export interface IAuthorByCategory{
+    categoryId: string,
+    listAuthor: IAuthor[]
+}
+
 class AuthorStore {
     currentAuthor?: IAuthor
-    listAuthors?: IAuthor[] 
+    listAuthors?: IAuthor[]
+    listAuthorsByCategory: IAuthorByCategory[] = []
     RootStore?: TRootStore
 
     constructor(RootStore: TRootStore){
@@ -21,6 +28,14 @@ class AuthorStore {
         this.currentAuthor = author
     }
 
+    setAllAuthors(authors: IAuthor[]){
+        this.listAuthors = authors
+    }
+
+    setAuthorsCategory(author: IAuthorByCategory){
+        this.listAuthorsByCategory = [...this.listAuthorsByCategory, author]
+    }
+
     get getCurrentAuthor(){
         return this.currentAuthor
     }
@@ -29,10 +44,14 @@ class AuthorStore {
         return this.listAuthors
     }
 
+    get getAuthorsCategory(){
+        return this.listAuthorsByCategory
+    }
+
     async getAllAuthorsAPI(){
         try {
             const authors = await getAllAuthors()
-            this.listAuthors = authors?.data.data
+            this.setAllAuthors(authors?.data.data)
         } catch (error) {
             console.log(error)
         }
@@ -50,7 +69,11 @@ class AuthorStore {
     async getAuthorsByCategoryAPI(categoryId: string){
         try {
             const authorsCategory = await getAuthorsByCategory(categoryId)
-            this.listAuthors = authorsCategory?.data.data
+            const author = {
+                categoryId: categoryId,
+                listAuthor: authorsCategory?.data.data as IAuthor[]
+            } as IAuthorByCategory
+            this.setAuthorsCategory(author)
         } catch (error) {
             console.log(error)
         }

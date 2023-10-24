@@ -7,9 +7,15 @@ export interface IPublisher{
     info: string
 }
 
+export interface IPublisherByCategory{
+    categoryId: string,
+    listPublisher: IPublisher[]
+}
+
 class PublisherStore {
     currentPublisher?: IPublisher
     listPublishers?: IPublisher[] 
+    listPublishersByCategory: IPublisherByCategory[] = []
     RootStore?: TRootStore
 
     constructor(RootStore: TRootStore){
@@ -19,6 +25,14 @@ class PublisherStore {
 
     setCurrentPublisher(publisher: IPublisher){
         this.currentPublisher = publisher
+    }
+
+    setPublisherCategory(publishers: IPublisherByCategory){
+        this.listPublishersByCategory = [...this.listPublishersByCategory, publishers]
+    }
+
+    setAllPublishers(publishers: IPublisher[]){
+        this.listPublishers = publishers
     }
 
     get getCurrentPublisher(){
@@ -32,7 +46,7 @@ class PublisherStore {
     async getAllPublishersAPI(){
         try {
             const Publishers = await getAllPublisher()
-            this.listPublishers = Publishers?.data.data
+            this.setAllPublishers(Publishers?.data.data)
         } catch (error) {
             console.log(error)
         }
@@ -49,8 +63,12 @@ class PublisherStore {
 
     async getPublishersByCategoryAPI(categoryId: string){
         try {
-            const PublishersCategory = await getPublishersByCategory(categoryId)
-            this.listPublishers = PublishersCategory?.data.data
+            const publishersCategory = await getPublishersByCategory(categoryId)
+            const publisher = {
+                categoryId: categoryId,
+                listPublisher: publishersCategory?.data.data as IPublisher[]
+            } as IPublisherByCategory
+            this.setPublisherCategory(publisher)
         } catch (error) {
             console.log(error)
         }
