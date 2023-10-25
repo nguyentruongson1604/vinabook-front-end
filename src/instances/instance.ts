@@ -16,10 +16,10 @@ async function refreshAccessToken(refreshToken: string){
     }
 
     const res = await axios(options)
-    // console.log("new token", res)
-    localStorage.setItem('accessToken', res.data.newAccessToken)
-    localStorage.setItem('refreshToken', res.data.newRefreshToken)
-    return res.data.data.newAccessToken
+    localStorage.setItem('accessToken', res.data.accessToken)
+    localStorage.setItem('refreshToken', res.data.refreshToken)
+    
+    return res.data.accessToken
 }
 
 export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstance => {
@@ -36,10 +36,10 @@ export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstanc
     instance.interceptors.request.use(
         (config) => {
             const accessToken = localStorage.getItem("accessToken")
-            // console.log("ACCESS TOKEN", accessToken)
             if(accessToken){
                 config.headers.Authorization = `Bearer ${accessToken}`
             }
+                // console.log('headers', config.headers)
             return config
         },
         (error: AxiosError) => {
@@ -48,7 +48,7 @@ export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstanc
       );
     
     instance.interceptors.response.use(
-        (response) => {
+        (response) => { 
             return response
         },
         async (error: AxiosError) => {
@@ -58,10 +58,13 @@ export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstanc
                 originalRequest._retry = true
                 try {
                     const refreshToken = localStorage.getItem("refreshToken")
+                    
                     if(refreshToken){
                         const newAccessToken = await refreshAccessToken(refreshToken)
+                        console.log('new access token in instance: ',newAccessToken)
                         if(newAccessToken && originalRequest.headers){
                             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
+                            console.log('re-request:', originalRequest)
                         }
                         return instance(originalRequest)
                     }

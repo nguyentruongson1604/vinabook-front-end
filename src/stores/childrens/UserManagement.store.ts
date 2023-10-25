@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { IUserAccess } from "./UserAccess.store";
-import { IUser, deleteOtherUser, getAllUser, updateOtherUser } from '../../APIs/user.api';
+import { IUser, createOtherInfo, deleteOtherUser, getAllUser, updateOtherUser } from '../../APIs/user.api';
 import { TRootStore } from "../RootStore.store";
 
 class UserManagement {
@@ -10,6 +10,14 @@ class UserManagement {
         makeAutoObservable(this);
         this.rootStore = rootStore
     }
+    createOtherInfo = async (account: IUserAccess) => {
+        try {
+            const response = await createOtherInfo(account);
+            return { success: true, res: response?.data };
+        } catch (error: any) {
+            return { success: false, res: error.response.data };
+        }
+    };
     setUsersManagemant = (usersManagemant: IUserAccess[]) =>{
         this.usersManagemant = usersManagemant
     }
@@ -22,7 +30,6 @@ class UserManagement {
             );
             return { status: true, message: "Success!!" };
         } catch (error: any) {
-            console.log(error.response.data);
             return { status: false, message: error.response.data.message };
         }
     }
@@ -41,9 +48,12 @@ class UserManagement {
                 page,
                 limit,
                 search
-            );
+            );            
             const users: IUserAccess[] = response?.data.data;
+            console.log(users);
+            
             this.setUsersManagemant(users);
+            
         } catch (error) {
             console.log(error);
         }

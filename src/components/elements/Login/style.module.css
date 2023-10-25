@@ -4,6 +4,8 @@
     float: left;
     margin-top: 30px;
     padding-left: 6px;
+    position: relative;
+    height: 100%;
 }
 
 .login a {
@@ -17,4 +19,20 @@
 
 .login p {
     display: inline-block;
+    height: 30px;
+}
+.headerLoginDropdown .accountInfo li{
+    list-style: none;
+    margin-top: 7px;
+}
+.headerLoginDropdown .accountInfo{
+    padding: 0;
+}
+.headerLoginDropdown{
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background: -webkit-linear-gradient(top,#ffffff,#f6f5f1);
+    border: 1px solid #d5d4cc;
+    padding: 10px 15px;
 }

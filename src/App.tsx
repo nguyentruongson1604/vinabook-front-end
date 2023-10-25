@@ -10,8 +10,26 @@ import BottomHeader from './components/templates/BottomHeader';
 import Footer from './components/templates/Footer';
 import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppContextProvider, rootStore } from './stores/RootStore.store';
-import RegisterBox from './components/templates/RegisterBox';
+import { AppContextProvider, rootStore, useStore } from './stores/RootStore.store';
+import InfoUserPage from './components/pages/InfoUserPage';
+import { useEffect, useCallback } from 'react';
+
+import PayPage from './components/pages/PayAdressPage';
+import PayAdressPage from './components/pages/PayAdressPage';
+import AdminPage from './components/pages/AdminPage/Page';
+
+function App() {  
+  const store = useStore()
+  const checkCurrentUser = useCallback(async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
+    try{      
+      await store.userAccess?.getCurrentUser()      
+    } catch(error){
+      console.log(error);
+    }
+  },[])
+  useEffect(()=>{
+    checkCurrentUser()  
+  }, [checkCurrentUser])
 
 function App() {
   return (
@@ -23,7 +41,14 @@ function App() {
           <Route path='/' element={<HomePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
+          <Route path='/info' element={<InfoUserPage/>}/>
           <Route path='/checkout' element={<DetailsCart/>}/>
+          <Route path='/author' element={<AuthorPage/>}/>
+          <Route path='/category' element={<CategoryPage/>}/>
+          <Route path='/details' element={<DetailsPage/>}/>
+          <Route path='/adressbill' element={<PayAdressPage/>}/>
+          <Route path='/admin/*' element={<AdminPage/>} />
+          {/* <Route path='/admin/user' element={<AdminPage/>}/> */}
           <Route path='/author/:authorId' element={<AuthorPage/>}/>
           <Route path='/category/:categoryId' element={<CategoryPage/>}/>
           <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
