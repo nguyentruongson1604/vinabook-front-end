@@ -38,7 +38,7 @@ export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstanc
             if(accessToken){
                 config.headers.Authorization = `Bearer ${accessToken}`
             }
-            console.log('headers', config.headers)
+                // console.log('headers', config.headers)
             return config
         },
         (error: AxiosError) => {

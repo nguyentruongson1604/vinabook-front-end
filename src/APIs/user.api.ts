@@ -1,4 +1,3 @@
-import { log } from "console"
 import { axiosInstanceOptions, createAxiosInstance } from "../instances/instance"
 
 export interface IUser{
@@ -10,18 +9,28 @@ export interface IUser{
 
 export interface IUserAccount {
     email: string,
-    password: string
+    password: string,
+    name?: string
 }
 
 //createAxiosInstance đã có sẵn token
 
-export async function register(newUser: IUser) {
+export async function register(newUser: IUserAccount) {
         const options: axiosInstanceOptions = {
             baseURL: '/api/user/register'
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', newUser)
         return res
+}
+
+export async function createOtherInfo(newUser: IUser) {
+    const options: axiosInstanceOptions = {
+        baseURL: `/api/user/createOtherInfo`
+    }
+    const instance = createAxiosInstance(options)
+    const res = await instance.post('/', newUser)
+    return res
 }
 
 export async function login(userAccount: IUserAccount) {
@@ -57,11 +66,11 @@ export async function changePassword(data: {currentPassword: string, newPassword
 //user manager
 export async function getAllUser(page: number, limit: number, search?: string) {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/getAllUser?page=${page}&limit=${limit}&search=${search}`
+            baseURL: `/api/user/getAllUsers?page=${page}&limit=${limit}&search=${search}`
             
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         return res
 }
 

@@ -24,7 +24,8 @@
     height: 40px !important;
     box-sizing: border-box !important;
     padding: 0 !important;
-    background-color: #2ba40d !important;
+    background-color: #FDC92D !important;
+    color: black !important;
     margin: 20px;
     float: left;
 }
@@ -51,9 +52,13 @@
     width: 50%;
     display: inline-block;
     overflow: auto;
+    margin: 40px 0;
+    padding-right: 20px;
 }
 .boxBtnRight{
     width: 50%;
     display: inline-block;
     overflow: auto;
+    margin: 40px 0;
+    padding-left: 20px;
 }

@@ -14,6 +14,10 @@ import { AppContextProvider, rootStore, useStore } from './stores/RootStore.stor
 import InfoUserPage from './components/pages/InfoUserPage';
 import { useEffect, useCallback } from 'react';
 
+import PayPage from './components/pages/PayAdressPage';
+import PayAdressPage from './components/pages/PayAdressPage';
+import AdminPage from './components/pages/AdminPage/Page';
+
 function App() {  
   const store = useStore()
   const checkCurrentUser = useCallback(async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
@@ -40,6 +44,9 @@ function App() {
           <Route path='/author' element={<AuthorPage/>}/>
           <Route path='/category' element={<CategoryPage/>}/>
           <Route path='/details' element={<DetailsPage/>}/>
+          <Route path='/adressbill' element={<PayAdressPage/>}/>
+          <Route path='/admin/*' element={<AdminPage/>} />
+          {/* <Route path='/admin/user' element={<AdminPage/>}/> */}
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
         </Routes>
         <Footer/>

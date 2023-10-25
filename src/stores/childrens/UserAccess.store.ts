@@ -7,6 +7,7 @@ export interface IUserAccess{
     email?: string
     role?: string
     password?: string
+    isNew? :boolean
 }
 
 class UserAccess {
