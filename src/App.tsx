@@ -30,6 +30,8 @@ function App() {
   useEffect(()=>{
     checkCurrentUser()  
   }, [checkCurrentUser])
+
+function App() {
   return (
     <BrowserRouter>
       <AppContextProvider value={rootStore}>
@@ -47,6 +49,12 @@ function App() {
           <Route path='/adressbill' element={<PayAdressPage/>}/>
           <Route path='/admin/*' element={<AdminPage/>} />
           {/* <Route path='/admin/user' element={<AdminPage/>}/> */}
+          <Route path='/author/:authorId' element={<AuthorPage/>}/>
+          <Route path='/category/:categoryId' element={<CategoryPage/>}/>
+          <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
+          <Route path='/search?' element={<CategoryPage/>}/>
+          <Route path='/details/:bookId' element={<DetailsPage/>}/>
+          <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
         </Routes>
         <Footer/>

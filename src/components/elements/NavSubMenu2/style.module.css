@@ -1,6 +1,7 @@
 /*Sub menu 2*/
 
 .navSubMenu2 {
+    background: url('https://www.vinabook.com/images/menu/175/van_hoc_nuoc_ngoai___crop.png') right bottom no-repeat white;
     display: block;
     margin: 0;
     padding: 0;
@@ -8,13 +9,12 @@
     height: 570px;
     box-shadow: 0 2px 2px #ccc;
     position: absolute;
-    z-index: 99;
+    /* z-index: 99; */
     top: 0;
     /* left: 222px; */
     right: -944px;
     border-radius: 2px;
     padding: 30px 0 50px 0;
-
 }
 
 .navSubMenu2More {

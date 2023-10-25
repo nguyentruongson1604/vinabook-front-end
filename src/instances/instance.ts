@@ -23,6 +23,7 @@ async function refreshAccessToken(refreshToken: string){
 }
 
 export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstance => {
+    // console.log('url', options.baseURL)
     const instance = axios.create({
         baseURL: options.baseURL,
         timeout: options.timeout || 10000,

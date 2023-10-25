@@ -1,10 +1,38 @@
+import { observer } from 'mobx-react';
 import SmallBoxInfo from '../../collections/SmallBoxInfo';
 import styles from './style.module.css'
-const HomeRight: React.FC<{className?: string }> = ({className }) => {
+import { useStore } from '../../../stores/RootStore.store';
+import { IBook, IBookCategory } from '../../../stores/childrens/Books.store';
+const HomeRight: React.FC<{className?: string }> = observer(({className }) => {
+    const store = useStore()
+    const listBookCategory = store.BooksStore?.getListBookCategory
     return (
         <div className={className}>
             <div className={styles.HomeRight}>
-                <div className={styles.topWeek}>   
+                {
+                    listBookCategory && listBookCategory.map((books: IBookCategory, index: number)=>{
+                        if(books.listBook.length > 0){
+                            return(
+                                <div key={index} className={styles.topWeek}>   
+                                    <div className={styles.tittle}>
+                                        {books.categoryName}
+                                    </div>
+                                    <div className={styles.listItem}>
+                                        {
+                                            books.listBook.map((book: IBook)=>{
+                                                return(
+                                                    <SmallBoxInfo key={book._id} className={styles.item} book={book}/>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            )
+                        }
+                        return <div></div>})
+                        
+                }
+                {/* <div className={styles.topWeek}>   
                     <div className={styles.tittle}>
                         SÁCH BÁN CHẠY TRONG TUẦN
                     </div>
@@ -45,10 +73,10 @@ const HomeRight: React.FC<{className?: string }> = ({className }) => {
                         <SmallBoxInfo className={styles.item}/>
                         <SmallBoxInfo className={styles.item}/>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
-};
+});
   
 export default HomeRight
