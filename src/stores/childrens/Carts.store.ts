@@ -1,34 +1,47 @@
 import { makeAutoObservable } from "mobx"
 import { TRootStore } from "../RootStore.store"
-import { getAllCarts, getCartByUserId, addBookToCart, clearCart, removeABook, deleteOneTypeBook } from "../../APIs/cart.api"
+import { getAllCarts, getCartByUserId, addBookToCart, clearCart, removeABook, deleteOneTypeBook, getCart } from "../../APIs/cart.api"
 
-interface IBook {
+export interface IBookCart {
     _id: string,
     name: string,
-    price: number,
-    discount: number
+    imageUrl: string,
+    price?: number,
+    discount?: number
 }
 
-interface IBookInCart {
-    book: IBook
+export interface IBookInCart {
+    bookId: IBookCart
     quantity: number
 }
 
 interface ICart {
-    _id: string
+    _id: string,
     listBook: IBookInCart[],
 }
 
 class CartStore {
-    [x: string]: any
-    currentCart? : ICart
-    cartByUserId?: ICart
+    accessToken?: string
+    currentCart : ICart = {
+        _id: 'guest',
+        listBook: []
+    }
     listCarts?: ICart[]
     RootStore?: TRootStore
 
     constructor(RootStore: TRootStore){
         this.RootStore = RootStore
+        const accessToken = localStorage.getItem('accessToken')
+        accessToken ? this.setAccessToken(accessToken) : this.setAccessToken('')
         makeAutoObservable(this)
+    }
+
+    setAccessToken(accessToken: string){
+        this.accessToken = accessToken
+    }
+
+    get getAccessToken(){
+        return this.accessToken
     }
 
     setCurrentCart(cart: ICart){
@@ -39,16 +52,73 @@ class CartStore {
         return this.currentCart
     }
 
-    get getCartByUserId(){
-        return this.cartByUserId
-    }
-
     setListCart(carts: ICart[]){
         this.listCarts = carts
     }
 
     get getAllCarts(){
         return this.listCarts
+    }
+
+    addBookToCart(book: IBookInCart){
+        const checkExist = this.currentCart.listBook.find((item: IBookInCart) => {
+            return item.bookId._id === book.bookId._id;
+        })
+        if(checkExist){
+            this.currentCart.listBook.filter((item: IBookInCart)=>{
+                if(item.bookId._id === book.bookId._id){
+                    item.quantity += 1
+                }
+            })
+        }
+        else{
+            this.currentCart.listBook = [...this.currentCart?.listBook, book]
+        }
+        
+        if(this.accessToken ===''){
+            localStorage.setItem('cart', JSON.stringify(this.currentCart))
+        }
+        else{
+            this.addBookToCartAPI({bookId: book.bookId._id, quantity: 1})
+        }
+        // alert('Them sach vao gio hang thanh cong!')
+    }
+
+    deleteBookFromCart(bookId: string){
+        const newItems: IBookInCart[] = this.currentCart.listBook.filter((item: IBookInCart)=>{
+            return item.bookId._id !== bookId
+        })
+        const newCart: ICart = {...this.currentCart, listBook: newItems}
+        this.setCurrentCart(newCart)
+        if(this.accessToken === ''){
+            localStorage.setItem('cart', JSON.stringify(this.currentCart))
+        }
+        else{
+            this.deleteOneTypeBookAPI(bookId)
+        }
+    }
+
+    removeOneBookFromCart(bookId: string){
+        const newItems: IBookInCart[] = this.currentCart.listBook.map((item: IBookInCart)=>{
+            if(item.bookId._id === bookId){
+                item.quantity -= 1
+            }
+            return item
+        })
+        const newCart: ICart = {...this.currentCart, listBook: newItems}
+        this.setCurrentCart(newCart)
+        if(this.accessToken === ''){
+            localStorage.setItem('cart', JSON.stringify(this.currentCart))
+        }
+        else{
+            this.removeABookAPI(bookId)
+        }
+        
+    }
+
+    clearCart(){
+        this.currentCart = {...this.currentCart, listBook: []}
+        localStorage.setItem('cart', JSON.stringify(this.currentCart))
     }
 
     async getAllCartsAPI(){
@@ -67,49 +137,51 @@ class CartStore {
 
         } catch (error) {
             console.log(error)
-        }
+        }   
     }
 
-    async getCartByUserIdAPI(userId: string){
+    async getCart(){
         try {
-            const cart = await getCartByUserId(userId)
-            this.cartByUserId = cart?.data.data
+            const cart = await getCart()
+            const userCart: ICart = {
+                _id: cart?.data.data.owner,
+                listBook: [...cart?.data.data.listBook]
+            }
+            this.setCurrentCart(userCart)
+
+        } catch (error) {
+            console.log(error)
+        }   
+    }
+
+    async addBookToCartAPI(book: {bookId: string, quantity: number}){
+        try {
+            await addBookToCart(book)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async addBookToCartAPI(userId: string, book: {bookId: string, quantity: number}){
+    async clearCartAPI(){
         try {
-            const cart = await addBookToCart(userId, book)
-            this.setCurrentCart(cart?.data.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    async clearCartAPI(userId: string){
-        try {
-            const cartClear = await clearCart(userId)
+            const cartClear = await clearCart()
             this.setCurrentCart(cartClear?.data.data)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async removeABookAPI(userId: string, bookId: string){
+    async removeABookAPI(bookId: string){
         try {
-            const cart = await removeABook(userId, bookId)
-            this.setCurrentCart(cart?.data.data)
+            await removeABook(bookId)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async deleteOneTypeBookAPI(userId: string, bookId: string){
+    async deleteOneTypeBookAPI(bookId: string){
         try {
-            const cart = await deleteOneTypeBook(userId, bookId)
-            this.setCurrentCart(cart?.data.data)
+            await deleteOneTypeBook(bookId)
         } catch (error) {
             console.log(error)
         }

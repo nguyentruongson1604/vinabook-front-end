@@ -61,7 +61,7 @@ class BooksStore {
     }
 
     setListBookCategory(books: IBookCategory){
-        if(!this.listBookCategory.find(book => book.categoryId === books.categoryId))
+        if(!this.listBookCategory.find(book => book.categoryId === books.categoryId) && books.listBook.length > 0)
             this.listBookCategory = [...this.listBookCategory, books]
     }
 

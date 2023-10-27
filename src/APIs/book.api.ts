@@ -36,7 +36,7 @@ export async function updateABook(updateBook: IBook, bookId: string) {
             baseURL: `/api/v1/book/${bookId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.put('/', updateBook)
+        const res = await instance.put('', updateBook)
         // console.log('updated book: ', res)
         return res
     } catch (error) {
@@ -50,7 +50,7 @@ export async function deleteBook(bookId: string) {
             baseURL: `/api/v1/book/${bookId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.delete('/')
+        const res = await instance.delete('')
         // console.log('delete response: ', res)
         return res
     } catch (error) {
@@ -97,7 +97,7 @@ export async function getBookById(bookId: string) {
             baseURL: `/api/v1/book/${bookId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         // console.log('book by Id: ', res)
         return res
     } catch (error) {
@@ -111,7 +111,7 @@ export async function getBookByAuthor(authorId: string) {
             baseURL: `/api/v1/book/author/${authorId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         // console.log('book by author: ', res)
         return res
     } catch (error) {
@@ -125,7 +125,7 @@ export async function getBookByPublisher(publisherId: string) {
             baseURL: `/api/v1/book/publisher/${publisherId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         // console.log('book by publisher: ', res)
         return res
     } catch (error) {
@@ -139,7 +139,7 @@ export async function getBooksByCategory(categoryId: string) {
             baseURL: `/api/v1/book/category/${categoryId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         // console.log('book by category: ', res)
         return res
     } catch (error) {
@@ -155,7 +155,7 @@ export async function searchBooks(filter: IFilter) {
         }
         console.log('baseUrl', options.baseURL)
         const instance = createAxiosInstance(options)
-        const res = await instance.get('/')
+        const res = await instance.get('')
         // console.log('book by filter: ', res)
 
         return res

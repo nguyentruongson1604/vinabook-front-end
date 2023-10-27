@@ -6,12 +6,8 @@ import NavSubMenu2 from '../../elements/NavSubMenu2';
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { useStore } from '../../../stores/RootStore.store';
-import { ICategory } from '../../../APIs/category.api';
-import { IAuthorByCategory } from '../../../stores/childrens/Authors.store';
-import { IPublisherByCategory } from '../../../stores/childrens/Publishers.store';
 import { useNavigate } from 'react-router';
 import { ICategoryAndRelation } from '../../../stores/childrens/Categorys.store';
-import { IAuthor } from '../../../APIs/author.api';
 
 const NavSubMenu = observer(() => {
     const [open , setOpen] = useState(false)

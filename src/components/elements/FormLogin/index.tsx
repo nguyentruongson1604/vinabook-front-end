@@ -44,6 +44,7 @@ const FormLogin= observer(() => {
             localStorage.setItem("accessToken", data.res.accessToken)
             localStorage.setItem("refreshToken", data.res.refreshToken)
             store.userAccess?.setUserAccess(data.res.data)
+            store.CartStore?.setAccessToken(data.res.accessToken)
             navigate('/')
           }
           else{

@@ -1,8 +1,9 @@
 import './Style.css'
-const AddToCard: React.FC<{className?: string}> = ({className}) => {
+const AddToCard: React.FC<{className?: string, handleAddBook:() => void}> = ({className, handleAddBook}) => {
+
     return (
         <div className = {className}>
-            <button className="btn" type="button">Mua ngay</button>
+            <button className="btn" type="button" onClick={()=>{handleAddBook()}}>Mua ngay</button>
         </div>
     ) 
   };

@@ -22,7 +22,7 @@ const ProductContainer = observer(({book}: {book: IBook}) => {
                   <ProductText title={book.name} id={book._id}/>
                   <AuthorWrap authorName={book.author.name}/>
                   <PriceContainer oldPrice={book.price} newPrice={newPrice}/>
-                  <BuyContainer/>
+                  <BuyContainer book={book}/>
                   <ShortDescription description={book.description} id={book._id}/>
               </div>
           </div>  
