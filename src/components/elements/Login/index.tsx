@@ -12,6 +12,7 @@ const Login = observer(() => {
         store.userAccess?.setUserAccess(undefined)
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        store.CartStore?.setAccessToken("")
     }
     return(
         <>

@@ -76,3 +76,7 @@
 .authorFullLink li:hover a{
     text-decoration: none;
 }
+
+a {
+    cursor: pointer;
+}
