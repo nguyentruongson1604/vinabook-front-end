@@ -1,6 +1,7 @@
+import { observer } from 'mobx-react';
 import style from './style.module.css'
 
-const CartInfomation = () => {
+const CartInfomation = observer(({quantity, total}: {quantity: number, total: number}) => {
     return(
         <div className={style.CartInfo}>
             <div className={style.title}>TÓM TẮT ĐƠN HÀNG</div>
@@ -9,7 +10,7 @@ const CartInfomation = () => {
                     <tbody>
                         <tr>
                             <td className={style.width60}>Sản phẩm</td>
-                            <td className={style.width40}>7</td>
+                            <td className={style.width40}>{quantity}</td>
                         </tr>
                         <tr>
                             <td className={style.width60}>Phí vận chuyển</td>
@@ -19,7 +20,7 @@ const CartInfomation = () => {
                             <td className={`${style.width60} ${style.bold}`}>TẠM TÍNH</td>
                             <td className={style.width40}>
                                 <span className={`${style.green}`}>
-                                    2.643.000
+                                    {total}
                                 </span>
                                 &nbsp;
                                 <span>₫</span>
@@ -39,7 +40,7 @@ const CartInfomation = () => {
                     </div>
                     <div className={style.width40}>
                         <span className={style.bold}>
-                            2.643.000
+                            {total}
                         </span>
                         &nbsp;
                         <span>₫</span>
@@ -48,6 +49,6 @@ const CartInfomation = () => {
             </div>
         </div>
     )
-}
+})
 
 export default CartInfomation;

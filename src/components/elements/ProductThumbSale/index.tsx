@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react';
 import styles from './style.module.css';
-const ProductThumbSale =() => {
+const ProductThumbSale = observer(({discount}: {discount: number}) => {
   return (
         <div className={styles.productThumbSale}>
-            -15%
+            -{discount}%
         </div>
   )
-}
+})
 
 export default ProductThumbSale;

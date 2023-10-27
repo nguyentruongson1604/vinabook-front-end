@@ -13,13 +13,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppContextProvider, rootStore, useStore } from './stores/RootStore.store';
 import InfoUserPage from './components/pages/InfoUserPage';
 import { useEffect, useCallback } from 'react';
-
-import PayPage from './components/pages/PayAdressPage';
 import PayAdressPage from './components/pages/PayAdressPage';
 import AdminPage from './components/pages/AdminPage/Page';
+import RegisterBox from './components/templates/RegisterBox';
 
 function App() {  
   const store = useStore()
+  
   const checkCurrentUser = useCallback(async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
     try{      
       await store.userAccess?.getCurrentUser()      
@@ -27,9 +27,12 @@ function App() {
       console.log(error);
     }
   },[])
+  
   useEffect(()=>{
-    checkCurrentUser()  
+    checkCurrentUser()
+    
   }, [checkCurrentUser])
+
   return (
     <BrowserRouter>
       <AppContextProvider value={rootStore}>
@@ -47,6 +50,12 @@ function App() {
           <Route path='/adressbill' element={<PayAdressPage/>}/>
           <Route path='/admin/*' element={<AdminPage/>} />
           {/* <Route path='/admin/user' element={<AdminPage/>}/> */}
+          <Route path='/author/:authorId' element={<AuthorPage/>}/>
+          <Route path='/category/:categoryId' element={<CategoryPage/>}/>
+          <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
+          <Route path='/search?' element={<CategoryPage/>}/>
+          <Route path='/details/:bookId' element={<DetailsPage/>}/>
+          <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
         </Routes>
         <Footer/>
@@ -54,5 +63,4 @@ function App() {
     </BrowserRouter>
   )
 }
-
 export default App;

@@ -1,11 +1,12 @@
+import { observer } from 'mobx-react';
 import styles from './style.module.css';
-function PriceContainer() {
+const PriceContainer = observer(({oldPrice, newPrice}: {oldPrice: number, newPrice: number}) => {
   return (
         <div className={styles.priceContainer}>
-            <span className={styles.priceNew}>185.000đ</span>
-            <span className={styles.priceOld}>218.000đ</span>
+            <span className={styles.priceNew}>{newPrice}đ</span>
+            <span className={styles.priceOld}>{oldPrice}đ</span>
         </div>
   )
-}
+})
 
 export default PriceContainer;

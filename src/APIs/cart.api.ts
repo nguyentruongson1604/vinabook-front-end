@@ -7,7 +7,7 @@ export interface ICart{
 }
 
 export interface IBookInCart{
-    book?: string,
+    bookId?: string,
     quantity: number
 }
 
@@ -18,7 +18,7 @@ export async function getAllCarts() {
         }
         const instance =  createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log('all cart: ', res)
+        // console.log('all cart: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -28,67 +28,82 @@ export async function getAllCarts() {
 export async function getCartByUserId(userId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL:   `/api/v1/cart/${userId}`
+            baseURL:   `/api/v1/cart/get-cart/${userId}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('/')
-        console.log(`cart of user`, res)
+        // console.log(`cart of user`, res)
         return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function clearCart(userId: string) {
+export async function getCart() {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/cart/${userId}/clear-cart`
+            baseURL:   `/api/v1/cart/get-cart`
+        }
+        const instance = createAxiosInstance(options)
+        const res = await instance.get('/')
+        // console.log(`cart of user`, res)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function clearCart() {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/v1/cart/clear-cart`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.put('/')
-        console.log('clear cart: ', res)
+        // console.log('clear cart: ', res)
         return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function removeABook(userId: string, bookId: string) {
+export async function removeABook(bookId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/cart/${userId}/remove?bookId=${bookId}`
+            baseURL: `/api/v1/cart/remove-book?bookId=${bookId}`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.delete('/')
-        console.log('remove a book: ', res)
+        const res = await instance.delete('')
+        // console.log('remove a book: ', res)
         return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function deleteOneTypeBook(userId: string, bookId: string) {
+export async function deleteOneTypeBook(bookId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/cart/${userId}`
+            baseURL: `/api/v1/cart/delete-book`
         }
         const instance = createAxiosInstance(options)
-        const res = await instance.delete('/', {bookId: bookId} as any)
-        console.log('delete on type book: ', res)
+        const params = {bookId: bookId}
+        const res = await instance.delete('/', {data: params})
+        // console.log('delete on type book: ', res)
         return res
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function addBookToCart(userId: string, newBook: IBookInCart) {
+export async function addBookToCart(newBook: IBookInCart) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/cart/${userId}`
+            baseURL: `/api/v1/cart/add-book`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.post('/', newBook)
-        console.log('add book to cart: ', res)
+        // console.log('add book to cart: ', res)
         return res
     } catch (error) {
         console.log(error)

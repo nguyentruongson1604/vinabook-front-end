@@ -1,6 +1,7 @@
 import {axiosInstanceOptions, createAxiosInstance} from '../instances/instance'
 
 export interface IAuthor{
+    _id?: string,
     name?: string,
     info?: string
 }
@@ -13,7 +14,7 @@ export async function createNewAuthor(newAuthor: IAuthor){
     
         const instance =  createAxiosInstance(options);
         const res = await instance.post('/', newAuthor)
-        console.log('new author: ', res)
+        // console.log('new author: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -27,7 +28,7 @@ export async function getAllAuthors() {
         }
         const instance =  createAxiosInstance(options);
         const res = await instance.get('/')
-        console.log('all author: ', res)
+        // console.log('all author: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -37,11 +38,11 @@ export async function getAllAuthors() {
 export async function getAuthorById(authorId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `api/v1/author/${authorId}`
+            baseURL: `/api/v1/author/${authorId}`
         }
         const instance =  createAxiosInstance(options);
         const res = await instance.get('/')
-        console.log(`author ${authorId}: `, res)
+        // console.log(`author ${authorId}: `, res)
         return res
     } catch (error) {
         console.log(error)
@@ -51,11 +52,11 @@ export async function getAuthorById(authorId: string) {
 export async function getAuthorsByCategory(categoryId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `api/v1/author/category/${categoryId}`
+            baseURL: `/api/v1/author/category/${categoryId}`
         }
         const instance =  createAxiosInstance(options);
         const res = await instance.get('/')
-        console.log(`author ${categoryId}: `, res)
+        // console.log(`author ${categoryId}: `, res.data)
         return res
     } catch (error) {
         console.log(error)
@@ -65,12 +66,12 @@ export async function getAuthorsByCategory(categoryId: string) {
 export async function updateAuthor(newAuthor: IAuthor, authorId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `api/v1/author/${authorId}`
+            baseURL: `/api/v1/author/${authorId}`
         }
     
         const instance =  createAxiosInstance(options);
         const res = await instance.put('/', newAuthor)
-        console.log('new author updated: ', res)
+        // console.log('new author updated: ', res)
         return res
     } catch (error) {
         console.log(error)
@@ -80,11 +81,11 @@ export async function updateAuthor(newAuthor: IAuthor, authorId: string) {
 export async function deleteAAuthor(authorId: string) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `api/v1/author/${authorId}`
+            baseURL: `/api/v1/author/${authorId}`
         }
         const instance =  createAxiosInstance(options);
         const res = await instance.delete('/')
-        console.log(`author ${authorId}: `, res)
+        // console.log(`author ${authorId}: `, res)
         return res
     } catch (error) {
         console.log(error)

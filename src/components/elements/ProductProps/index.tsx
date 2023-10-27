@@ -1,8 +1,9 @@
 import styles from './style.module.css'
 
-const ProductPropRight = ({price, discount, quantity}: {price: number, discount: number, quantity: number}) => {
+const ProductPropRight = ({price, discount, quantity, handleAddBookToCart}: {price: number, discount: number, quantity: number, handleAddBookToCart: ()=>void}) => {
     const saveMoney = price * discount / 100
     const priceDiscount = price - saveMoney
+
     return(
         <div className={styles.productPropRight}>
             <div className={styles.title}>Thông tin thanh toán</div>
@@ -41,7 +42,7 @@ const ProductPropRight = ({price, discount, quantity}: {price: number, discount:
                 </div>
             </div>
             <div className={styles.buttonAddToCart}>
-                    <input type="button" value="Add to cart" className={styles.button} />
+                    <input type="button" value="Add to cart" className={styles.button} onClick={()=>{handleAddBookToCart()}}/>
             </div>
         </div>
     )
