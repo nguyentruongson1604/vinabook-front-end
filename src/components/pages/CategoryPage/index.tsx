@@ -32,11 +32,22 @@ const CategoryPage = observer(() => {
     useEffect(()=>{
         fetchCategories()
         if(categoryId){
-            store.BooksStore?.getBooksOfCategoryAPI(categoryId!)
+            if(page){
+                store.BooksStore?.getBooksOfCategoryAPI(categoryId!, {page: parseInt(page)})
+            }
+            else{
+                store.BooksStore?.getBooksOfCategoryAPI(categoryId!, {page: 1, limit: 5})
+            }
             store.CategoryStore?.getCategoryByIdAPI(categoryId!)
         }
         else if(publisherId){
-            store.BooksStore?.getBooksOfPublisherAPI(publisherId!)
+            if(page){
+                store.BooksStore?.getBooksOfPublisherAPI(publisherId!, {page: parseInt(page)})
+            }
+            else{
+                store.BooksStore?.getBooksOfPublisherAPI(publisherId!, {page: 1, limit: 5})
+            }
+
             store.PublisherStore?.getPublisherByIdAPI(publisherId!)
         }
         else if(keyword !== null){

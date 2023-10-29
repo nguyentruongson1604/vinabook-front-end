@@ -2,10 +2,9 @@
 import { observer } from 'mobx-react'
 import { IBook } from '../../../stores/childrens/Books.store'
 import style from './style.module.css'
-import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const ProductFullDetails = observer(({book}: {book: IBook | undefined}) => {
-    const navigate = useNavigate()
     return(
         <div style={{float: 'left'}} id='details'>
             <h3 className={style.title}>Thông tin chi tiết</h3>
@@ -21,7 +20,7 @@ const ProductFullDetails = observer(({book}: {book: IBook | undefined}) => {
                             </li>
                             <li>
                                 <strong>Nhà xuất bản: </strong>
-                                <a onClick={()=>{navigate(`/publisher/${book.publisher._id}`)}}>{book.publisher.name}</a>
+                                <Link to={`/publisher/${book.publisher._id}`}>{book.publisher.name}</Link>
                                 <br />
                             </li>
                             <li>

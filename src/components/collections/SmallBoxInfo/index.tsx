@@ -2,25 +2,23 @@
 import styles from './style.module.css'
 import BoxPrice from '../../elements/BoxPrice/Index';
 import { IBook } from '../../../stores/childrens/Books.store';
-import { useNavigate } from 'react-router';
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 const price = {
   className: styles.price
 }
 const SmallBoxInfo: React.FC<{ book?: IBook, className?: string}> = observer(({ book, className}) => {
-  const navigate = useNavigate()
-
   return (
     <div className={className}>
-      <div className={styles.smallBoxInfo} onClick={()=>{navigate(`/details/${book?._id}`)}}> 
+      <div className={styles.smallBoxInfo}> 
         <div className={styles.picThump}>
-            <a href="">
+            <Link to={`/details/${book?._id}`}>
                 <img src={book?.imageUrl} data-src={book?.imageUrl} alt={book?.imageUrl} width="55" height="" title={book?.name}/>
-            </a>
+            </Link>
         </div>
         <div className={styles.infoBook}>
             <div className={styles.tittle}>
-                <a href="">{book?.name}</a>
+                <Link to={`/details/${book?._id}`}>{book?.name}</Link>
             </div>
             <div className={styles.auth}>
                 <p>{book?.author.name}</p>
