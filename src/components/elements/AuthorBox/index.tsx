@@ -2,22 +2,21 @@
 import { observer } from 'mobx-react'
 import style from './style.module.css'
 import { IAuthor } from '../../../APIs/author.api'
-import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const AuthorBox = observer(({author}: {author: IAuthor}) => {
-    const navigate = useNavigate()
     return(
         <div className={style.authorBox}>
             <div className={style.title}>Thông tin tác giả</div>
             <div className={style.authorDescriptionWrap}>
                 <div className="authorDescription">
                     <div className={style.authorName}>
-                        <a onClick={()=>{navigate(`/author/${author._id}`)}}>{author.name}</a>
+                        <Link to={`/author/${author._id}`}>{author.name}</Link>
                     </div>
                 </div>
                 <ul className={style.authorFullLink}>
-                    <li><a onClick={()=>{navigate(`/author/${author._id}`)}}>Vào trang riêng của tác giả</a></li>
-                    <li><a onClick={()=>{navigate(`/author/${author._id}`)}}>Xem tất cả các sách của tác giả</a></li>
+                    <li><Link to={`/author/${author._id}`}>Vào trang riêng của tác giả</Link></li>
+                    <li><Link to={`/author/${author._id}`}>Xem tất cả các sách của tác giả</Link></li>
                 </ul>
             </div>
         </div>

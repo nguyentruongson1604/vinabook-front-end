@@ -46,6 +46,7 @@ export interface IFilter {
 
 class BooksStore {
     listBook?: IBook[]
+    page?: number
     size?: number
     RootStore?: TRootStore
     currentBook?: IBook
@@ -54,6 +55,15 @@ class BooksStore {
     constructor(RootStore: TRootStore){
         makeAutoObservable(this)
         this.RootStore = RootStore
+    }
+
+    get getPageNumber(){
+        return this.page
+    }
+
+    setPage(page: number){
+        // console.log( 'page',page)
+        this.page = page
     }
 
     get getListBookCategory(){
@@ -82,10 +92,12 @@ class BooksStore {
         this.currentBook = book
     }
 
-    async getAllBooksAPI(){
+    async getAllBooksAPI(filter: IFilter){
         try {
-            const res = await getAllBook()
+            filter.limit = 10
+            const res = await getAllBook(filter)
             this.setBooks(res?.data.data)
+            this.setPage(res?.data.page)
         } catch (error) {
             console.log(error)
         }
@@ -100,28 +112,41 @@ class BooksStore {
         }
     }
 
-    async getBooksOfAuthorAPI(authorId: string){
+    async getBooksOfAuthorAPI(authorId: string, filter: IFilter){
         try {
-            const res = await getBookByAuthor(authorId)
+            if(!filter.limit){
+                filter.limit = 6
+            }
+            const res = await getBookByAuthor(authorId, filter)
             this.setBooks(res?.data.data)
+            this.setPage(res?.data.page)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async getBooksOfCategoryAPI(categoryId: string){
+    async getBooksOfCategoryAPI(categoryId: string, filter: IFilter){
         try {
-            const res = await getBooksByCategory(categoryId)
+            if(!filter.limit){
+                filter.limit = 6
+            }
+            const res = await getBooksByCategory(categoryId, filter)
+            // console.log('res', res)
             this.setBooks(res?.data.data)
+            this.setPage(res?.data.page)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async getBooksOfPublisherAPI(publisherId: string){
+    async getBooksOfPublisherAPI(publisherId: string, filter: IFilter){
         try {
-            const res = await getBookByPublisher(publisherId)
+            if(!filter.limit){
+                filter.limit = 6
+            }
+            const res = await getBookByPublisher(publisherId, filter)
             this.setBooks(res?.data.data)
+            this.setPage(res?.data.page)
         } catch (error) {
             console.log(error)
         }
@@ -133,6 +158,7 @@ class BooksStore {
             filter.limit = 10
             const res = await searchBooks(filter)
             this.setBooks(res?.data.data)
+            this.setPage(res?.data.page)
         } catch (error) {
             console.log(error)
         }

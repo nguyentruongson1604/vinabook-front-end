@@ -19,7 +19,9 @@ const HomePage: React.FC<{className?: string }> = observer(({className }) => {
             setLoading(true)
             // console.log('length ', store.CategoryStore.getAllCategories.length)
             const pendingData =  store.CategoryStore?.getCategoriesAndRelation.map(async (item: ICategoryAndRelation) => {
-                const res = await getBooksByCategory(item._id!)
+                const res = await getBooksByCategory(item._id!, {
+                    page: 1
+                })
                 const books = {
                     categoryId: item._id!,
                     categoryName: item.name!,

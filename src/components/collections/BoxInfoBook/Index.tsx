@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
 import BoxPrice from '../../elements/BoxPrice/Index';
 import BoxSaleOff from '../../elements/BoxSaleOff/Index';
 import styles from './Style.module.css'
 import { IBook } from '../../../stores/childrens/Books.store';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 const saleOff = {
   className: styles.saleOff
 }
@@ -11,25 +12,24 @@ const price = {
   className: styles.price
 }
 const BoxInfoBook: React.FC<{ book?: IBook, className?: string}> = ({ book, className}) => {
-    const navigate = useNavigate()
     return (
       <div className={className}>
-        <div className={styles.boxInfoBook} onClick={()=>{navigate(`/details/${book?._id}`)}}>
+        <div className={styles.boxInfoBook}>
             <div className={styles.picBook}>
-                <a href="" >
+                <Link to={`/details/${book?._id}`}>
                     <img className=" pict lazy-img" src={book?.imageUrl}
                     alt={book?.name} width="115" height="" title={book?.name} />
-                </a>
+                </Link>
             </div>
             <div className={styles.textInfoBook}>
               <div className={styles.boxTittleBook}>
                 <div className={styles.tittleSmallBook}>
-                    <a href="" className={styles.productTittle}>{book?.name}</a>
+                    <Link to={`/details/${book?._id}`} className={styles.productTittle}>{book?.name}</Link>
                 </div>
                 <span>{book?.author.name}</span>
               </div>
                 <div className={styles.textContentBook}>
-                    <a href='#'>
+                    <a>
                       {book?.description}
                     </a>
                 </div>
