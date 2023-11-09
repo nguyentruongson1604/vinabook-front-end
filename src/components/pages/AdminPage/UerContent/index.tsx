@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import ViewIcon from '@mui/icons-material/RemoveRedEye'
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -43,27 +44,6 @@ const UserContent = observer(() =>{
   const [edit, setEdit]= React.useState<boolean>(false);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
   const store = useStore()
-  function EditToolbar(props: EditToolbarProps) {
-    //  const {  setRowModesModel } = props;
-  
-    const handleClick = async() => {
-      const data = await store.userManagement?.createOtherInfo({email: 'fds@gmail.com', name: 'a', password: '111111'})
-      const id: GridRowId = data?.res.data._id      
-      setRowModesModel((oldModel) => ({
-        ...oldModel,
-        [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-      }));
-      setEdit(true)
-    };
-  
-    return (
-      <GridToolbarContainer>
-        <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-          Add record
-        </Button>
-      </GridToolbarContainer>
-    );
-  }
   const checkCurrentUser = async ()=>{  
     try{      
        await store.userManagement?.getAllUser(1,10,'')
@@ -83,7 +63,7 @@ const UserContent = observer(() =>{
   
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {  //handleRowEditStop
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
+      event.defaultMuiPrevented = true;      
     }
   };
 
@@ -199,12 +179,6 @@ const UserContent = observer(() =>{
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        // slotProps={{
-        //   toolbar: { setRowModesModel },
-        // }}
       />
     </Box>
   );

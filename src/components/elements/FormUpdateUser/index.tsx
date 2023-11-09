@@ -6,10 +6,11 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { useNavigate } from 'react-router';
 import { useStore } from '../../../stores/RootStore.store';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 
@@ -34,34 +35,118 @@ const validationSchema = Yup.object().shape({
 
 const FormUpdateUser= observer(() => {
   const store = useStore()
-  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
-  
-  const formik = useFormik({
+  const navigate = useNavigate()
+  const formik =  useFormik({
     initialValues: {
-      name: store.userAccess?.userAccess?.name,
-      email: store.userAccess?.userAccess?.email,
+      name: '',
+      email: '',
       currentPassword: '',
       newPassword: '',
       passwordConfirm: '',
     },
     validationSchema: validationSchema,
+
     onSubmit: async (values) => {
-      const data = await store.userAccess?.changePassword(values)      
+      const data = await store.userAccess?.changePassword(values)
       if(data?.success){
         setErrorMessage(null)
+        navigate('/')
       }
       else{
         setErrorMessage(data?.res.message)
       }
     },
   });
+
+
+  const fetchData = async () => {
+    try {
+      const user = store.userAccess?.user;
+      formik.setValues({
+        name: user?.name || '',
+        email: user?.email || '',
+        currentPassword: '',
+        newPassword: '',
+        passwordConfirm: '',
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [store.userAccess?.userAccess]);
+
+
+  // const [initialValues, setInitialValues] = useState({
+  //   name: '',
+  //   email: '',
+  //   currentPassword: '',
+  //   newPassword: '',
+  //   passwordConfirm: '',
+  // });
+  // const [dataReady, setDataReady] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(null);
+
+  // const fetchData = async () => {
+  //   try {
+  //     setInitialValues({
+  //       name: await store.userAccess?.userAccess?.name || '',
+  //       email: await store.userAccess?.userAccess?.email || '',
+  //       currentPassword: '',
+  //       newPassword: '',
+  //       passwordConfirm: '',
+  //     });
+  //     await Promise.all(initialValues)
+  //     setDataReady(true);
+  //   } catch (error) {
+  //     console.error('Lỗi khi lấy dữ liệu:', error);
+  //     // setInitialValues({
+  //     //   name: '',
+  //     //   email: '',
+  //     //   currentPassword: '',
+  //     //   newPassword: '',
+  //     //   passwordConfirm: '',
+  //     // });
+  //     // setDataReady(true);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  //   console.log(initialValues);
+    
+  // }, []);
+
+  
+  // const formik = useFormik({
+
+    
+  //   initialValues: initialValues,
+  //   validationSchema: validationSchema,
+  //   onSubmit: async (values) => {
+  //     console.log(initialValues)
+  //     // if (dataReady) {
+  //       const data = await store.userAccess?.changePassword(values);
+  //       if (data?.success) {
+  //         setErrorMessage(null);
+  //       } else {
+  //         setErrorMessage(data?.res.message);
+  //       }
+  //     // }
+  //   },
+  // });
+  // console.log("222",initialValues);
+  
+
   return (
     <div>
       <h1 className={styles.bannerReg}>Thông tin cá nhân</h1>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <label className={styles.inputName}>Họ và tên:</label>     
+          <label className={styles.inputName}>Họ và tên:</label>  
           <TextField
             label="Disabled"
             variant="outlined"
@@ -197,7 +282,6 @@ const FormUpdateUser= observer(() => {
           errorMessage/*biểu thức điều kiện, nếu errorMessage = null thì {} sẽ không được thực thi*/ 
           && <div className={styles.errorMesage}>Error: {errorMessage}</div>
         }
-
         <label className={styles.inputName}></label>
         <Button
             fullWidth

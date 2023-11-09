@@ -7,6 +7,7 @@ import CartStore from "./childrens/Carts.store"
 import UserAccess from "./childrens/UserAccess.store"
 import UserManagement from "./childrens/UserManagement.store"
 import { makeObservable, observable } from "mobx"
+import Bill from "./childrens/Bill.store"
 
 class RootStore {
     BooksStore?: BooksStore
@@ -16,6 +17,7 @@ class RootStore {
     CartStore?: CartStore
     userAccess?: UserAccess;
     userManagement?: UserManagement;
+    billStore?: Bill;
     constructor(){
         this.userAccess = new UserAccess()
         this.userManagement = new UserManagement(this)
@@ -24,6 +26,7 @@ class RootStore {
         this.CategoryStore = new CategoryStore(this)
         this.CartStore = new CartStore(this)
         this.PublisherStore = new PublisherStore(this)
+        this.billStore = new Bill(this)
     }
     
 }

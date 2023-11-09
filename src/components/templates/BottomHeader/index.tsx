@@ -45,7 +45,7 @@ const BottomHeader = observer(() => {
                 <LogoCard/>
                 <Login/>
             </div>
-            
+            <div className="clearfix"></div>
         </div>
         
     )

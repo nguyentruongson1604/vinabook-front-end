@@ -1,5 +1,6 @@
 .slideBar{
     width: 20%;
+    background-color: #d2e3ef !important;
 }
 .content{
     flex: 1;

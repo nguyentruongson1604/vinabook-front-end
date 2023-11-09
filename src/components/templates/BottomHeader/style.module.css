@@ -1,7 +1,6 @@
 .bottomHeader {
     width: 100%;
     background-color: #fff;
-    float: left;
     min-height: 80px;
     position: -webkit-sticky;
     position: sticky;

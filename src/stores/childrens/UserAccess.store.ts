@@ -60,6 +60,8 @@ class UserAccess {
             return { success: false, res: error.response.data };
         }
     };
-
+    get user(){
+        return this.userAccess
+    }
 }
 export default UserAccess

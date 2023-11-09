@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import ViewIcon from '@mui/icons-material/RemoveRedEye'
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -25,98 +26,62 @@ import {
   randomId,
   randomArrayItem,
 } from '@mui/x-data-grid-generator';
+import { useStore } from '../../../../stores/RootStore.store';
 
-const roles = ['Market', 'Finance', 'Development'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-const initialRows: GridRowsProp = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
-
+import { useEffect, useCallback } from 'react';
+import { observer } from 'mobx-react';
+import { useNavigate } from 'react-router';
 interface EditToolbarProps {
-  setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
+  // setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
 }
 
-function EditToolbar(props: EditToolbarProps) {
-  const { setRows, setRowModesModel } = props;
 
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-    }));
-  };
 
-  return (
-    <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  );
-}
 
-export default function BillContent() {
-  const [rows, setRows] = React.useState(initialRows);
+const BillContent = observer(() =>{
+  const navigate = useNavigate()
+  const [edit, setEdit]= React.useState<boolean>(false);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
+  const store = useStore()
+  const checkCurrentUser = async ()=>{  
+    try{      
+       await store.billStore?.getAllBill(1,100,'')
+      //  setRows()
+    } catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    checkCurrentUser()
+  }, [])
 
-  const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
+    
+
+  
+  
+  const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {  //handleRowEditStop
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
+      event.defaultMuiPrevented = true;      
     }
   };
 
-  const handleEditClick = (id: GridRowId) => () => {
+  const handleEditClick = (id: any) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    setEdit(true)
   };
 
-  const handleSaveClick = (id: GridRowId) => () => {
+  const handleSaveClick = (id: any) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+    setEdit(false)
   };
-
-  const handleDeleteClick = (id: GridRowId) => () => {
-    setRows(rows.filter((row) => row.id !== id));
+  const handleViewClick = (id: any) => () => {
+    navigate(`${id}`)
+  }
+  const handleDeleteClick = (id: any) => () => {
+    store.billStore?.deleteBill(id)
   };
 
   const handleCancelClick = (id: GridRowId) => () => {
@@ -124,58 +89,38 @@ export default function BillContent() {
       ...rowModesModel,
       [id]: { mode: GridRowModes.View, ignoreModifications: true },
     });
-
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow!.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
   };
 
   const processRowUpdate = (newRow: GridRowModel) => {
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    const updatedRow = { ...newRow};
+    store.billStore?.updateStatusBill(updatedRow.id, updatedRow)
     return updatedRow;
   };
 
   const handleRowModesModelChange = (newRowModesModel: GridRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-
   const columns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
+    { field: 'id', headerName: 'ID', width: 250, editable: false },
+    { field: 'time', headerName: 'Time',width: 100, editable: false },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 80,
-      align: 'left',
-      headerAlign: 'left',
-      editable: true,
-    },
-    {
-      field: 'joinDate',
-      headerName: 'Join date',
-      type: 'date',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'role',
-      headerName: 'Department',
-      width: 220,
-      editable: true,
+      field: 'status',
+      headerName: 'Status',
+      width: 100,
+      editable: edit,
       type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
+      valueOptions: ['wait', 'accept', 'decline'],
     },
     {
       field: 'actions',
       type: 'actions',
       headerName: 'Actions',
-      width: 100,
+      width: 150,
       cellClassName: 'actions',
+      
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
+        
         if (isInEditMode) {
           return [
             <GridActionsCellItem
@@ -210,6 +155,12 @@ export default function BillContent() {
             onClick={handleDeleteClick(id)}
             color="inherit"
           />,
+          <GridActionsCellItem
+            icon={<ViewIcon />}
+            label="View"
+            onClick={handleViewClick(id)}
+            color="inherit"
+          />,
         ];
       },
     },
@@ -229,20 +180,21 @@ export default function BillContent() {
       }}
     >
       <DataGrid
-        rows={rows}
+        rows={store.billStore?.tableData || []}
         columns={columns}
         editMode="row"
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
+        // slotProps={{
+        //   toolbar: { setRowModesModel },
+        // }}
       />
     </Box>
   );
-}
+})
+
+
+export default BillContent
+

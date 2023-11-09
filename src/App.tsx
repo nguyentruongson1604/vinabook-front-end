@@ -12,27 +12,30 @@ import TopHeader from './components/templates/TopHeader';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppContextProvider, rootStore, useStore } from './stores/RootStore.store';
 import InfoUserPage from './components/pages/InfoUserPage';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import PayAdressPage from './components/pages/PayAdressPage';
 import AdminPage from './components/pages/AdminPage/Page';
 import RegisterBox from './components/templates/RegisterBox';
+import CofirmBillPage from './components/pages/CofirmBillPage';
+import { AdminRouter, UserRouter } from './Auths/PrivateRouter';
+import SuccessNotice from './components/elements/SuccessNotice';
+import ListBillPage from './components/pages/ListBillPage';
 
 function App() {  
   const store = useStore()
-  
-  const checkCurrentUser = useCallback(async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
-    try{      
-      await store.userAccess?.getCurrentUser()      
-    } catch(error){
-      console.log(error);
+  const [loading, setLoading] = useState(true);
+  const checkCurrentUser = async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
+    if(localStorage.getItem('accessToken')){
+      await store.userAccess?.getCurrentUser()  
     }
-  },[])
+      setLoading(false)
+  }
   
   useEffect(()=>{
     checkCurrentUser()
     
   }, [checkCurrentUser])
-
+  if(loading) return <div>Loading...</div>
   return (
     <BrowserRouter>
       <AppContextProvider value={rootStore}>
@@ -42,21 +45,28 @@ function App() {
           <Route path='/' element={<HomePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
-          <Route path='/info' element={<InfoUserPage/>}/>
+          <Route element={<UserRouter/>} >
+            <Route path='/info' element={<InfoUserPage/>}/>
+          </Route>
           <Route path='/checkout' element={<DetailsCart/>}/>
           <Route path='/author' element={<AuthorPage/>}/>
           <Route path='/category' element={<CategoryPage/>}/>
           <Route path='/details' element={<DetailsPage/>}/>
           <Route path='/adressbill' element={<PayAdressPage/>}/>
-          <Route path='/admin/*' element={<AdminPage/>} />
-          {/* <Route path='/admin/user' element={<AdminPage/>}/> */}
+          <Route element={<AdminRouter />} >
+            < Route path='/admin/*' element={<AdminPage />}/>
+          </Route>
           <Route path='/author/:authorId' element={<AuthorPage/>}/>
           <Route path='/category/:categoryId' element={<CategoryPage/>}/>
           <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
           <Route path='/search?' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/pay' element={<RegisterBox/>}/>
-          {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
+          <Route path='/confirmBill' element={<CofirmBillPage/>} />
+          <Route path='/noticeSuccess/:billId' element={<SuccessNotice/>} />
+          <Route path='/listBill' element={<ListBillPage/>} />
+
+
         </Routes>
         <Footer/>
       </AppContextProvider>

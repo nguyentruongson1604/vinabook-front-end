@@ -1,0 +1,27 @@
+.contains{
+    padding: 30px;
+}
+h2{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+.rowName{
+    margin-bottom: 20px;
+    text-align: center;
+}
+.nameField{
+    display: inline-block;
+    width: 15%;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 40px
+}
+.inputName{
+    width: 50%;
+    height: 40px;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid #c7c7c7
+}

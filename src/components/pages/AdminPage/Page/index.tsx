@@ -5,10 +5,11 @@ import styles from './style.module.css'
 import UserContent from '../UerContent';
 import PublishContent from '../PublisherContent';
 import CategoryContent from '../CategoryContent';
-import AuthorContent from '../AuthorContent copy';
+import AuthorContent from '../AuthorContent';
 import CheckoutContent from '../CheckoutContent';
 import BillContent from '../BillContent';
-import BookContent from '../BookContent copy';
+import BookContent from '../BookContent';
+import BillForm from '../BillForm';
 // import CartContent from '../CartContent';
 const AdminPage: React.FC<{className?: string }> = ({className }) => {
     return (
@@ -28,6 +29,8 @@ const AdminPage: React.FC<{className?: string }> = ({className }) => {
                     <Route path='/author' element={<AuthorContent/>}/>
                     <Route path='/checkout' element={<CheckoutContent/>}/>
                     <Route path='/bill' element={<BillContent/>}/>
+                    <Route path='/bill/*' element={<BillForm/>}/>
+                    {/* <Route path='/bill/:billId' element={<BookContent/>}/> */}
                     <Route path='/book' element={<BookContent/>}/>
                     {/* <Route path='/cart' element={<CartContent/>}/> */}
                 </Routes>

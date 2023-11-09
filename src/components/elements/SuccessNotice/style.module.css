@@ -1,0 +1,38 @@
+.tittle{
+    font-weight: normal;
+    color: #087b44;
+    font-size: 22px;
+    margin: 40px 0 35px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #c7c7c7;
+}
+.idText{
+    font-size: 17px;
+    margin-top: 15px
+}
+.idContent{
+    display: inline-block;
+    color: #087b44;
+}
+.notice{
+    display: flex;
+}
+.noticeText{
+    margin-left: 10px;
+}
+.success{
+    font-size: 20px;
+}
+.contact{
+    color: #9f9b9b;
+}
+.btnBack{
+    margin: 40px 0 40px 46px;
+}
+.buttonBack{
+    width: 250px !important;
+    height: 40px !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    background-color: #2ba40d !important;
+}
