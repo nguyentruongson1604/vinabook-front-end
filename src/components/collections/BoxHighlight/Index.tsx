@@ -7,9 +7,9 @@ import BoxSaleOff from '../../elements/BoxSaleOff/Index';
 import styles from './Style.module.css'
 import { IBook } from '../../../stores/childrens/Books.store';
 import { observer } from 'mobx-react';
-import { useNavigate } from 'react-router';
 import { IBookCart, IBookInCart } from '../../../stores/childrens/Carts.store';
 import { useStore } from '../../../stores/RootStore.store';
+import { Link } from 'react-router-dom';
 
 const BoxHighlight: React.FC<{ book?: IBook, background_color?: string, className?: string}> = observer(({book, background_color, className}) => {
     const store = useStore()
@@ -43,19 +43,19 @@ const BoxHighlight: React.FC<{ book?: IBook, background_color?: string, classNam
 
         store.CartStore?.addBookToCart(bookAdd)
     }
-    const navigate = useNavigate()
+
     return (
         <div className={className}>
             <div className={styles.background} style={backgr}>
                 <div className={styles.imgThump}> 
-                    <a href="" onClick={()=>{navigate(`/details/${book?._id}`)}}>
+                    <Link to={`/details/${book?._id}`}>
                         <img className="img" src={book?.imageUrl} data-src={book?.imageUrl} alt={book?.name} width="210" height="" title={book?.name}/>
-                    </a>
+                    </Link>
                 </div>
                 <div className={clsx(styles.textInfo, 'clearfix')}> 
                     <div className={styles.tittle}>
                         <div className={styles.smallTittle}>
-                            <a href="" onClick={()=>{navigate(`/details/${book?._id}`)}}>{book?.name}</a>
+                            <Link to={`/details/${book?._id}`}>{book?.name}</Link>
                         </div>
                         <div className={styles.auth}>{book?.author.name}</div>
                     </div>

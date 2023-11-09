@@ -1,14 +1,13 @@
 import { observer } from 'mobx-react';
 import styles from './style.module.css';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const ProductThumbImg = observer(({imgUrl, id}: {imgUrl: string, id: string}) => {
-  const navigate = useNavigate()
   return (
         <div className={styles.productThumbImg}>
-            <a href="" onClick={()=>{navigate(`/details/${id}`)}}>
+            <Link to={`/details/${id}`}>
                 <img src={imgUrl} alt="sach"/>
-            </a>
+            </Link>
         </div> 
   )
 })

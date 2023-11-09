@@ -77,10 +77,10 @@ export async function uploadImageBook(bookId: string, image: File) {
     }
 }
 
-export async function getAllBook() {
+export async function getAllBook(filter: IFilter) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: '/api/v1/book/all-book'
+            baseURL: `/api/v1/book/all-book?limit=${filter.limit}&page=${filter.page}`
         }
         const instance = createAxiosInstance(options)
         const res = instance.get('/')
@@ -105,10 +105,10 @@ export async function getBookById(bookId: string) {
     }
 }
 
-export async function getBookByAuthor(authorId: string) {
+export async function getBookByAuthor(authorId: string, filter: IFilter) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/book/author/${authorId}`
+            baseURL: `/api/v1/book/author/${authorId}?limit=${filter.limit}&page=${filter.page}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('')
@@ -119,10 +119,10 @@ export async function getBookByAuthor(authorId: string) {
     }
 }
 
-export async function getBookByPublisher(publisherId: string) {
+export async function getBookByPublisher(publisherId: string, filter: IFilter) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/book/publisher/${publisherId}`
+            baseURL: `/api/v1/book/publisher/${publisherId}?limit=${filter.limit}&page=${filter.page}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('')
@@ -133,10 +133,10 @@ export async function getBookByPublisher(publisherId: string) {
     }
 }
 
-export async function getBooksByCategory(categoryId: string) {
+export async function getBooksByCategory(categoryId: string, filter: IFilter) {
     try {
         const options: axiosInstanceOptions = {
-            baseURL: `/api/v1/book/category/${categoryId}`
+            baseURL: `/api/v1/book/category/${categoryId}?limit=${filter.limit}&page=${filter.page}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.get('')
