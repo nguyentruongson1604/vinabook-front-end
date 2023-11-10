@@ -3,7 +3,8 @@ import {axiosInstanceOptions, createAxiosInstance} from '../instances/instance'
 export interface IAuthor{
     _id?: string,
     name?: string,
-    info?: string
+    info?: string,
+    createAt?: string
 }
 
 export async function createNewAuthor(newAuthor: IAuthor){

@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import { useState, useEffect } from 'react';
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -20,54 +21,12 @@ import {
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
 import {
-  randomCreatedDate,
-  randomTraderName,
   randomId,
-  randomArrayItem,
 } from '@mui/x-data-grid-generator';
-
-const roles = ['Market', 'Finance', 'Development'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-const initialRows: GridRowsProp = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
+import { observer } from 'mobx-react';
+import { useStore } from '../../../../stores/RootStore.store';
+import { updateABook } from '../../../../APIs/book.api';
+import AlertDialog from '../../../elements/AlertDialog';
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -97,7 +56,73 @@ function EditToolbar(props: EditToolbarProps) {
   );
 }
 
-export default function BookContent() {
+const BookContent = observer(() => {
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [deleteItem, setDeleteItem] = useState<GridRowId>()
+  const [loading, setLoading] = useState(true);
+  const [initAuthorsOptions, setInitAuthorsOptions] = useState<any>([]);
+  const [initCategoriesOptions, setInitCategoriesOptions] = useState<any>([]);
+  const [initPublishersOptions, setInitPublishersOptions] = useState<any>([]);
+  const store = useStore();
+  let initialRows: GridRowsProp = [];
+
+  const fetchBooks = async () => {
+    setLoading(true);
+    try {
+      await Promise.all([
+        store.BooksStore?.getAllBooksAPI({}),
+        store.AuthorStore?.getAllAuthorsAPI(),
+        store.CategoryStore?.getAllCategorysAPI(),
+        store.PublisherStore?.getAllPublishersAPI(),
+      ])
+    } catch (error) {
+      console.log(error)
+    }
+    finally{
+      setLoading(false);
+      store.BooksStore?.getBooks?.map((book)=>{
+        const init = {
+          id: book._id,
+          name: book.name,
+          category: book.category._id,
+          author: book.author._id,
+          publisher: book.publisher._id
+        }
+        initialRows = [...initialRows, init]
+      })
+      const initAuthorsOptions = store.AuthorStore?.getAllAuthors?.map((author)=>{
+        const authorOptions = {
+          value: author._id,
+          label: author.name
+        }
+        // console.log('**', authorOptions)
+        return authorOptions
+      })
+      const initCategoriesOptions = store.CategoryStore?.getAllCategories?.map((category)=>{
+        const authorOptions = {
+          value: category._id,
+          label: category.name
+        }
+        return authorOptions
+      })
+      const initPublishersOptions = store.PublisherStore?.getAllPublishers?.map((publisher)=>{
+        const authorOptions = {
+          value: publisher._id,
+          label: publisher.name
+        }
+        return authorOptions
+      })
+      setInitAuthorsOptions(initAuthorsOptions)
+      setInitCategoriesOptions(initCategoriesOptions)
+      setInitPublishersOptions(initPublishersOptions)
+      setRows(initialRows)
+      // console.log(initAuthorsOptions)
+    }
+  }
+
+  useEffect(()=>{
+    fetchBooks()
+  }, [])
   const [rows, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
 
@@ -113,10 +138,12 @@ export default function BookContent() {
 
   const handleSaveClick = (id: GridRowId) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+    // console.log(id)
   };
 
   const handleDeleteClick = (id: GridRowId) => () => {
     setRows(rows.filter((row) => row.id !== id));
+    setOpenDialog(false)
   };
 
   const handleCancelClick = (id: GridRowId) => () => {
@@ -131,9 +158,10 @@ export default function BookContent() {
     }
   };
 
-  const processRowUpdate = (newRow: GridRowModel) => {
-    const updatedRow = { ...newRow, isNew: false };
+  const processRowUpdate = async (newRow: GridRowModel) => {
+    const updatedRow = { ...newRow, isNew: false } as any;
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    await updateABook(updatedRow, updatedRow.id)
     return updatedRow;
   };
 
@@ -144,28 +172,30 @@ export default function BookContent() {
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Name', width: 180, editable: true },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 80,
+      field: 'category',
+      headerName: 'Category',
+      type: 'singleSelect',
+      valueOptions:[...initCategoriesOptions],
+      width: 180,
       align: 'left',
       headerAlign: 'left',
       editable: true,
     },
     {
-      field: 'joinDate',
-      headerName: 'Join date',
-      type: 'date',
+      field: 'author',
+      headerName: 'Author',
+      type: 'singleSelect',
+      valueOptions:[...initAuthorsOptions],
       width: 180,
       editable: true,
     },
     {
-      field: 'role',
-      headerName: 'Department',
-      width: 220,
+      field: 'publisher',
+      headerName: 'Publisher',
+      width: 180,
       editable: true,
       type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
+      valueOptions:[...initPublishersOptions]
     },
     {
       field: 'actions',
@@ -207,14 +237,17 @@ export default function BookContent() {
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={handleDeleteClick(id)}
+            onClick={()=>{
+              setDeleteItem(id)
+              setOpenDialog(true);
+            }}
             color="inherit"
           />,
         ];
       },
     },
   ];
-
+  if(loading) return <div>Loading...</div>
   return (
     <Box
       sx={{
@@ -242,7 +275,17 @@ export default function BookContent() {
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
+        initialState={{
+          pagination: {paginationModel: {pageSize: 5}}
+        }}
+        pageSizeOptions={[5, 10]}
+        pagination={true}
       />
+      {openDialog && 
+      <div onClick={()=>(setOpenDialog(false))}>
+        <AlertDialog isOpen={true} handleAccept={handleDeleteClick(deleteItem!)} handleCancle={()=>(setOpenDialog(false))}/>  
+      </div>}s
     </Box>
   );
-}
+})
+export default BookContent; 

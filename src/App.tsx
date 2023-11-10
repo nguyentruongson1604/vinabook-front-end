@@ -37,6 +37,7 @@ function App() {
   }, [checkCurrentUser])
   if(loading) return <div>Loading...</div>
   return (
+    <>
     <BrowserRouter>
       <AppContextProvider value={rootStore}>
         <TopHeader/>
@@ -71,6 +72,8 @@ function App() {
         <Footer/>
       </AppContextProvider>
     </BrowserRouter>
+    
+    </>
   )
 }
 export default App;

@@ -1,10 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
 import styles from './style.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faPhone, faComment } from '@fortawesome/free-solid-svg-icons'
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
 function HeaderContact() {
   return (
     <div className={styles.headerContact}>

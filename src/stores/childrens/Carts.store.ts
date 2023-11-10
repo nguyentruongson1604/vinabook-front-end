@@ -17,7 +17,12 @@ export interface IBookInCart {
 
 interface ICart {
     _id: string,
+    owner?: {
+        _id: string,
+        name: string
+    },
     listBook: IBookInCart[],
+    totalCost?: number
 }
 
 class CartStore {
@@ -124,6 +129,7 @@ class CartStore {
     async getAllCartsAPI(){
         try {
             const carts = await getAllCarts()
+            console.log(carts?.data.data)
             this.setListCart(carts?.data.data)
         } catch (error) {
             console.log(error)
