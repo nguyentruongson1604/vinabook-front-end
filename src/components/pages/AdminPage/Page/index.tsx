@@ -1,16 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from '../Header';
 import SlideBar from '../SlideBar';
 import styles from './style.module.css'
 import UserContent from '../UerContent';
 import PublishContent from '../PublisherContent';
 import CategoryContent from '../CategoryContent';
-import AuthorContent from '../AuthorContent copy';
+import AuthorContent from '../AuthorContent';
 import CheckoutContent from '../CheckoutContent';
 import BillContent from '../BillContent';
-import BookContent from '../BookContent copy';
+import BookContent from '../BookContent';
+import { observer } from 'mobx-react';
+
 // import CartContent from '../CartContent';
-const AdminPage: React.FC<{className?: string }> = ({className }) => {
+const AdminPage: React.FC<{className?: string }> = observer(({className }) => {   
     return (
         <>
             <div className={styles.header}>
@@ -35,6 +37,6 @@ const AdminPage: React.FC<{className?: string }> = ({className }) => {
             </div>
         </>
     )
-};
+});
   
 export default AdminPage

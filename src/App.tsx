@@ -16,6 +16,7 @@ import { useEffect, useCallback } from 'react';
 import PayAdressPage from './components/pages/PayAdressPage';
 import AdminPage from './components/pages/AdminPage/Page';
 import RegisterBox from './components/templates/RegisterBox';
+import FormAddBookDialog from './components/elements/FormAddBook';
 
 function App() {  
   const store = useStore()
@@ -34,6 +35,7 @@ function App() {
   }, [checkCurrentUser])
 
   return (
+    <>
     <BrowserRouter>
       <AppContextProvider value={rootStore}>
         <TopHeader/>
@@ -57,10 +59,13 @@ function App() {
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/pay' element={<RegisterBox/>}/>
           {/* <Route path='*' element={<div>Page not found</div>}></Route>   */}
+          <Route path='/test' element={<FormAddBookDialog handleClose={()=>{}} />}/>
         </Routes>
         <Footer/>
       </AppContextProvider>
     </BrowserRouter>
+    
+    </>
   )
 }
 export default App;
