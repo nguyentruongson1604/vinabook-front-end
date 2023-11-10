@@ -3,9 +3,10 @@ import { TRootStore } from "../RootStore.store"
 import { getAllAuthors, getAuthorById, getAuthorsByCategory } from "../../APIs/author.api"
 
 export interface IAuthor{
-    _id: string
+    _id?: string
     name: string,
-    info: string
+    info: string,
+    createdAt?: string
 }
 
 export interface IAuthorByCategory{
@@ -30,6 +31,10 @@ class AuthorStore {
 
     setAllAuthors(authors: IAuthor[]){
         this.listAuthors = authors
+    }
+
+    addAuthor(author: IAuthor){
+        this.listAuthors = [...this.listAuthors!, author]
     }
 
     setAuthorsCategory(author: IAuthorByCategory){

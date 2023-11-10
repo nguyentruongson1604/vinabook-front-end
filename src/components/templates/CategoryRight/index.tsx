@@ -18,7 +18,17 @@ const CategoryRight: React.FC<{className?: string, search?: string }> = observer
     //     return <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
     // }
     async function handlePagination (event: React.ChangeEvent<any>, page: number) {
-        await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
+        if(search){
+            await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
+        }
+        if(category){
+            // await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
+            await store.BooksStore?.getBooksOfCategoryAPI(category._id,{limit: 5, page: page})
+        }
+        if(publisher){
+            // await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
+            await store.BooksStore?.getBooksOfPublisherAPI(publisher._id, {limit: 5, page: page})
+        }
     } 
     return (
         <div className={className}>

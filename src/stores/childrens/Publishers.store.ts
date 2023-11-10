@@ -3,8 +3,9 @@ import { TRootStore } from "../RootStore.store"
 import {getAllPublisher, getPublisherById, getPublishersByCategory} from '../../APIs/publisher.api'
 
 export interface IPublisher{
-    name: string,
-    info: string
+    _id?: any
+    name?: string,
+    info?: string
 }
 
 export interface IPublisherByCategory{
@@ -33,6 +34,10 @@ class PublisherStore {
 
     setAllPublishers(publishers: IPublisher[]){
         this.listPublishers = publishers
+    }
+
+    addNewPublisher(publisher: IPublisher){
+        this.listPublishers = [...this.listPublishers!, publisher];
     }
 
     get getCurrentPublisher(){

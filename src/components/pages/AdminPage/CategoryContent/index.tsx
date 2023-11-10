@@ -19,93 +19,80 @@ import {
   GridRowModel,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-} from '@mui/x-data-grid-generator';
-
-const roles = ['Market', 'Finance', 'Development'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-const initialRows: GridRowsProp = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
+import { observer } from 'mobx-react';
+import { useState, useEffect } from 'react';
+import { useStore } from '../../../../stores/RootStore.store';
+import { ICategory, deleteCategory, newCategory, updateCategory } from '../../../../APIs/category.api';
+import AlertDialog from '../../../elements/AlertDialog';
+import FormDialog from '../../../elements/FormDialog';
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
+  handleClick: () => void
 }
 
 function EditToolbar(props: EditToolbarProps) {
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-    }));
-  };
-
+  const {handleClick} = props;
+  
   return (
     <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+      <Button color="primary" startIcon={<AddIcon />} onClick={()=>{handleClick()}}>
         Add record
       </Button>
     </GridToolbarContainer>
   );
 }
 
-export default function CategoryContent() {
+const CategoryContent = observer(() => {
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [openAddDialog, setAddOpenDialog] = useState<boolean>(false)
+  const [deleteItem, setDeleteItem] = useState<GridRowId>()
+  const [loading, setLoading] = useState<Boolean>(true);
+  const store = useStore()
+  let initialRows: GridRowsProp = [];
   const [rows, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
 
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      await Promise.all([store.CategoryStore?.getAllCategorysAPI()])
+    } catch (error) {
+      console.log(error)
+    }
+    finally{
+      store.CategoryStore?.getAllCategories?.map((category)=>{
+        const init = {
+          id: category._id,
+          name: category.name,
+        }
+        initialRows = [...initialRows, init]
+      })
+      setRows(initialRows)
+      setLoading(false)
+    }
+  }
+
+  const handleSubmit = async (inputVal: ICategory) => {
+    Promise.all([await newCategory(inputVal)])
+    store.CategoryStore?.addNewCategory(inputVal)
+  }
+
+  useEffect(()=>{
+    fetchCategories()
+  }, [store.CategoryStore?.getAllCategories])
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
     }
   };
+
+  const handleClick = () => {
+    setAddOpenDialog(true);
+  }
 
   const handleEditClick = (id: GridRowId) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
@@ -115,8 +102,10 @@ export default function CategoryContent() {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id: GridRowId) => () => {
+  const handleDeleteClick = (id: GridRowId) => async () => {
     setRows(rows.filter((row) => row.id !== id));
+    Promise.all([await deleteCategory(id.toString())])
+    setOpenDialog(false)
   };
 
   const handleCancelClick = (id: GridRowId) => () => {
@@ -131,8 +120,9 @@ export default function CategoryContent() {
     }
   };
 
-  const processRowUpdate = (newRow: GridRowModel) => {
-    const updatedRow = { ...newRow, isNew: false };
+  const processRowUpdate = async (newRow: GridRowModel) => {
+    const updatedRow = { ...newRow, isNew: false } as any;
+    await updateCategory({name: updatedRow.name}, updatedRow.id)
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     return updatedRow;
   };
@@ -142,31 +132,7 @@ export default function CategoryContent() {
   };
 
   const columns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 80,
-      align: 'left',
-      headerAlign: 'left',
-      editable: true,
-    },
-    {
-      field: 'joinDate',
-      headerName: 'Join date',
-      type: 'date',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'role',
-      headerName: 'Department',
-      width: 220,
-      editable: true,
-      type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
-    },
+    { field: 'name', headerName: 'Name', width: 220, editable: true },
     {
       field: 'actions',
       type: 'actions',
@@ -207,14 +173,17 @@ export default function CategoryContent() {
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={handleDeleteClick(id)}
+            onClick={()=>{
+              setDeleteItem(id)
+              setOpenDialog(true);
+            }}
             color="inherit"
           />,
         ];
       },
     },
   ];
-
+  if(loading) return <div>Loading...</div>
   return (
     <Box
       sx={{
@@ -240,9 +209,21 @@ export default function CategoryContent() {
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel },
+          toolbar: { setRows, setRowModesModel, handleClick},
         }}
+        initialState={{
+          pagination: {paginationModel: {pageSize: 5}}
+        }}
+        pageSizeOptions={[5, 10]}
+        pagination={true}
       />
+      {openDialog && 
+      <div onClick={()=>(setOpenDialog(false))}>
+        <AlertDialog isOpen={true} handleAccept={handleDeleteClick(deleteItem!)} handleCancle={()=>(setOpenDialog(false))}/>  
+      </div>}
+      {openAddDialog &&
+      <FormDialog handleClose={()=>{setAddOpenDialog(false)}} handleSubmit={handleSubmit}/>}
     </Box>
   );
-}
+})
+export default CategoryContent;

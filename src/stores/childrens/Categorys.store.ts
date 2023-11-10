@@ -6,7 +6,8 @@ import { IPublisher } from "../../APIs/publisher.api"
 
 
 export interface ICategory{
-    name: string
+    _id?: any
+    name?: string
 }
 
 export interface ICategoryAndRelation{
@@ -37,6 +38,10 @@ class CategoryStore {
 
     setCategoriesAndRelation(catergories: ICategoryAndRelation[]){
         this.categoriesAndRelation = [...catergories]
+    }
+
+    addNewCategory(category: ICategory){
+        this.listCategories = [...this.listCategories!, category]
     }
 
     get getCategoriesAndRelation(){

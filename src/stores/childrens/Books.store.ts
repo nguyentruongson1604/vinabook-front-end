@@ -94,7 +94,7 @@ class BooksStore {
 
     async getAllBooksAPI(filter: IFilter){
         try {
-            filter.limit = 10
+            // filter.limit = 10
             const res = await getAllBook(filter)
             this.setBooks(res?.data.data)
             this.setPage(res?.data.page)
