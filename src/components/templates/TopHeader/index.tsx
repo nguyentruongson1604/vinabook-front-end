@@ -4,11 +4,14 @@ import styles from './style.module.css'
 
 const TopHeader = () => {
     return(
-        <div className={styles.topHeader}>
-            <div className="container">
-                <TopLineToolTip/>
-            </div>
-        </div> 
+        <div>
+            <div className={styles.topHeader}>
+                <div className="container">
+                    <TopLineToolTip/>
+                </div>
+            </div> 
+            <div className="clearfix"></div>
+        </div>
     )
 }
 

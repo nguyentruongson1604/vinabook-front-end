@@ -12,7 +12,8 @@ class UserManagement {
     }
     createOtherInfo = async (account: IUserAccess) => {
         try {
-            const response = await createOtherInfo(account);
+            const response = await createOtherInfo(account);            
+            this.usersManagemant = [...this.usersManagemant, response.data.data]
             return { success: true, res: response?.data };
         } catch (error: any) {
             return { success: false, res: error.response.data };
@@ -49,14 +50,18 @@ class UserManagement {
                 limit,
                 search
             );            
-            const users: IUserAccess[] = response?.data.data;
-            console.log(users);
-            
+            const users: IUserAccess[] = response?.data.data;            
             this.setUsersManagemant(users);
             
         } catch (error) {
             console.log(error);
         }
     };
+
+    get tableData(){
+        return this.usersManagemant?.map(item => {
+            return {...item, id: item._id}
+        })||[]
+    }
 }
 export default UserManagement

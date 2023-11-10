@@ -17,11 +17,11 @@ const Login = observer(() => {
     return(
         <>
             {
-                store.userAccess?.userAccess ? (
+                store.userAccess?.user ? (
                     <div className={styles.login} onMouseLeave={() => setIsHoverPopup(false)}>          
                         <Link to='info'
                             onMouseEnter={() => setIsHoverPopup(true)}  
-                        >{store.userAccess?.userAccess?.name}</Link>
+                        >{store.userAccess?.user?.name}</Link>
                         <div 
                             className={styles.headerLoginDropdown}
                             style={{ display: isHoverPopup ? 'block' : 'none' }}
@@ -29,7 +29,7 @@ const Login = observer(() => {
                         >
                             <ul className={styles.accountInfo}>
                                 <li><Link to='info'>thông tin cá nhân</Link></li>
-                                <li><a href="#">Đơn hàng</a></li>
+                                <li><Link to='listBill'>Đơn hàng</Link></li>
                                 <li><a href="#">Điểm tích lũy</a></li>
                                 <li><a href="#">Danh sách ưa thích</a></li>
                             </ul>

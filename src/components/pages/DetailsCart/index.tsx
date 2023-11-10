@@ -6,6 +6,7 @@ import Logo from '../../elements/Logo'
 import style from './style.module.css'
 import { useStore } from '../../../stores/RootStore.store'
 import { IBookInCart } from '../../../stores/childrens/Carts.store'
+import { Link } from 'react-router-dom'
 
 const DetailsCart = observer(() => {
     function getSum (total: number, book: IBookInCart){
@@ -49,8 +50,16 @@ const DetailsCart = observer(() => {
                 </div>
                 <div className="clearfix"></div>
                 <div className={style.payment}>
-                    <a href="#" className={style.btnPay}>Thanh toán</a>
-                    <a href="#" className={style.btnBack}>Quay lại</a>
+                    {cartItems?.length == 0 ? (
+                        <Link to='/adressbill' className={`${style.btnPay} ${style.linkDisabled}`}  >
+                            Thanh toán
+                        </Link>
+                    ) : (
+                        <Link to='/adressbill' className={style.btnPay}>
+                            Thanh toán
+                        </Link>
+                    )}
+                    <Link to='/' className={style.btnBack}>Quay lại</Link>
                 </div>
             </div>
         </div>

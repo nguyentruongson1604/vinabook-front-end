@@ -1,0 +1,13 @@
+.tittle{
+    display: flex;
+    justify-content: space-between
+}
+.link{
+    color: #5f5f5f;
+    text-decoration: none;
+}
+.leftTittle{
+    text-transform: uppercase;
+    color: #117c47;
+    font-size: 16px;
+}

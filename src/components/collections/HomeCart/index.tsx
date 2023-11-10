@@ -5,6 +5,7 @@ import style from './style.module.css'
 import { observer } from 'mobx-react'
 import { IBookInCart } from '../../../stores/childrens/Carts.store'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const HomeCart = observer(({closeCart, cartItems}: {closeCart: (isOpenCart: boolean) => void, cartItems: IBookInCart[]}) => {
     const navigate = useNavigate()
@@ -30,7 +31,8 @@ const HomeCart = observer(({closeCart, cartItems}: {closeCart: (isOpenCart: bool
                 </div>
                 <div className={style.cartButton}>
                     <span className={style.button}>
-                        <a href='' onClick={()=>{closeCart(false); navigate('checkout')}}>Xem giỏ hàng</a>
+                        {/* <a href='' onClick={()=>{closeCart(false); navigate('checkout')}}>Xem giỏ hàng</a> */}
+                        <Link to='checkout' onClick={()=>{closeCart(false)}} >Xem giỏ hàng</Link>
                     </span>
                 </div>
             </div>

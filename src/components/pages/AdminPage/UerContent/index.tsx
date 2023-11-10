@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import ViewIcon from '@mui/icons-material/RemoveRedEye'
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -30,7 +31,7 @@ import { useStore } from '../../../../stores/RootStore.store';
 import { useEffect, useCallback } from 'react';
 import { observer } from 'mobx-react';
 interface EditToolbarProps {
-  setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
+  // setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
@@ -40,60 +41,44 @@ interface EditToolbarProps {
 
 
 const UserContent = observer(() =>{
+  const [edit, setEdit]= React.useState<boolean>(false);
+  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
   const store = useStore()
-  function EditToolbar(props: EditToolbarProps) {
-    const { setRows, setRowModesModel } = props;
-  
-    const handleClick = async() => {
-      const data = await store.userManagement?.createOtherInfo({email: 'a@gmail.com', name: 'a', password: '111111'})
-      setRows((oldRows) => [...oldRows, data?.res]);
-      setRowModesModel((oldModel) => ({
-        ...oldModel,
-        [data?.res._id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-      }));
-    };
-  
-    return (
-      <GridToolbarContainer>
-        <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-          Add record
-        </Button>
-      </GridToolbarContainer>
-    );
-  }
-  const checkCurrentUser = async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
+  const checkCurrentUser = async ()=>{  
     try{      
-       await store.userManagement?.getAllUser(1,10,'') 
-       return store.userManagement?.usersManagemant
+       await store.userManagement?.getAllUser(1,10,'')
+      //  setRows()
     } catch(error){
       console.log(error);
     }
   }
+  useEffect(()=>{
+    checkCurrentUser()
 
+  }, [])
 
     
 
-  const [rows, setRows] = React.useState(store.userManagement?.usersManagemant!);
-  console.log(rows);
-  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
-
+  
   
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {  //handleRowEditStop
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
+      event.defaultMuiPrevented = true;      
     }
   };
 
-  const handleEditClick = (id: GridRowId) => () => {
+  const handleEditClick = (id: any) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    setEdit(true)
   };
 
-  const handleSaveClick = (id: GridRowId) => () => {
+  const handleSaveClick = (id: any) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+    setEdit(false)
   };
 
-  const handleDeleteClick = (id: GridRowId) => () => {
-    setRows(rows.filter((row) => row._id !== id));
+  const handleDeleteClick = (id: any) => () => {
+    store.userManagement?.deleteOtherUser(id)
   };
 
   const handleCancelClick = (id: GridRowId) => () => {
@@ -101,50 +86,28 @@ const UserContent = observer(() =>{
       ...rowModesModel,
       [id]: { mode: GridRowModes.View, ignoreModifications: true },
     });
-
-    const editedRow = rows.find((row) => row._id === id);
-    if (editedRow!.isNew) {
-      setRows(rows.filter((row) => row._id !== id));
-    }
   };
 
-  const processRowUpdate = (newRow: GridRowModel) => {  //processRowUpdate
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row._id === newRow.id ? updatedRow : row)));
+  const processRowUpdate = (newRow: GridRowModel) => {
+    const updatedRow = { ...newRow};
+    store.userManagement?.updateOtherUser(updatedRow.id, updatedRow)
     return updatedRow;
   };
 
   const handleRowModesModelChange = (newRowModesModel: GridRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-
   const columns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
-    { field: 'email', headerName: 'Email',type: 'email', width: 180, editable: true },
-    { field: 'password', headerName: 'Password', width: 180, editable: true },
-    // {
-    //   field: 'age',
-    //   headerName: 'Age',
-    //   type: 'number',
-    //   width: 80,
-    //   align: 'left',
-    //   headerAlign: 'left',
-    //   editable: true,
-    // },
-    // {
-    //   field: 'joinDate',
-    //   headerName: 'Join date',
-    //   type: 'date',
-    //   width: 180,
-    //   editable: true,
-    // },
+    { field: 'name', headerName: 'Name', width: 180, editable: edit },
+    { field: 'email', headerName: 'Email',type: 'email', width: 180, editable: false },
     {
       field: 'role',
       headerName: 'Department',
       width: 220,
-      editable: true,
+      editable: false,
       type: 'singleSelect',
-      valueOptions: ['all', 'user', 'admin'],
+      valueOptions: [ 'user', 'admin'],
+      
     },
     {
       field: 'actions',
@@ -152,9 +115,10 @@ const UserContent = observer(() =>{
       headerName: 'Actions',
       width: 100,
       cellClassName: 'actions',
+      
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
+        
         if (isInEditMode) {
           return [
             <GridActionsCellItem
@@ -208,19 +172,13 @@ const UserContent = observer(() =>{
       }}
     >
       <DataGrid
-        rows={rows}
+        rows={store.userManagement?.tableData || []}
         columns={columns}
         editMode="row"
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
       />
     </Box>
   );

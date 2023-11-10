@@ -7,6 +7,13 @@ import {
   TextField,
   styled,
 } from "@mui/material";
+import { observer } from 'mobx-react';
+import { useStore } from '../../../stores/RootStore.store';
+import { IBookInCart } from '../../../stores/childrens/Carts.store';
+import { IBooksInBill } from '../../../APIs/bill.api';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+// import { IBookInCart } from '../../../stores/childrens/Carts.store';
 
 
 const phoneRegExp = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
@@ -14,33 +21,78 @@ const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required('ho vầ tên không được để trống'),
     phone: Yup.string()
-        .matches(phoneRegExp, "Số điện thoại không hợp lệ")
+        // .matches(phoneRegExp, "Số điện thoại không hợp lệ")
         .required("Số điện thoại không được để trống"),
-    city: Yup.string()
-        .required("Tỉnh thành không được để trống"),
+    // city: Yup.string()
+    //     .required("Tỉnh thành không được để trống"),
     address: Yup.string()
         .required("Địa chỉ không được để trống"),
     note: Yup.string()
 });
 
+// const a = () =>{
+//   if(dataFromLocalStorage){
+//     return JSON.parse(dataFromLocalStorage)
+//   }
+//   else
+//   return undefined
+// }
+// console.log(a().name);
 
-const PayForm= () => {
-
+const PayForm= observer(() => {
+  const dataFromLocalStorage  = localStorage.getItem("adress")
+  const store = useStore()
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name:  '',
       phone: '',
-      city: '',
       address: '',
       note: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      // Xử lý khi form được gửi
-      console.log('Form data submitted:', values);
+    onSubmit: async (values) => {
+      localStorage.setItem('adress', JSON.stringify(values));
+      const data = await store.CartStore?.getCurrentCart
+      // const data:IBooksInBill[] = books?.listBook!
+      const newData = data?.listBook.map((book)=>{
+        return{
+          bookId: book.bookId,
+          quantity: book.quantity,
+          discount: book.bookId.discount!,
+          price: book.bookId.price!,
+        }
+      })
+      const convertData = {
+        books: newData
+      }         
+      const dataBill = {...values, ...convertData}
+      await store.billStore?.setCurrentBill(dataBill)
+      navigate(`/confirmBill/`)
     },
   });
 
+
+  const fetchData = () => {
+      if(dataFromLocalStorage){
+        const dataAdress = JSON.parse(dataFromLocalStorage)
+        formik.setValues({
+          name:  dataAdress.name,
+          phone: dataAdress.phone ,
+          address: dataAdress.address ,
+          note: dataAdress.note ,
+        })
+      }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [dataFromLocalStorage]);
+  
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+    formik.handleSubmit(e);
+  };
 
   return (
     <div>
@@ -48,7 +100,6 @@ const PayForm= () => {
         <img width="252" height="33" src="https://www.vinabook.com/images/thumbnails/img/252/33/vnb_logo_2x.png"/>
     </div>
     <div className={styles.leftBox}>
-      
       <form onSubmit={formik.handleSubmit} >
         <div>   
           <label className={styles.inputName}>Họ và tên:</label>     
@@ -114,33 +165,34 @@ const PayForm= () => {
             placeholder="ghi chú giao hàng"
             fullWidth
           />
-          <div>
-          
-        </div>
       </form>
     </div>
-    <div className={styles.boxBtnLeft}>
-      <Button
-          fullWidth
-          variant="contained"
-          className={styles.buttonBack}
-      >
-          Quay lại
-      </Button>
-    </div>
+        <div className={styles.boxBtnLeft}>
+          <Link to='/checkout'>
+            <Button
+                fullWidth
+                variant="contained"
+                className={styles.buttonBack}
+            >
+                Quay lại
+            </Button>
+          </Link>
+        </div>
 
-    <div className={styles.boxBtnRight}>
-      <Button
-          fullWidth
-          variant="contained"
-          className={styles.buttonPay}
-      >
-          Thanh toán
-      </Button>
-    </div>
-    </div>
+        <div className={styles.boxBtnRight}>
+        
+          <Button
+              fullWidth
+              variant="contained"
+              className={styles.buttonPay}
+              onClick={handleFormSubmit}
+          >
+            Thanh toán
+          </Button>
+        </div>
+    </div>  
   );
-};
+});
   
 export default PayForm
 

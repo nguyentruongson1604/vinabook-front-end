@@ -1,0 +1,66 @@
+.miniCartItem{
+    width: 100px;
+}
+
+.miniCartItem td{
+    padding: 10px 0;
+    vertical-align: top;
+}
+.productImage img{
+    border: 1px solid #8c8c8c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    width: 40px;
+    box-sizing: content-box;
+}
+.titleBox{
+    padding-left: 10px !important
+}
+.title{
+    color: #000;
+    text-decoration: none;
+    display: block;
+    padding: 0 6px;
+}
+
+.miniCartItem p{
+    padding: 6px;
+}
+
+.price{
+    color: #ca2027;
+    font-weight: bold;
+}
+
+.miniCartItemDelete{
+    padding: 8px 0;
+    width: 45px;
+    height: 35px;
+}
+
+.remove{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #0b703d;
+    color: #fff;
+    background-color: #0b703d;
+    font-size: 26px;
+    padding: 5px;
+    position: relative;
+    top: -8px;
+    cursor: pointer;
+    border: none;
+    font-size: 13px;
+    box-sizing: border-box !important;
+    margin-top: 20px;
+    margin-left: -15px;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+}
+
+.miniCartItem:hover .remove{
+    opacity: 1;
+    transition-delay: 0s;
+}

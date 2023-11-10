@@ -46,6 +46,7 @@ const FormLogin= observer(() => {
             store.userAccess?.setUserAccess(data.res.data)
             store.CartStore?.setAccessToken(data.res.accessToken)
             navigate('/')
+            
           }
           else{
             setErrorMessage(data.res.message)

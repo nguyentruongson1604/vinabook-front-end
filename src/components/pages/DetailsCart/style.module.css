@@ -85,3 +85,10 @@
     padding: 13px !important;
     font-weight: bold;
 }
+/* styles.css hoặc tương tự */
+.linkDisabled {
+    color: gray;
+    pointer-events: none;
+    cursor: not-allowed;
+    display: none;
+}

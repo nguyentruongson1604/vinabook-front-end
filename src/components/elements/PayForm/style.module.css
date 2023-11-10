@@ -11,8 +11,8 @@
     margin-bottom: 14px;
 }
 .buttonBack{
-    width: 135px !important;
-    height: 40px !important;
+    width: 255px !important;
+    height: 49px !important;
     box-sizing: border-box !important;
     padding: 0 !important;
     background-color: #2ba40d !important;
@@ -20,8 +20,8 @@
     float: right;
 }
 .buttonPay{
-    width: 135px !important;
-    height: 40px !important;
+    width: 255px !important;
+    height: 49px !important;
     box-sizing: border-box !important;
     padding: 0 !important;
     background-color: #FDC92D !important;
