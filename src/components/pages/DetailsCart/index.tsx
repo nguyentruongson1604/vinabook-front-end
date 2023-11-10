@@ -50,9 +50,16 @@ const DetailsCart = observer(() => {
                 </div>
                 <div className="clearfix"></div>
                 <div className={style.payment}>
-                    {/* <a href="#" className={style.btnPay}>Thanh toán</a> */}
-                    <Link to='/adressbill' className={style.btnPay}>Thanh toán</Link>
-                    <a href="#" className={style.btnBack}>Quay lại</a>
+                    {cartItems?.length == 0 ? (
+                        <Link to='/adressbill' className={`${style.btnPay} ${style.linkDisabled}`}  >
+                            Thanh toán
+                        </Link>
+                    ) : (
+                        <Link to='/adressbill' className={style.btnPay}>
+                            Thanh toán
+                        </Link>
+                    )}
+                    <Link to='/' className={style.btnBack}>Quay lại</Link>
                 </div>
             </div>
         </div>

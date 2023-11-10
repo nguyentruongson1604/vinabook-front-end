@@ -20,9 +20,7 @@ const BillForm = observer(() =>{
   console.log('billid',billID);
   
   const currentBill = async () => {  
-    console.log('a');
     Promise.all([await store.billStore?.getCurrentBill(billID!)])    
-    console.log(store.billStore?.currenBill);
   }
   useEffect(()=>{
     console.log('abc');
