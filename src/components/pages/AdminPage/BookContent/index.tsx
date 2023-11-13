@@ -20,36 +20,31 @@ import {
   GridRowModel,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
-import {
-  randomId,
-} from '@mui/x-data-grid-generator';
+
 import { observer } from 'mobx-react';
 import { useStore } from '../../../../stores/RootStore.store';
-import { updateABook } from '../../../../APIs/book.api';
+import { IBook, createNewBook, deleteBook, updateABook, uploadImageBook } from '../../../../APIs/book.api';
 import AlertDialog from '../../../elements/AlertDialog';
+import FormAddBookDialog from '../../../elements/FormAddBook';
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
+  handleClick: () => void
+}
+
+export interface Options {
+  value?: string,
+  label?: string
 }
 
 function EditToolbar(props: EditToolbarProps) {
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-    }));
-  };
-
+  const {handleClick} = props;
   return (
     <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+      <Button color="primary" startIcon={<AddIcon />} onClick={()=>{handleClick()}}>
         Add record
       </Button>
     </GridToolbarContainer>
@@ -58,19 +53,20 @@ function EditToolbar(props: EditToolbarProps) {
 
 const BookContent = observer(() => {
   const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false)
   const [deleteItem, setDeleteItem] = useState<GridRowId>()
   const [loading, setLoading] = useState(true);
-  const [initAuthorsOptions, setInitAuthorsOptions] = useState<any>([]);
-  const [initCategoriesOptions, setInitCategoriesOptions] = useState<any>([]);
-  const [initPublishersOptions, setInitPublishersOptions] = useState<any>([]);
+  const [initAuthorsOptions, setInitAuthorsOptions] = useState<Options[]>([]);
+  const [initCategoriesOptions, setInitCategoriesOptions] = useState<Options[]>([]);
+  const [initPublishersOptions, setInitPublishersOptions] = useState<Options[]>([]);
+
   const store = useStore();
   let initialRows: GridRowsProp = [];
 
-  const fetchBooks = async () => {
+  const fetchOptions = async () => {
     setLoading(true);
     try {
       await Promise.all([
-        store.BooksStore?.getAllBooksAPI({}),
         store.AuthorStore?.getAllAuthorsAPI(),
         store.CategoryStore?.getAllCategorysAPI(),
         store.PublisherStore?.getAllPublishersAPI(),
@@ -79,23 +75,11 @@ const BookContent = observer(() => {
       console.log(error)
     }
     finally{
-      setLoading(false);
-      store.BooksStore?.getBooks?.map((book)=>{
-        const init = {
-          id: book._id,
-          name: book.name,
-          category: book.category._id,
-          author: book.author._id,
-          publisher: book.publisher._id
-        }
-        initialRows = [...initialRows, init]
-      })
       const initAuthorsOptions = store.AuthorStore?.getAllAuthors?.map((author)=>{
         const authorOptions = {
           value: author._id,
           label: author.name
         }
-        // console.log('**', authorOptions)
         return authorOptions
       })
       const initCategoriesOptions = store.CategoryStore?.getAllCategories?.map((category)=>{
@@ -112,17 +96,60 @@ const BookContent = observer(() => {
         }
         return authorOptions
       })
-      setInitAuthorsOptions(initAuthorsOptions)
-      setInitCategoriesOptions(initCategoriesOptions)
-      setInitPublishersOptions(initPublishersOptions)
+      setInitAuthorsOptions(initAuthorsOptions!)
+      setInitCategoriesOptions(initCategoriesOptions!)
+      setInitPublishersOptions(initPublishersOptions!)
+      setLoading(false);
+    }
+  }
+
+  const fetchBooks = async () => {
+    setLoading(true);
+    try {
+      await Promise.all([
+        store.BooksStore?.getAllBooksAPI({}),
+      ])
+    } catch (error) {
+      console.log(error)
+    }
+    finally{
+      store.BooksStore?.getBooks?.map((book)=>{
+        const init = {
+          id: book._id,
+          name: book.name,
+          quantity: book.quantity,
+          category: book.category._id,
+          author: book.author._id,
+          publisher: book.publisher._id
+        }
+        initialRows = [...initialRows, init]
+      })
       setRows(initialRows)
+      setLoading(false);
       // console.log(initAuthorsOptions)
     }
   }
 
+  const handleAddBook = async (book: IBook, image: File) => {
+    try {
+      const newBook = await createNewBook(book)
+      const id = newBook?.data.data._id
+      Promise.all([await uploadImageBook(id, image!)])
+      fetchBooks()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(()=>{
+    fetchOptions()
     fetchBooks()
   }, [])
+
+  const handleClick = () => {
+    setOpenAddDialog(true);
+  }
+
   const [rows, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
 
@@ -141,8 +168,9 @@ const BookContent = observer(() => {
     // console.log(id)
   };
 
-  const handleDeleteClick = (id: GridRowId) => () => {
+  const handleDeleteClick = (id: GridRowId) => async () => {
     setRows(rows.filter((row) => row.id !== id));
+    Promise.all([await deleteBook(id.toString())])
     setOpenDialog(false)
   };
 
@@ -171,6 +199,14 @@ const BookContent = observer(() => {
 
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Name', width: 180, editable: true },
+    {
+      field: 'quantity', 
+      headerName: 'Quantity', 
+      width: 180, editable: true , 
+      type: 'number', 
+      align: 'left',
+      headerAlign: 'left',
+    },
     {
       field: 'category',
       headerName: 'Category',
@@ -273,7 +309,7 @@ const BookContent = observer(() => {
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel },
+          toolbar: { setRows, setRowModesModel, handleClick },
         }}
         initialState={{
           pagination: {paginationModel: {pageSize: 5}}
@@ -284,7 +320,13 @@ const BookContent = observer(() => {
       {openDialog && 
       <div onClick={()=>(setOpenDialog(false))}>
         <AlertDialog isOpen={true} handleAccept={handleDeleteClick(deleteItem!)} handleCancle={()=>(setOpenDialog(false))}/>  
-      </div>}s
+      </div>}
+      {openAddDialog &&
+      <FormAddBookDialog handleClose={()=>{setOpenAddDialog(false)}}
+      handleSubmit={handleAddBook}
+      authors={initAuthorsOptions}
+      publishers={initPublishersOptions}
+      categories={initCategoriesOptions}/>}
     </Box>
   );
 })

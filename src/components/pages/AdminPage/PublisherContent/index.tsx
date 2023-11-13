@@ -78,6 +78,7 @@ const PublishserContent = observer(() => {
   const handleSubmit = async (inputVal: IPublisher) => {
     Promise.all([await newPublisher(inputVal)])
     store.PublisherStore?.addNewPublisher(inputVal);
+    fetchPublishers()
   }
 
   const handleClick = () => {
@@ -86,7 +87,7 @@ const PublishserContent = observer(() => {
 
   useEffect(()=>{
     fetchPublishers()
-  }, [store.PublisherStore?.getAllPublishers])
+  }, [])
 
   const [rows, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});

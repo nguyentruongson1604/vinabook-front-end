@@ -41,7 +41,7 @@ class CategoryStore {
     }
 
     addNewCategory(category: ICategory){
-        this.listCategories = [...this.listCategories!, category]
+        this.listCategories = [category, ...this.listCategories! ]
     }
 
     get getCategoriesAndRelation(){

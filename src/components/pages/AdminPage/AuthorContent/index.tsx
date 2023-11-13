@@ -25,7 +25,7 @@ import { useStore } from '../../../../stores/RootStore.store';
 import { observer } from 'mobx-react';
 import { IAuthor } from '../../../../stores/childrens/Authors.store';
 import { useEffect, useState } from 'react';
-import { deleteAAuthor, updateAuthor } from '../../../../APIs/author.api';
+import { createNewAuthor, deleteAAuthor, updateAuthor } from '../../../../APIs/author.api';
 import AlertDialog from '../../../elements/AlertDialog';
 import FormAuthorDialog from '../../../elements/FormAuthorDialog';
 
@@ -78,9 +78,15 @@ const AuthorContent = observer(()=>{
       setRows(initialRows)
     }
   }
+
+  const handleAddAuthor = async (author: IAuthor) => {
+    Promise.all([await createNewAuthor(author)])
+    fetchAuthors()
+  }
+
   useEffect(()=>{
       fetchAuthors()
-  }, [store.AuthorStore?.getAllAuthors])
+  }, [])
   
   const [rows, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
@@ -233,7 +239,7 @@ const AuthorContent = observer(()=>{
         <AlertDialog isOpen={true} handleAccept={handleDeleteClick(deleteItem!)} handleCancle={()=>(setOpenDialog(false))}/>  
       </div>}
       {openAddDialog && 
-      <FormAuthorDialog handleClose={()=>{setAddOpenDialog(false)}}/> }
+      <FormAuthorDialog handleClose={()=>{setAddOpenDialog(false)}} handleSubmit={handleAddAuthor}/> }
     </Box>
   );
 })
