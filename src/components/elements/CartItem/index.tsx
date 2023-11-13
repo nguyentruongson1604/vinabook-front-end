@@ -7,7 +7,6 @@ import { useStore } from '../../../stores/RootStore.store';
 
 const CartItem = ({cartItem}: {cartItem: IBookInCart}) => {
     const store = useStore()
-
     const newPrice = cartItem.bookId.price! - cartItem.bookId.price! * cartItem.bookId.discount! / 100;
     const [quantity, setQuantity] = useState<number>(cartItem.quantity)
 
@@ -36,8 +35,10 @@ const CartItem = ({cartItem}: {cartItem: IBookInCart}) => {
                     }}>-</button>
                     <input type="number" name="amount" value={quantity} onChange={()=>{}}/>
                     <button type="button" onClick={()=>{
-                        setQuantity(quantity + 1)
-                        store.CartStore?.addBookToCart(cartItem)
+                        if(quantity < cartItem.bookId.quantity!){
+                            setQuantity(quantity + 1)
+                            store.CartStore?.addBookToCart(cartItem)
+                        }
                     }}>+</button>
                 </div>
             </td>

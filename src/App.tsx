@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';
@@ -66,8 +67,6 @@ function App() {
           <Route path='/confirmBill' element={<CofirmBillPage/>} />
           <Route path='/noticeSuccess/:billId' element={<SuccessNotice/>} />
           <Route path='/listBill' element={<ListBillPage/>} />
-
-
         </Routes>
         <Footer/>
       </AppContextProvider>

@@ -30,16 +30,24 @@ const DetailsCart = observer(() => {
                         <div className={style.boxListCart}>
                             <form action="" method='POST'>
                                 <table>
-                                    <thead>
-                                        <tr><th colSpan={3}>SẢN PHẨM</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            cartItems && cartItems.map((cartItem: IBookInCart)=>{
-                                                return <CartItem key={cartItem.bookId._id} cartItem={cartItem} />
-                                            })
-                                        }
-                                    </tbody>
+                                    {
+                                        cartItems?.length! > 0 ? 
+                                        <>
+                                        <thead>
+                                            <tr><th colSpan={3}>SẢN PHẨM</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                cartItems && cartItems.map((cartItem: IBookInCart)=>{
+                                                    console.log(cartItem)
+                                                    return <CartItem key={cartItem.bookId._id} cartItem={cartItem} />
+                                                })
+                                            }
+                                        </tbody>
+                                        </> : <tbody>
+                                        <tr><th><div style={{fontSize: 40, textAlign:'center', color: '#d7dae4'}}>Không có sản phẩm</div></th></tr>
+                                        </tbody>
+                                    }
                                 </table>
                             </form>
                         </div>
@@ -50,7 +58,7 @@ const DetailsCart = observer(() => {
                 </div>
                 <div className="clearfix"></div>
                 <div className={style.payment}>
-                    {cartItems?.length == 0 ? (
+                    {cartItems?.length === 0 ? (
                         <Link to='/adressbill' className={`${style.btnPay} ${style.linkDisabled}`}  >
                             Thanh toán
                         </Link>

@@ -8,6 +8,7 @@ export interface IBookCart {
     imageUrl: string,
     price?: number,
     discount?: number
+    quantity?: number
 }
 
 export interface IBookInCart {
