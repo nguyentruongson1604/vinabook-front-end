@@ -65,7 +65,7 @@ class BooksStore {
         // console.log( 'page',page)
         this.page = page
     }
-
+    
     get getListBookCategory(){
         return this.listBookCategory
     }

@@ -79,11 +79,12 @@ const CategoryContent = observer(() => {
   const handleSubmit = async (inputVal: ICategory) => {
     Promise.all([await newCategory(inputVal)])
     store.CategoryStore?.addNewCategory(inputVal)
+    fetchCategories();
   }
 
   useEffect(()=>{
     fetchCategories()
-  }, [store.CategoryStore?.getAllCategories])
+  }, [])
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;

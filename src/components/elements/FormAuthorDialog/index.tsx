@@ -1,24 +1,20 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { createNewAuthor } from "../../../APIs/author.api";
 import { observer } from "mobx-react";
-import { useStore } from "../../../stores/RootStore.store";
 import { IAuthor } from "../../../stores/childrens/Authors.store";
 
-const FormAuthorDialog = observer(( {handleClose}: {handleClose: ()=> void} ) => {
-    const store = useStore();
+const FormAuthorDialog = observer(( {handleClose, handleSubmit}: {handleClose: ()=> void, handleSubmit: (author: IAuthor) => void}) => {
     const [authorName, setAuthorName] = useState<string>('');
     const [authorInfo, setAuthorInfo] = useState<string>('');
     const [isDisabled, setDisabled] = useState<boolean>(false);
 
-    const handleSubmit = async () => {
+    const handleAddAuthor = async () => {
         const author = {
             name: authorName,
             info: authorInfo
         } as IAuthor
         if(authorName && authorInfo){
-            Promise.all([await createNewAuthor(author)])
-            store.AuthorStore?.addAuthor(author);
+            handleSubmit(author)
             handleClose()
         }
     }
@@ -76,7 +72,7 @@ const FormAuthorDialog = observer(( {handleClose}: {handleClose: ()=> void} ) =>
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={()=>{handleClose()}} color="error">Cancel</Button>
-                <Button onClick={handleSubmit} disabled={isDisabled}>Add</Button>
+                <Button onClick={handleAddAuthor} disabled={isDisabled}>Add</Button>
                 </DialogActions>
             </Dialog>
         </div>

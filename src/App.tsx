@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import AuthorPage from './components/pages/AuthorPage';
 import CategoryPage from './components/pages/CategoryPage';

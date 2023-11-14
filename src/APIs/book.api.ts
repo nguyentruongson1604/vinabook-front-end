@@ -1,7 +1,7 @@
 import { axiosInstanceOptions, createAxiosInstance } from "../instances/instance"
 import { IFilter } from "../stores/childrens/Books.store"
 
-interface IBook{
+export interface IBook{
     name?: string,
     description?: string,
     page?: number,
@@ -135,6 +135,9 @@ export async function getBookByPublisher(publisherId: string, filter: IFilter) {
 
 export async function getBooksByCategory(categoryId: string, filter: IFilter) {
     try {
+        if(!filter.limit){
+            filter.limit = 6
+        }
         const options: axiosInstanceOptions = {
             baseURL: `/api/v1/book/category/${categoryId}?limit=${filter.limit}&page=${filter.page}`
         }
