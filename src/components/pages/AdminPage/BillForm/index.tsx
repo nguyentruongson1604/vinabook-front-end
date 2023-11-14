@@ -23,8 +23,6 @@ const BillForm = observer(() =>{
     Promise.all([await store.billStore?.getCurrentBill(billID!)])    
   }
   useEffect(()=>{
-    console.log('abc');
-    
     currentBill()
   }, [])
   

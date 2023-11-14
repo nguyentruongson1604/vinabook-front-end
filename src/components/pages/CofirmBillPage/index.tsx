@@ -56,8 +56,10 @@ const CofirmBillPage: React.FC<{className?: string }> = ({className }) => {
                                 Quay lại
                             </Button>
                     </div>
-
-                    <div className={styles.boxBtnRight}>
+                    {store.CartStore?.getCurrentCart.listBook?.length == 0 ? (
+                        <div></div>
+                    ) : (
+                        <div className={styles.boxBtnRight}>
                         <Button
                             fullWidth
                             variant="contained"
@@ -67,6 +69,7 @@ const CofirmBillPage: React.FC<{className?: string }> = ({className }) => {
                             Đặt hàng
                         </Button>
                     </div>
+                    )}
                 </div>
                 </div>
             <div className="clearfix"></div>

@@ -36,7 +36,8 @@ class UserManagement {
     }
     deleteOtherUser = async (_id: string) => {
         try {
-            await deleteOtherUser(_id);
+            const res = await deleteOtherUser(_id);
+            if(res.data.status = "success")
             this.usersManagemant = this.usersManagemant.filter((userManagemant) => userManagemant._id !== _id);
         } catch (error) {
             console.log(error);
