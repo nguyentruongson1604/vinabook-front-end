@@ -48,12 +48,14 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}/>
           <Route element={<UserRouter/>} >
             <Route path='/info' element={<InfoUserPage/>}/>
+            <Route path='/adressbill' element={<PayAdressPage/>}/>
+            <Route path='/confirmBill' element={<CofirmBillPage/>} />
+            <Route path='/listBill' element={<ListBillPage/>} />
           </Route>
           <Route path='/checkout' element={<DetailsCart/>}/>
           <Route path='/author' element={<AuthorPage/>}/>
           <Route path='/category' element={<CategoryPage/>}/>
           <Route path='/details' element={<DetailsPage/>}/>
-          <Route path='/adressbill' element={<PayAdressPage/>}/>
           <Route element={<AdminRouter />} >
             < Route path='/admin/*' element={<AdminPage />}/>
           </Route>
@@ -62,10 +64,7 @@ function App() {
           <Route path='/publisher/:publisherId' element={<CategoryPage/>}/>
           <Route path='/search?' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
-          <Route path='/pay' element={<RegisterBox/>}/>
-          <Route path='/confirmBill' element={<CofirmBillPage/>} />
           <Route path='/noticeSuccess/:billId' element={<SuccessNotice/>} />
-          <Route path='/listBill' element={<ListBillPage/>} />
 
 
         </Routes>

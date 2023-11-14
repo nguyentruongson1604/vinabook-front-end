@@ -55,6 +55,15 @@ export async function getCurrentBill(_id: string) {
         return res
 }
 
+export async function getCurrentBillUser(_id: string) {
+    const options: axiosInstanceOptions = {
+        baseURL: `/api/bill/getCurrentBillUser/${_id}`
+    }
+    const instance = createAxiosInstance(options)
+    const res = await instance.get('/')
+    return res
+}
+
 export async function updateStatusBill(_id: string, data: IBill) {
         const options: axiosInstanceOptions = {
             baseURL: `/api/bill/updateStatusBill/${_id}`
@@ -64,11 +73,20 @@ export async function updateStatusBill(_id: string, data: IBill) {
         return res
 }
 
-export async function deleteBill(_id: string) {
+export async function deleteBill(_id: string) {    
         const options: axiosInstanceOptions = {
             baseURL: `/api/bill/deleteBill/${_id}`
         }
         const instance = createAxiosInstance(options)
         const res = await instance.delete('/')
         return res
+}
+
+export async function deleteUserBill(_id: string) {    
+    const options: axiosInstanceOptions = {
+        baseURL: `/api/bill/deleteUserBill/${_id}`
+    }
+    const instance = createAxiosInstance(options)
+    const res = await instance.delete('/')
+    return res
 }

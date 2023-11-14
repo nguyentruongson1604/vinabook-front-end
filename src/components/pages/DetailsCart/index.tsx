@@ -51,9 +51,7 @@ const DetailsCart = observer(() => {
                 <div className="clearfix"></div>
                 <div className={style.payment}>
                     {cartItems?.length == 0 ? (
-                        <Link to='/adressbill' className={`${style.btnPay} ${style.linkDisabled}`}  >
-                            Thanh toán
-                        </Link>
+                        <div></div>
                     ) : (
                         <Link to='/adressbill' className={style.btnPay}>
                             Thanh toán

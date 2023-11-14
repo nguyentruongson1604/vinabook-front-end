@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { IBill, createUserBill, deleteBill, getAllBillAdmin, getAllBillUser, getCurrentBill, updateStatusBill } from "../../APIs/bill.api";
+import { IBill, createUserBill, deleteBill, deleteUserBill, getAllBillAdmin, getAllBillUser, getCurrentBill, getCurrentBillUser, updateStatusBill } from "../../APIs/bill.api";
 import { TRootStore } from "../RootStore.store";
 
 class Bill{
@@ -26,6 +26,25 @@ class Bill{
             this.setCurrentBill(bill)
             const bills: IBill[] = [bill]
             this.setBills(bills)
+        }
+        catch(error: any) {
+            this.setBills([])
+            console.log(error.response.data);
+        }
+
+    }
+    getCurrentBillUser = async (_id: string) => {
+        try{
+            const res = await getCurrentBillUser(_id)            
+            if(res.data.status === "success"){
+                const bill = res?.data.data;        
+                this.setCurrentBill(bill)
+                const bills: IBill[] = [bill]
+                this.setBills(bills)
+            }
+            else{
+                this.setBills([])
+            }
         }
         catch(error: any) {
             this.setBills([])
@@ -105,8 +124,19 @@ class Bill{
     };
     deleteBill = async (_id: string) => {
         try {
-            const response = await deleteBill( _id);
+            const response = await deleteBill(_id);
+            if(response.data.status == "success")
             this.bills = this.bills.filter((bill) => bill._id !== _id);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    deleteUserBill = async (_id: string) => {
+        try {
+            const response = await deleteUserBill(_id);
+            if(response.data.status == "success")
+                this.bills = this.bills.filter((bill) => bill._id !== _id);
+            return response
         } catch (error) {
             console.log(error);
         }

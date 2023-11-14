@@ -25,7 +25,7 @@ const NavSubMenu = observer(() => {
                 const publishers = item.publishers;
 
                 return(
-                    <li key={item._id} onMouseOver={() =>{ setOpen(true); setItemOpen(item._id)}} onMouseLeave={() =>setOpen(true)} className={styles.navSubMenuTitle}>
+                    <li key={item._id} onMouseOver={() =>{ setOpen(true); setItemOpen(item._id)}} onMouseLeave={() =>setOpen(false)} className={styles.navSubMenuTitle}>
                         <a href="" onClick={()=>{navigate(`/category/${item._id}`)}}>
                             {item.name}
                         </a>
