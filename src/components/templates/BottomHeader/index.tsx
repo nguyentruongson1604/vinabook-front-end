@@ -13,7 +13,6 @@ const BottomHeader = observer(() => {
         // console.log(accessToken)
         if(accessToken){
           await store.CartStore?.getCart()
-          
         }
         else{
           // console.log('here')

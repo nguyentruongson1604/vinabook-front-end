@@ -71,7 +71,6 @@ function App() {
         <Footer/>
       </AppContextProvider>
     </BrowserRouter>
-    
     </>
   )
 }

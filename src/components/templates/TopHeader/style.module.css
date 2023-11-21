@@ -3,3 +3,8 @@
     background-color: #f3f3f3;
     float: left;
 }
+@media only screen and (max-width: 480px) {
+    .topHeader {
+        display: none;
+    }
+}
