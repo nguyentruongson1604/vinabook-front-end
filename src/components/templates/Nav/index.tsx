@@ -36,7 +36,7 @@ const Nav: React.FC<{ appear?: boolean}> = observer(({appear}) =>{
           </div>
       </div>
       {openMenu &&
-        <div className={styles.nav}>
+        <div className={styles.nav + " " + styles.none2}>
         <div className="container">
             <ul className={styles.navMenu}>
                 <li onMouseOver={() =>setOpen(true)} onMouseLeave={() =>setOpen(false)} className={styles.navBar}>
