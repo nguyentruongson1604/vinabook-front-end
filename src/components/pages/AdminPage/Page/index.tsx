@@ -32,9 +32,7 @@ const AdminPage: React.FC<{className?: string }> = observer(({className }) => {
                     <Route path='/checkout' element={<CheckoutContent/>}/>
                     <Route path='/bill' element={<BillContent/>}/>
                     <Route path='/bill/*' element={<BillForm/>}/>
-                    {/* <Route path='/bill/:billId' element={<BookContent/>}/> */}
                     <Route path='/book' element={<BookContent/>}/>
-                    {/* <Route path='/cart' element={<CartContent/>}/> */}
                 </Routes>
                 </div>
             </div>

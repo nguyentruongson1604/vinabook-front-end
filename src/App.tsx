@@ -26,7 +26,6 @@ import Slider1 from './components/pages/test';
 import BoxInfoBook from './components/collections/BoxInfoBook/Index';
 
 function App() {  
-  const images = ["https://kenh14cdn.com/2020/4/30/902457161437121738069051937911925677490176n-15882080571301544789257.jpg","https://kenh14cdn.com/2020/4/30/902457161437121738069051937911925677490176n-15882080571301544789257.jpg", "https://kenh14cdn.com/2020/4/30/902457161437121738069051937911925677490176n-15882080571301544789257.jpg","https://kenh14cdn.com/2020/4/30/902457161437121738069051937911925677490176n-15882080571301544789257.jpg","https://kenh14cdn.com/2020/4/30/902457161437121738069051937911925677490176n-15882080571301544789257.jpg"];
   const store = useStore()
   const [loading, setLoading] = useState(true);
   const checkCurrentUser = async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
@@ -70,8 +69,6 @@ function App() {
           <Route path='/search?' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/noticeSuccess/:billId' element={<SuccessNotice/>} />
-          <Route path='/abc/' element={<BoxInfoBook/>} />
-
 
         </Routes>
         <Footer/>

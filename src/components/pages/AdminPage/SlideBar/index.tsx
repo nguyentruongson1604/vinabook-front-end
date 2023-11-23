@@ -67,7 +67,7 @@ export default function SlideBar() {
           </ListItem>
           </NavLink>
 
-        <NavLink to='checkout' className={styles.navLink}>
+        {/* <NavLink to='checkout' className={styles.navLink}>
           <ListItem disablePadding className={styles.listItem}>
             <ListItemButton>
               <ListItemIcon>
@@ -76,7 +76,7 @@ export default function SlideBar() {
               <ListItemText primary="Cart" />
             </ListItemButton>
           </ListItem>
-        </NavLink>
+        </NavLink> */}
 
         <NavLink to='category' className={styles.navLink}>
           <ListItem disablePadding className={styles.listItem}>
