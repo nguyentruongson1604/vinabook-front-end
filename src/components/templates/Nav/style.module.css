@@ -16,10 +16,9 @@
 
 .nav {
     width: 100%;
-    background-color: #fff;
+    background-color: #057A45;
     min-height: 43px;
     margin-bottom: 15px;
-    overflow-y: scroll;
 }
 
 .navMenu {
@@ -48,10 +47,15 @@
     text-decoration: none;
     color: #fff;
 }
-
+.none2{
+    display: none;
+}
 @media only screen and (max-width: 480px) {
     .none{
         display: none;
+    }
+    .none2{
+        display: block;
     }
     .iconMenu{
         display: none;
@@ -68,6 +72,8 @@
         position: fixed;
         z-index: 99;
         height: 100%;
-        top: 90px;
+        top: 87px;
+        overflow-y: scroll;
+        background-color: #fff;
     }
 }
