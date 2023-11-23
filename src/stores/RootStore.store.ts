@@ -6,7 +6,6 @@ import PublisherStore from "./childrens/Publishers.store"
 import CartStore from "./childrens/Carts.store"
 import UserAccess from "./childrens/UserAccess.store"
 import UserManagement from "./childrens/UserManagement.store"
-import { makeObservable, observable } from "mobx"
 import Bill from "./childrens/Bill.store"
 
 class RootStore {

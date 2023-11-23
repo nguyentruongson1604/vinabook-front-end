@@ -45,7 +45,7 @@ const HomePage: React.FC<{className?: string }> = observer(({className }) => {
             <Banner/>
             <div className="container">
                 <HomeLeft className={styles.homeLeft}/>
-                <HomeRight className={styles.homeRight}/>
+                {/* <HomeRight className={styles.homeRight}/> */}
             </div>
             <div className="clearfix"></div>
         </div>

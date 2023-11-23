@@ -39,7 +39,6 @@ const DetailsCart = observer(() => {
                                         <tbody>
                                             {
                                                 cartItems && cartItems.map((cartItem: IBookInCart)=>{
-                                                    console.log(cartItem)
                                                     return <CartItem key={cartItem.bookId._id} cartItem={cartItem} />
                                                 })
                                             }
