@@ -150,6 +150,7 @@ class CartStore {
     async getCart(){
         try {
             const cart = await getCart()
+            console.log('cart', cart)
             const userCart: ICart = {
                 _id: cart?.data.data.owner,
                 listBook: [...cart?.data.data.listBook]

@@ -24,3 +24,9 @@
     float: right;
     width: 80%;
 }
+
+@media only screen and (max-width: 480px) {
+    .smallBannerBottom{
+        display: none;
+    }
+}

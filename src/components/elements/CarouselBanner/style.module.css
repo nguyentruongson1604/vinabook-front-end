@@ -1,0 +1,10 @@
+.carouselBanner{
+    display: none;
+}
+
+@media only screen and (max-width: 480px) {
+    .carouselBanner{
+        display: block;
+        margin-top: 10px;
+    }
+}

@@ -53,3 +53,22 @@
     color: #ffffff;
     font-size: 16px;
 }
+
+@media only screen and (max-width: 480px) {
+    .formWrapper {
+        width: 100%;
+        padding: 0 10px;
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        margin-top: 10px;
+    }
+
+    .searchIcon {
+        padding-left: 10px;
+    }
+
+    .inputGroup button{
+        margin-right: 7px;
+    }
+}

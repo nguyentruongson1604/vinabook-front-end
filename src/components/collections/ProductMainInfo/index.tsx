@@ -15,7 +15,8 @@ const ProductMainInfo = observer(({book} : {book: IBook | undefined}) => {
             name: book?.name!,
             imageUrl: book?.imageUrl!,
             price: book?.price,
-            discount: book?.discount
+            discount: book?.discount,
+            quantity: book?.quantity
         }
         store.CartStore?.addBookToCart({bookId: bookCart, quantity: 1})
     }
