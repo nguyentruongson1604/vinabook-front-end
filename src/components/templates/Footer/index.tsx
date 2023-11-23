@@ -1,11 +1,17 @@
 import CopyrightFooter from '../../collections/CopyrightFooter'
 import FooterBody from '../../collections/FooterBody'
+import ResponsiveFooter from '../../collections/ResponsiveFooter'
 import SocialFooter from '../../collections/SocialFooter'
 import styles from './style.module.css'
 
 const Footer = () => {
     return(
         <div>
+            <div className={styles.responsiveFooter}>
+                <div className="container">
+                    <ResponsiveFooter />
+                </div>
+            </div>
             <div className={styles.socialFooter}>
                 <div className="container">
                     <SocialFooter />

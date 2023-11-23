@@ -21,6 +21,9 @@ import CofirmBillPage from './components/pages/CofirmBillPage';
 import { AdminRouter, UserRouter } from './Auths/PrivateRouter';
 import SuccessNotice from './components/elements/SuccessNotice';
 import ListBillPage from './components/pages/ListBillPage';
+import Slider from './components/pages/test';
+import Slider1 from './components/pages/test';
+import BoxInfoBook from './components/collections/BoxInfoBook/Index';
 
 function App() {  
   const store = useStore()
@@ -66,7 +69,6 @@ function App() {
           <Route path='/search?' element={<CategoryPage/>}/>
           <Route path='/details/:bookId' element={<DetailsPage/>}/>
           <Route path='/noticeSuccess/:billId' element={<SuccessNotice/>} />
-
 
         </Routes>
         <Footer/>

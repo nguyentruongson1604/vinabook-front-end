@@ -11,11 +11,11 @@ const LeftFooterContent = () => {
                     </span>
                     <ul>
                         <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Báo chí</a></li>
+                        <li><a href="#">Chương trình đại lý</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,12 +25,12 @@ const LeftFooterContent = () => {
                     Trợ giúp
                     </span>
                     <ul>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
+                        <li><a href="#">Quy trình sử dụng</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Phương thức vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Ứng dụng đọc</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,12 +40,10 @@ const LeftFooterContent = () => {
                     Tin tức sách
                     </span>
                     <ul>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
-                        <li><a href="#">Giới thiệu công ty</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Chân dung</a></li>
+                        <li><a href="#">Điểm sách</a></li>
+                        <li><a href="#">Phê bình</a></li>
                     </ul>
                 </div>
             </div>

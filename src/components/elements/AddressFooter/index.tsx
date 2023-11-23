@@ -1,8 +1,10 @@
 import styles from './style.module.css'
+import logo from '../../images/logo_vnb1_2x.png'
 
 const AddressFooter = () => {
     return(
         <div className={styles.addressCompany}>
+            <div className={styles.logoImg}><img src={logo} alt="" /></div>
             <p className={styles.nameCompany}>
             CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ MÊ KÔNG COM
             </p>

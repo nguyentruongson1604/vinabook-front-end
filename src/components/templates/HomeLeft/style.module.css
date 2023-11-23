@@ -3,11 +3,52 @@
     width: 100%;
 }
 .span4{
-    width: 31.914893617021278%;
+    /* width: 31.914893617021278%; */
+    width: 33.33%;
     display: inline-block;
-    margin-bottom: 30px;
-    margin-left: 18px;
+    padding-bottom: 30px;
+    padding-left: 18px;
 }
 .boxInforWrapper [class*="span4"]:nth-child(3n+1){
-    margin-left: 0;
+    padding-left: 0;
 }
+
+/* Slider.module.css */
+.slider {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slideWrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slideWrapper [class*="span4"]:first-child{
+    padding-left: 0;
+  }
+
+  .dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .dot.active {
+    background-color: #333;
+  }
+  
+  @media only screen and (min-width: 510px) and (max-width: 800px){
+
+  }

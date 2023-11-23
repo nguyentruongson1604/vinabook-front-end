@@ -26,7 +26,7 @@ const BoxInfoBook: React.FC<{ book?: IBook, className?: string}> = ({ book, clas
                 <div className={styles.tittleSmallBook}>
                     <Link to={`/details/${book?._id}`} className={styles.productTittle}>{book?.name}</Link>
                 </div>
-                <span>{book?.author.name}</span>
+                <span className={styles.tittleAuthorName}>{book?.author.name}</span>
               </div>
                 <div className={styles.textContentBook}>
                     <a>

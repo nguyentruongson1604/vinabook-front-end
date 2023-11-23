@@ -78,3 +78,33 @@
 .addToCard{
     float: right;
 }
+@media only screen and (min-width: 320px) and (max-width: 768px){
+    .boxSaleOffEdit{
+        float: none;
+    }
+    .oldPriceEdit{
+        float: none;
+    }
+    .newPriceEdit{
+        float: none;
+    }
+    .addToCard{
+        float: none;
+        width: 100%;
+    }
+    .price{
+        margin: 10px 0;
+    }
+    .background{
+        flex-direction: column;
+    }
+    .imgThump{
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    .textInfo{
+        width: 100%;
+    }
+}
