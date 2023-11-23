@@ -9,3 +9,17 @@
     padding: 20px 0;
     background-color: #ececec;
 }
+.responsiveFooter{
+    display: none;
+}
+@media only screen and (min-width: 320px) and (max-width: 768px){
+    .socialFooter{
+        display: none;
+    }
+    .footerBody{
+        display: none;
+    }
+    .responsiveFooter{
+        display: block;
+    }
+}

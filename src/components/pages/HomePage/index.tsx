@@ -40,7 +40,7 @@ const HomePage: React.FC<{className?: string }> = observer(({className }) => {
 
     if(loading) return <div>Loading...</div>
     return (
-        <>
+        <div className={styles.home}>
             <Nav appear={true}/>
             <Banner/>
             <div className="container">
@@ -48,7 +48,7 @@ const HomePage: React.FC<{className?: string }> = observer(({className }) => {
                 <HomeRight className={styles.homeRight}/>
             </div>
             <div className="clearfix"></div>
-        </>
+        </div>
     )
 });
   

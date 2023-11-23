@@ -35,9 +35,9 @@ class Bill{
     }
     getCurrentBillUser = async (_id: string) => {
         try{
-            const res = await getCurrentBillUser(_id)            
+            const res = await getCurrentBillUser(_id)                        
             if(res.data.status === "success"){
-                const bill = res?.data.data;        
+                const bill = res?.data.data;                        
                 this.setCurrentBill(bill)
                 const bills: IBill[] = [bill]
                 this.setBills(bills)

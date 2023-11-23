@@ -14,3 +14,8 @@
     float: left;
     margin: 20px 20px 0 0;
  }
+ @media only screen and (min-width: 320px) and (max-width: 768px){
+    .relateWebsite{
+        display: none;
+    }
+}

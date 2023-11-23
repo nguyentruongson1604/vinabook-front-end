@@ -1,0 +1,38 @@
+.rightContentFooter{
+    padding: 25px 0;
+    border-top: 1px solid #ccc;
+}
+.icon{
+    display: flex;
+    padding: 0;
+}
+.payment{
+    display: flex;
+    padding: 0;
+}
+.rightContentFooter ul li{
+    text-align: center;
+    width: 33.3333%;
+    list-style: none;
+}
+.rightContentFooter ul li img{
+    width: 50px;
+    height: auto;
+    margin-bottom: 5px;
+}
+.title{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.payment li img{
+    width: 58px;
+    height: auto;
+}
+.appMobi{
+    text-align: center;
+}
+.appMobi img{
+    width: 135px;
+}
