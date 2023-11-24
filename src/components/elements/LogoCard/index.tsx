@@ -15,10 +15,9 @@ const LogoCart = observer(() => {
     }
     const store = useStore()
     const cartItems = store.CartStore?.getCurrentCart.listBook
-    console.log( cartRef)
+    // console.log( cartRef)
 
     useEffect(()=>{
-        console.log('run herer', cartRef)
         function handleClickOutside(event: MouseEvent){
             if (cartRef.current) {
                 const target = event.target as Node;
