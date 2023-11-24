@@ -6,7 +6,9 @@
     .bottomNavigation {
         display: block;
         position: fixed;
-        bottom: -1px;
+        bottom: 0px;
+        right: 0;
+        left: 0;
         z-index: 999;
         width: 100%;
         padding: 0 10px;

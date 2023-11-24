@@ -13,6 +13,10 @@ const BottomHeader = observer(() => {
         // console.log(accessToken)
         if(accessToken){
           await store.CartStore?.getCart()
+          const cart = localStorage.getItem('cart')
+          const cartObject = JSON.parse(cart!);
+          console.log(cartObject);
+          
         }
         else{
           // console.log('here')
