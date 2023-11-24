@@ -41,7 +41,7 @@ const BoxHighlight: React.FC<{ book?: IBook, background_color?: string, classNam
             bookId: newBook,
             quantity: 1
         }
-        console.log('add',bookAdd)
+        // console.log('add',bookAdd)
         store.CartStore?.addBookToCart(bookAdd)
     }
 
