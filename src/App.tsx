@@ -16,7 +16,6 @@ import InfoUserPage from './components/pages/InfoUserPage';
 import { useEffect, useState } from 'react';
 import PayAdressPage from './components/pages/PayAdressPage';
 import AdminPage from './components/pages/AdminPage/Page';
-import RegisterBox from './components/templates/RegisterBox';
 import CofirmBillPage from './components/pages/CofirmBillPage';
 import { AdminRouter, UserRouter } from './Auths/PrivateRouter';
 import SuccessNotice from './components/elements/SuccessNotice';

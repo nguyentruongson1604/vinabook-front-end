@@ -22,6 +22,7 @@ const CategoryRight: React.FC<{className?: string, search?: string }> = observer
             search = ' ';
         }
         if(search){
+            console.log('keyword:', search)
             await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
         }
         if(category){
