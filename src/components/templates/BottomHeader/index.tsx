@@ -12,11 +12,7 @@ const BottomHeader = observer(() => {
     const fetchCart = async (accessToken: string) => {
         // console.log(accessToken)
         if(accessToken){
-          await store.CartStore?.getCart()
-          const cart = localStorage.getItem('cart')
-          const cartObject = JSON.parse(cart!);
-          console.log(cartObject);
-          
+          Promise.all([await store.CartStore?.getCart()])
         }
         else{
           // console.log('here')

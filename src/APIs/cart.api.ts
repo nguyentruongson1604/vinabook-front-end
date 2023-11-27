@@ -109,3 +109,17 @@ export async function addBookToCart(newBook: IBookInCart) {
         console.log(error)
     }
 }
+
+export async function initCartFromLocal(listBook: IBookInCart[]) {
+    try {
+        const options: axiosInstanceOptions = {
+            baseURL: `/api/v1/cart/init-cart`
+        }
+        const instance = createAxiosInstance(options)
+        const res = await instance.post('/', listBook)
+        // console.log('add book to cart: ', res)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

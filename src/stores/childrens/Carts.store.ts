@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx"
 import { TRootStore } from "../RootStore.store"
-import { getAllCarts, getCartByUserId, addBookToCart, clearCart, removeABook, deleteOneTypeBook, getCart } from "../../APIs/cart.api"
+import { getAllCarts, getCartByUserId, addBookToCart, clearCart, removeABook, deleteOneTypeBook, getCart, initCartFromLocal } from "../../APIs/cart.api"
 
 export interface IBookCart {
     _id: string,
@@ -66,7 +66,7 @@ class CartStore {
         return this.listCarts
     }
 
-    addBookToCart(book: IBookInCart){
+    async addBookToCart(book: IBookInCart){
         const checkExist = this.currentCart.listBook.find((item: IBookInCart) => {
             return item.bookId._id === book.bookId._id;
         })
@@ -85,7 +85,8 @@ class CartStore {
             localStorage.setItem('cart', JSON.stringify(this.currentCart))
         }
         else{
-            this.addBookToCartAPI({bookId: book.bookId._id, quantity: 1})
+            console.log('add cart', book)
+            await this.addBookToCartAPI({bookId: book.bookId._id, quantity: book.quantity})
         }
         // alert('Them sach vao gio hang thanh cong!')
     }
@@ -150,13 +151,37 @@ class CartStore {
     async getCart(){
         try {
             const cart = await getCart()
-            console.log('cart', cart)
             const userCart: ICart = {
                 _id: cart?.data.data.owner,
                 listBook: [...cart?.data.data.listBook]
             }
             this.setCurrentCart(userCart)
 
+            if(userCart.listBook.length === 0){
+                const localCart = JSON.parse(localStorage.getItem('cart')!)
+                const initCart = await initCartFromLocal(localCart)
+                const userCart: ICart = {
+                    _id: initCart?.data.data.owner,
+                    listBook: [...initCart?.data.data.listBook]
+                }
+                // console.log('init', userCart)
+                this.setCurrentCart(userCart)
+            }
+
+            // console.log('cart', cart)
+            // if(cart?.data.status === 'cart empty'){
+            //     this.currentCart.listBook = []
+            //     const localCart = JSON.parse(localStorage.getItem('cart')!)
+            //     const userCart = Promise.all(localCart.listBook.map((item: IBookInCart)=>{
+            //         this.addBookToCart(item)
+            //         // console.log('add item: ', item)
+            //     }))
+            //     console.log('userCart', userCart)
+            // }
+            // else{
+                
+            // }
+            
         } catch (error) {
             console.log(error)
         }   
