@@ -71,22 +71,20 @@ class CartStore {
             return item.bookId._id === book.bookId._id;
         })
         if(checkExist){
-            this.currentCart.listBook.filter((item: IBookInCart)=>{
-                if(item.bookId._id === book.bookId._id){
-                    item.quantity += 1
+            this.currentCart.listBook.filter(async (item: IBookInCart)=>{
+                if(item.bookId._id === book.bookId._id && item.quantity < book.bookId.quantity!){
+                    item.quantity += 1;
+                    await this.addBookToCartAPI({bookId: book.bookId._id, quantity: book.quantity});
                 }
             })
         }
         else{
-            this.currentCart.listBook = [...this.currentCart?.listBook, book]
+            this.currentCart.listBook = [...this.currentCart?.listBook, book];
+            await this.addBookToCartAPI({bookId: book.bookId._id, quantity: book.quantity});
         }
         
         if(this.accessToken ===''){
             localStorage.setItem('cart', JSON.stringify(this.currentCart))
-        }
-        else{
-            console.log('add cart', book)
-            await this.addBookToCartAPI({bookId: book.bookId._id, quantity: book.quantity})
         }
         // alert('Them sach vao gio hang thanh cong!')
     }

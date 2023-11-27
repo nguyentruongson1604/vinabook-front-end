@@ -61,10 +61,10 @@ export const createAxiosInstance = (options: axiosInstanceOptions): AxiosInstanc
                     
                     if(refreshToken){
                         const newAccessToken = await refreshAccessToken(refreshToken)
-                        console.log('new access token in instance: ',newAccessToken)
+                        // console.log('new access token in instance: ',newAccessToken)
                         if(newAccessToken && originalRequest.headers){
                             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
-                            console.log('re-request:', originalRequest)
+                            // console.log('re-request:', originalRequest)
                         }
                         return instance(originalRequest)
                     }

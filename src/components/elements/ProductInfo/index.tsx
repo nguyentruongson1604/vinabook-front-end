@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './style.module.css'
 
 const ProductInfo = ({title, author, company, publicCompany, intro}: {title: string, author: string, company: string, publicCompany: string, intro: string}) => {
@@ -9,13 +10,14 @@ const ProductInfo = ({title, author, company, publicCompany, intro}: {title: str
             <div className={styles.productAuthor}>
                 <div className={styles.productAuthorShare}>
                     <span>Tác giả: </span>
-                    <a href="#">{author}</a>
+                    {/* <Link to={``}>{author}</Link> */}
+                    <span>{author}</span>
                     <br />
                     <span>Nhà xuất bản: </span>
-                    <a href="#">{company}</a>
+                    <span>{company}</span>
                     <br />
                     <span>Nhà phát hành: </span>
-                    <a href="#">{publicCompany}</a>
+                    <span>{publicCompany}</span>
                 </div>
             </div>
             <div className='clear'></div>
