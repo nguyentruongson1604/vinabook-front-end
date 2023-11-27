@@ -21,15 +21,12 @@ import CofirmBillPage from './components/pages/CofirmBillPage';
 import { AdminRouter, UserRouter } from './Auths/PrivateRouter';
 import SuccessNotice from './components/elements/SuccessNotice';
 import ListBillPage from './components/pages/ListBillPage';
-import Slider from './components/pages/test';
-import Slider1 from './components/pages/test';
-import BoxInfoBook from './components/collections/BoxInfoBook/Index';
 
 function App() {  
   const store = useStore()
   const [loading, setLoading] = useState(true);
   const checkCurrentUser = async ()=>{  //khi người dùng load lại page sẽ gọi hàm checkCurrentUser
-    if(localStorage.getItem('accessToken')){
+    if(localStorage.getItem('refreshToken')){
       await store.userAccess?.getCurrentUser()  
     }
       setLoading(false)

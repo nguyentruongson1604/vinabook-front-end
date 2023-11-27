@@ -148,7 +148,6 @@ const FormUpdateUser= observer(() => {
         <div>
           <label className={styles.inputName}>Họ và tên:</label>  
           <TextField
-            label="Disabled"
             variant="outlined"
             name="name"
             // className={styles.input}
@@ -167,7 +166,6 @@ const FormUpdateUser= observer(() => {
         <div>   
           <label className={styles.inputName}>Email:</label>     
           <TextField
-            label="Disabled"
             variant="outlined"
             name="email"
             className={styles.input}

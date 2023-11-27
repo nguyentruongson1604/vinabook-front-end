@@ -187,6 +187,11 @@ const BillContent = observer(() =>{
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
+        initialState={{
+          pagination: {paginationModel: {pageSize: 5}}
+        }}
+        pageSizeOptions={[5, 10]}
+        pagination={true}
         // slotProps={{
         //   toolbar: { setRowModesModel },
         // }}

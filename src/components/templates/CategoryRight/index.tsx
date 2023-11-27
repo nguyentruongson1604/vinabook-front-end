@@ -18,6 +18,9 @@ const CategoryRight: React.FC<{className?: string, search?: string }> = observer
     //     return <div style={{fontSize: 40, textAlign:'center', position:'relative', top:'100px', color: '#d7dae4'}}>Không có sách</div>
     // }
     async function handlePagination (event: React.ChangeEvent<any>, page: number) {
+        if(!search && !category && !publisher){
+            search = ' ';
+        }
         if(search){
             await store.BooksStore?.getBooksSearchAPI({keyWord: search, page: page})
         }
